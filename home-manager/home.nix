@@ -1,9 +1,15 @@
-{ inputs, lib, config, pkgs, ... }: {
+{
+  inputs,
+  lib,
+  config,
+  pkgs,
+  ...
+}: {
   imports = [
     inputs.nix-index-database.hmModules.nix-index # Black magic
     inputs.nixcord.homeManagerModules.nixcord
     ./modules/nixcord.nix
-    # ./nvim.nix
+    ./modules/nvim.nix
   ];
 
   nixpkgs = {
@@ -29,12 +35,12 @@
   home = {
     username = "ironlung";
     homeDirectory = "/home/ironlung";
-    sessionPath = [ # Add support for .local/bin in order to make mason work on NixOS
+    sessionPath = [
+      # Add support for .local/bin in order to make mason work on NixOS
       "$HOME/.local/bin"
     ];
   };
 
-  programs.neovim.enable = true;
   home.packages = with pkgs; [
     alacritty
     kitty
@@ -46,7 +52,11 @@
 
   wayland.windowManager.hyprland.enable = true;
 
-  programs.git = { enable = true; userName = "ironlungx"; userEmail = "hwlooverhello@gmail.com"; };
+  programs.git = {
+    enable = true;
+    userName = "ironlungx";
+    userEmail = "hwlooverhello@gmail.com";
+  };
 
   systemd.user.startServices = "sd-switch";
 
