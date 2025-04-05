@@ -10,6 +10,7 @@
     inputs.nixcord.homeManagerModules.nixcord
     ./modules/nixcord.nix
     ./modules/nvim.nix
+    ./modules/hyprland.nix
   ];
 
   nixpkgs = {

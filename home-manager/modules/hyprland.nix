@@ -1,9 +1,9 @@
-{pkgs, ...}: {
+{
   wayland.windowManager.hyprland = {
     enable = true;
     settings = {
       # See https://wiki.hyprland.org/Configuring/Monitors/
-      monitor = ",preferred,auto,auto";
+      # monitor = ",preferred,auto,auto";
 
       ###################
       ### MY PROGRAMS ###
