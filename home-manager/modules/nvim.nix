@@ -10,6 +10,6 @@
     ruff
     basedpyright
     lazygit
-    make
+    gnumake
   ];
 }

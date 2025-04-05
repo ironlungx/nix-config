@@ -16,15 +16,6 @@
   nixpkgs = {
     # You can add overlays here
     overlays = [
-      # If you want to use overlays exported from other flakes:
-      # neovim-nightly-overlay.overlays.default
-
-      # Or define it inline, for example:
-      # (final: prev: {
-      #   hi = final.hello.overrideAttrs (oldAttrs: {
-      #     patches = [ ./change-hello-to-hi.patch ];
-      #   });
-      # })
     ];
     # Configure your nixpkgs instance
     config = {
@@ -37,9 +28,10 @@
     username = "ironlung";
     homeDirectory = "/home/ironlung";
     sessionPath = [
-      # Add support for .local/bin in order to make mason work on NixOS
-      "$HOME/.local/bin"
+      "$HOME/.local/bin" # Add support for .local/bin in order to make mason work on NixOS
     ];
+
+    file = {}; # TODO: Move from stow to this
   };
 
   home.packages = with pkgs; [

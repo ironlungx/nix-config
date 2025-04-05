@@ -3,6 +3,8 @@
     wofi
     nautilus
     bibata-cursors
+    nwg-look
+    playerctl
   ];
   wayland.windowManager.hyprland = {
     enable = true;
@@ -42,8 +44,9 @@
       # See https://wiki.hyprland.org/Configuring/Environment-variables/
 
       env = [
-        "XCURSOR_SIZE,16"
-        "HYPRCURSOR_SIZE,16"
+        "XCURSOR_THEME,Bibata-Modern-Ice"
+        "XCURSOR_SIZE,24"
+        "HYPRCURSOR_SIZE,24"
 
         "LIBVA_DRIVER_NAME,nvidia"
         "__GLX_VENDOR_LIBRARY_NAME,nvidia"
