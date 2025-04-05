@@ -7,7 +7,10 @@
         "https://catppuccin.github.io/discord/dist/catppuccin-frappe.theme.css"
       ];
       frameless = true; # set some Vencord options
-      plugins = {};
+      plugins = {
+        fakeNitro.enable = true;
+        fixSpotifyEmbeds.enable = true;
+      };
     };
   };
 }
