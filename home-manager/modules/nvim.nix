@@ -10,5 +10,6 @@
     ruff
     basedpyright
     lazygit
+    make
   ];
 }
