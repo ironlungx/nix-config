@@ -2,10 +2,10 @@
   description = "Your new nix config";
 
   inputs = {
-    # Nixpkgs unstable
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";  # Changed from 23.11 to unstable
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
 
-    # Home manager (update to match unstable)
+    nixcord.url = "github:kaylorben/nixcord";
+
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";

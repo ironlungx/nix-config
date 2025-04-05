@@ -1,6 +1,8 @@
 { inputs, lib, config, pkgs, ... }: {
   imports = [
-    inputs.nix-index-database.hmModules.nix-index
+    inputs.nix-index-database.hmModules.nix-index # Black magic
+    inputs.nixcord.homeManagerModules.nixcord
+    ./modules/nixcord.nix
     # ./nvim.nix
   ];
 
@@ -41,6 +43,8 @@
   ];
 
   programs.home-manager.enable = true;
+
+  wayland.windowManager.hyprland.enable = true;
 
   programs.git = { enable = true; userName = "ironlungx"; userEmail = "hwlooverhello@gmail.com"; };
 
