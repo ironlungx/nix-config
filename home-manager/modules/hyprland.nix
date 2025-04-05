@@ -52,8 +52,6 @@
         border_size = "2";
 
         # https://wiki.hyprland.org/Configuring/Variables/#variable-types for info about colors
-        col.active_border = "rgba(33ccffee) rgba(00ff99ee) 45deg";
-        col.inactive_border = "rgba(595959aa)";
 
         # Set to true enable resizing windows by clicking and dragging on borders and gaps
         resize_on_border = "false";
@@ -63,6 +61,8 @@
 
         layout = "dwindle";
       };
+      "general:col.active_border" = "rgba(33ccffee) rgba(00ff99ee) 45deg";
+      "general:col.inactive_border" = "rgba(595959aa)";
 
       # https://wiki.hyprland.org/Configuring/Variables/#decoration
       decoration = {
@@ -186,7 +186,7 @@
 
       # See https://wiki.hyprland.org/Configuring/Keywords/
       "$mainMod" = "SUPER"; # Sets "Windows" key as main modifier
-      binds = [
+      bind = [
         "$mainMod, Q, exec, $terminal"
         "$mainMod, C, killactive,"
         "$mainMod, M, exit,"
@@ -228,17 +228,22 @@
 
         "$mainMod, mouse_down, workspace, e+1"
         "$mainMod, mouse_up, workspace, e-1"
-
+      ];
+      bindm = [
         "$mainMod, mouse:272, movewindow"
         "$mainMod, mouse:273, resizewindow"
+      ];
 
+      bindel = [
         ",XF86AudioRaiseVolume, exec, wpctl set-volume -l 1 @DEFAULT_AUDIO_SINK@ 5%+"
         ",XF86AudioLowerVolume, exec, wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-"
         ",XF86AudioMute, exec, wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"
         ",XF86AudioMicMute, exec, wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle"
         ",XF86MonBrightnessUp, exec, brightnessctl s 10%+"
         ",XF86MonBrightnessDown, exec, brightnessctl s 10%-"
+      ];
 
+      bindl = [
         ", XF86AudioNext, exec, playerctl next"
         ", XF86AudioPause, exec, playerctl play-pause"
         ", XF86AudioPlay, exec, playerctl play-pause"
