@@ -1,9 +1,17 @@
-{
+{pkgs, ...}: {
+  home.packages = with pkgs; [
+    wofi
+    nautilus
+    bibata-cursors
+  ];
   wayland.windowManager.hyprland = {
     enable = true;
     settings = {
       # See https://wiki.hyprland.org/Configuring/Monitors/
-      # monitor = ",preferred,auto,auto";
+      monitor = [
+        "DVI-D-1, 1920x1200,auto,auto"
+        "WAYLAND-1, disable"
+      ];
 
       ###################
       ### MY PROGRAMS ###
