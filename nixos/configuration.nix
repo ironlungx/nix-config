@@ -44,6 +44,8 @@
   services.xserver.displayManager.gdm.enable = true;
   services.xserver.desktopManager.gnome.enable = true;
 
+  services.teamviewer.enable = true;
+
   # Configure keymap in X11
   services.xserver.xkb = {
     layout = "us";
@@ -56,6 +58,11 @@
   # Enable sound with pipewire.
   hardware.pulseaudio.enable = false;
   security.rtkit.enable = true;
+  security.sudo.extraConfig = ''
+    Defaults pwfeedback
+  '';
+
+
   services.pipewire = {
     enable = true;
     alsa.enable = true;
@@ -86,6 +93,13 @@
   # Install firefox.
   programs.firefox.enable = true;
   programs.fish.enable = true;
+
+  programs.nh = {
+    enable = true;
+    clean.enable = true;
+    flake = "/home/ironlung/nix-config/";
+  };
+
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
