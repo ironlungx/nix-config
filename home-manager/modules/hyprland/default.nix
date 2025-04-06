@@ -2,7 +2,6 @@
   home.packages = with pkgs; [
     wofi
     nautilus
-    bibata-cursors
     nwg-look
     playerctl
     pyprland
@@ -55,7 +54,7 @@
       env = [
         "XCURSOR_THEME,Bibata-Modern-Ice"
         "XCURSOR_SIZE,24"
-        "HYPRCURSOR_SIZE,24"
+        # "HYPRCURSOR_SIZE,24"
 
         "LIBVA_DRIVER_NAME,nvidia"
         "__GLX_VENDOR_LIBRARY_NAME,nvidia"

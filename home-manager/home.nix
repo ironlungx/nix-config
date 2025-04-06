@@ -9,12 +9,14 @@
     inputs.nix-index-database.hmModules.nix-index # Black magic
     inputs.nixcord.homeManagerModules.nixcord
     inputs.spicetify-nix.homeManagerModules.default
+    inputs.stylix.homeManagerModules.stylix
 
     ./modules/nixcord.nix
     ./modules/nvim.nix
     ./modules/hyprland
     ./modules/spicetify.nix
     ./modules/gaming.nix
+    ./modules/stylix.nix
   ];
 
   nixpkgs = {
@@ -48,7 +50,6 @@
 
   programs.home-manager.enable = true;
 
-
   programs.git = {
     enable = true;
     userName = "ironlungx";
@@ -58,5 +59,5 @@
   systemd.user.startServices = "sd-switch";
 
   # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
-  home.stateVersion = "23.05";
+  home.stateVersion = "25.05";
 }
