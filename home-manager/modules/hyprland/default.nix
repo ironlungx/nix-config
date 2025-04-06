@@ -6,6 +6,9 @@
     nwg-look
     playerctl
     pyprland
+    cliphist
+    wl-clipboard
+    # writers.writeTOML
   ];
   wayland.windowManager.hyprland = {
     enable = true;
@@ -31,8 +34,11 @@
       ### AUTOSTART ###
       #################
 
-      exec-once = ["${pkgs.pyprland}/bin/pypr"];
-
+      exec-once = [
+        "${pkgs.pyprland}/bin/pypr"
+        "wl-paste --type text --watch cliphist store"
+        "wl-paste --type image --watch cliphist store"
+      ];
       # Autostart necessary processes (like notifications daemons, status bars, etc.)
       # Or execute your favorite apps at launch like this:
 
@@ -221,12 +227,13 @@
         "$mainMod SHIFT, J, movewindow, d"
         "$mainMod SHIFT, K, movewindow, u"
         "$mainMod SHIFT, L, movewindow, r"
-
         
         "$mainMod, Return, layoutmsg, swapwithmaster master"
 
         "$mainMod, comma, layoutmsg, addmaster"
         "$mainMod, period, layoutmsg, removemaster"
+
+        "$mainMod, t, togglefloating"
 
         "$mainMod, A, workspace, 1"
         "$mainMod, S, workspace, 2"
@@ -244,8 +251,11 @@
         "$mainMod SHIFT, Z, movetoworkspace, 6"
         "$mainMod SHIFT, X, movetoworkspace, 7"
 
-        # "$mainMod, S, togglespecialworkspace, magic"
-        # "$mainMod SHIFT, S, movetoworkspace, special:magic"
+        "SUPER, V, exec, cliphist list | wofi --dmenu | cliphist decode | wl-copy"
+
+        "$mainMod, W, togglespecialworkspace, magic"
+        "$mainMod SHIFT, W, movetoworkspace, special:magic"
+
       ];
 
       binde = [
@@ -293,5 +303,16 @@
       ];
     };
   };
-  home.file.".config/hypr/pyprland.toml".source = ./
+   
+  # FIXME: Work on pyprland scratchpads
+  /* home.file.".config/hypr/pyprland.toml".source = pkgs.writers.writeTOML "pyprland-config" { 
+    pyprland.plugins = [ "scratchpads" ];
+
+    scratchpads.term = {
+      command = "kitty";
+      margin = 50;
+      animation = "fromTop";
+      lazy = false;
+    };
+  }; */
 }
