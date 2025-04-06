@@ -11,5 +11,6 @@
     basedpyright
     lazygit
     gnumake
+    ripgrep
   ];
 }
