@@ -8,9 +8,12 @@
   imports = [
     inputs.nix-index-database.hmModules.nix-index # Black magic
     inputs.nixcord.homeManagerModules.nixcord
+    inputs.spicetify-nix.homeManagerModules.spicetify
+
     ./modules/nixcord.nix
     ./modules/nvim.nix
     ./modules/hyprland
+    ./modules/spicetify.nix
   ];
 
   nixpkgs = {
