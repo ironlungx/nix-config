@@ -7,7 +7,9 @@
     pyprland
     cliphist
     wl-clipboard
-    # writers.writeTOML
+    grim 
+    slurp
+    hyprpaper
   ];
   wayland.windowManager.hyprland = {
     enable = true;
@@ -37,6 +39,7 @@
         "${pkgs.pyprland}/bin/pypr"
         "wl-paste --type text --watch cliphist store"
         "wl-paste --type image --watch cliphist store"
+        "hyprpaper"
       ];
       # Autostart necessary processes (like notifications daemons, status bars, etc.)
       # Or execute your favorite apps at launch like this:
@@ -255,6 +258,8 @@
         "$mainMod, W, togglespecialworkspace, magic"
         "$mainMod SHIFT, W, movetoworkspace, special:magic"
 
+        "$mainMod CTRL, S, exec, grim -g \"$(slurp -d)\" - | wl-copy"
+
       ];
 
       binde = [
@@ -302,6 +307,12 @@
       ];
     };
   };
+
+  home.file.".config/hypr/hyprpaper.conf".source = pkgs.writers.writeText "hyprpaper-config" ''
+    preload = ~/.wall/rocket-launch.jpg
+    wallpaper = DVI-D-1,~/.wall/rocket-launch.jpg
+    ipc = true
+  '';
    
   # FIXME: Work on pyprland scratchpads
   /* home.file.".config/hypr/pyprland.toml".source = pkgs.writers.writeTOML "pyprland-config" { 
