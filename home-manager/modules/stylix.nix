@@ -1,6 +1,5 @@
 { config, pkgs, ... }:
 {
-
   home.packages = with pkgs; [ bibata-cursors ];
 
   stylix = {
@@ -34,16 +33,6 @@
       package = pkgs.bibata-cursors;
       name = "Bibata-Modern-Ice";
       size = 24;
-    };
-    
-    targets = {
-      alacritty.enable = true;
-
-      gtk.enable = true;
-      
-      firefox.enable = true;
-      wofi.enable = true;
-      hyprland.enable = true;
     };
   };
 }

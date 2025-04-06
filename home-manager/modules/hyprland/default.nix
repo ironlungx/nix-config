@@ -1,4 +1,8 @@
-{pkgs, ...}: {
+{config, pkgs, ...}: 
+let
+  inherit (config.lib.stylix.colors.withHashtag) base14;
+in
+{
   home.packages = with pkgs; [
     wofi
     nautilus
@@ -86,8 +90,10 @@
 
         layout = "master";
       };
-      "general:col.active_border" = "rgba(33ccffee) rgba(00ff99ee) 45deg";
-      "general:col.inactive_border" = "rgba(595959aa)";
+
+      # Managed by stylix?
+      # "general:col.active_border" = "rgba(33ccffee) rgba(00ff99ee) 45deg";
+      # "general:col.inactive_border" = "rgba(595959aa)";
 
       # https://wiki.hyprland.org/Configuring/Variables/#decoration
       decoration = {
