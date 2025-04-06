@@ -10,7 +10,7 @@
     inputs.nixcord.homeManagerModules.nixcord
     ./modules/nixcord.nix
     ./modules/nvim.nix
-    ./modules/hyprland.nix
+    ./modules/hyprland
   ];
 
   nixpkgs = {
@@ -39,6 +39,7 @@
     kitty
     fish
     xclip
+    stow
   ];
 
   programs.home-manager.enable = true;

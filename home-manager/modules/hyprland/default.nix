@@ -5,6 +5,7 @@
     bibata-cursors
     nwg-look
     playerctl
+    pyprland
   ];
   wayland.windowManager.hyprland = {
     enable = true;
@@ -23,12 +24,14 @@
 
       # Set programs that you use
       "$terminal" = "kitty";
-      "$fileManager" = "dolphin";
+      "$fileManager" = "nautilus";
       "$menu" = "wofi --show drun";
 
       #################
       ### AUTOSTART ###
       #################
+
+      exec-once = ["${pkgs.pyprland}/bin/pypr"];
 
       # Autostart necessary processes (like notifications daemons, status bars, etc.)
       # Or execute your favorite apps at launch like this:
@@ -73,7 +76,7 @@
         # Please see https://wiki.hyprland.org/Configuring/Tearing/ before you turn this on
         allow_tearing = "false";
 
-        layout = "dwindle";
+        layout = "master";
       };
       "general:col.active_border" = "rgba(33ccffee) rgba(00ff99ee) 45deg";
       "general:col.inactive_border" = "rgba(595959aa)";
@@ -201,48 +204,57 @@
       # See https://wiki.hyprland.org/Configuring/Keywords/
       "$mainMod" = "SUPER"; # Sets "Windows" key as main modifier
       bind = [
-        "$mainMod, Q, exec, $terminal"
-        "$mainMod, C, killactive,"
-        "$mainMod, M, exit,"
+
+        "$mainMod SHIFT, Return, exec, $terminal"
+        "$mainMod SHIFT, Q, killactive,"
+        "$mainMod CTRL, Escape, exit,"
+
         "$mainMod, E, exec, $fileManager"
-        "$mainMod, V, togglefloating,"
-        "$mainMod, R, exec, $menu"
-        "$mainMod, P, pseudo, # dwindle"
-        "$mainMod, J, togglesplit, # dwindle"
+        "$mainMod, P, exec, $menu"
 
-        "$mainMod, left, movefocus, l"
-        "$mainMod, right, movefocus, r"
-        "$mainMod, up, movefocus, u"
-        "$mainMod, down, movefocus, d"
+        "$mainMod, H, movefocus, l"
+        "$mainMod, J, movefocus, d"
+        "$mainMod, K, movefocus, u"
+        "$mainMod, L, movefocus, r"
 
-        "$mainMod, 1, workspace, 1"
-        "$mainMod, 2, workspace, 2"
-        "$mainMod, 3, workspace, 3"
-        "$mainMod, 4, workspace, 4"
-        "$mainMod, 5, workspace, 5"
-        "$mainMod, 6, workspace, 6"
-        "$mainMod, 7, workspace, 7"
-        "$mainMod, 8, workspace, 8"
-        "$mainMod, 9, workspace, 9"
-        "$mainMod, 0, workspace, 10"
+        "$mainMod SHIFT, H, movewindow, l"
+        "$mainMod SHIFT, J, movewindow, d"
+        "$mainMod SHIFT, K, movewindow, u"
+        "$mainMod SHIFT, L, movewindow, r"
 
-        "$mainMod SHIFT, 1, movetoworkspace, 1"
-        "$mainMod SHIFT, 2, movetoworkspace, 2"
-        "$mainMod SHIFT, 3, movetoworkspace, 3"
-        "$mainMod SHIFT, 4, movetoworkspace, 4"
-        "$mainMod SHIFT, 5, movetoworkspace, 5"
-        "$mainMod SHIFT, 6, movetoworkspace, 6"
-        "$mainMod SHIFT, 7, movetoworkspace, 7"
-        "$mainMod SHIFT, 8, movetoworkspace, 8"
-        "$mainMod SHIFT, 9, movetoworkspace, 9"
-        "$mainMod SHIFT, 0, movetoworkspace, 10"
+        
+        "$mainMod, Return, layoutmsg, swapwithmaster master"
 
-        "$mainMod, S, togglespecialworkspace, magic"
-        "$mainMod SHIFT, S, movetoworkspace, special:magic"
+        "$mainMod, comma, layoutmsg, addmaster"
+        "$mainMod, period, layoutmsg, removemaster"
 
-        "$mainMod, mouse_down, workspace, e+1"
-        "$mainMod, mouse_up, workspace, e-1"
+        "$mainMod, A, workspace, 1"
+        "$mainMod, S, workspace, 2"
+        "$mainMod, D, workspace, 3"
+        "$mainMod, F, workspace, 4"
+        "$mainMod, G, workspace, 5"
+        "$mainMod, Z, workspace, 6"
+        "$mainMod, X, workspace, 7"
+
+        "$mainMod SHIFT, A, movetoworkspace, 1"
+        "$mainMod SHIFT, S, movetoworkspace, 2"
+        "$mainMod SHIFT, D, movetoworkspace, 3"
+        "$mainMod SHIFT, F, movetoworkspace, 4"
+        "$mainMod SHIFT, G, movetoworkspace, 5"
+        "$mainMod SHIFT, Z, movetoworkspace, 6"
+        "$mainMod SHIFT, X, movetoworkspace, 7"
+
+        # "$mainMod, S, togglespecialworkspace, magic"
+        # "$mainMod SHIFT, S, movetoworkspace, special:magic"
       ];
+
+      binde = [
+        "$mainMod CTRL, H, resizeactive, -20 0"
+        "$mainMod CTRL, J, resizeactive, 0 20"
+        "$mainMod CTRL, K, resizeactive, 0 -20"
+        "$mainMod CTRL, L, resizeactive, 20 0"
+      ];
+
       bindm = [
         "$mainMod, mouse:272, movewindow"
         "$mainMod, mouse:273, resizewindow"
@@ -281,4 +293,5 @@
       ];
     };
   };
+  home.file.".config/hypr/pyprland.toml".source = ./
 }
