@@ -1,7 +1,4 @@
 {config, pkgs, ...}: 
-let
-  inherit (config.lib.stylix.colors.withHashtag) base14;
-in
 {
   home.packages = with pkgs; [
     wofi
@@ -11,8 +8,7 @@ in
     pyprland
     cliphist
     wl-clipboard
-    grim 
-    slurp
+    hyprshot
     hyprpaper
   ];
   wayland.windowManager.hyprland = {
@@ -32,6 +28,7 @@ in
 
       # Set programs that you use
       "$terminal" = "kitty";
+      "$browser" = "firefox";
       "$fileManager" = "nautilus";
       "$menu" = "wofi --show drun";
 
@@ -108,7 +105,7 @@ in
           enabled = true;
           range = 4;
           render_power = 3;
-          color = "rgba(1a1a1aee)";
+          # color = "rgba(1a1a1aee)";
         };
 
         # https://wiki.hyprland.org/Configuring/Variables/#blur
@@ -220,11 +217,13 @@ in
       bind = [
 
         "$mainMod SHIFT, Return, exec, $terminal"
+        "$mainMod CTRL, Return, exec, $browser"
         "$mainMod SHIFT, Q, killactive,"
         "$mainMod CTRL, Escape, exit,"
 
         "$mainMod, E, exec, $fileManager"
         "$mainMod, P, exec, $menu"
+        "$mainMod, U, fullscreen"
 
         "$mainMod, H, movefocus, l"
         "$mainMod, J, movefocus, d"
@@ -264,8 +263,7 @@ in
         "$mainMod, W, togglespecialworkspace, magic"
         "$mainMod SHIFT, W, movetoworkspace, special:magic"
 
-        "$mainMod CTRL, S, exec, grim -g \"$(slurp -d)\" - | wl-copy"
-
+        "$mainMod, M, exec, hyprshot -m region"
       ];
 
       binde = [
@@ -314,12 +312,6 @@ in
     };
   };
 
-  home.file.".config/hypr/hyprpaper.conf".source = pkgs.writers.writeText "hyprpaper-config" ''
-    preload = ~/.wall/rocket-launch.jpg
-    wallpaper = DVI-D-1,~/.wall/rocket-launch.jpg
-    ipc = true
-  '';
-   
   # FIXME: Work on pyprland scratchpads
   /* home.file.".config/hypr/pyprland.toml".source = pkgs.writers.writeTOML "pyprland-config" { 
     pyprland.plugins = [ "scratchpads" ];

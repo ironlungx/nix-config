@@ -14,7 +14,7 @@
       shuffle # shuffle+ (special characters are sanitized out of extension names)
       popupLyrics
     ];
-    theme = spicePkgs.themes.catppuccin;
-    colorScheme = "frappe";
+    # theme = spicePkgs.themes.catppuccin;
+    # colorScheme = "frappe";
   };
 }

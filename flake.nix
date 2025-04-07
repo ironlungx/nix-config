@@ -6,6 +6,7 @@
     nixcord.url = "github:kaylorben/nixcord";
     spicetify-nix.url = "github:Gerg-L/spicetify-nix";
     stylix.url = "github:danth/stylix";
+    hyprpanel.url = "github:Jas-SinghFSU/HyprPanel";
 
     home-manager = {
       url = "github:nix-community/home-manager";
@@ -22,6 +23,8 @@
     self,
     nixpkgs,
     home-manager,
+    stylix,
+    hyprpanel,
     ...
   } @ inputs: let
     inherit (self) outputs;
@@ -29,7 +32,7 @@
     nixosConfigurations = {
       valinor = nixpkgs.lib.nixosSystem {
         specialArgs = {inherit inputs outputs;};
-        modules = [./nixos/configuration.nix];
+        modules = [  ./nixos/configuration.nix stylix.nixosModules.stylix ];
       };
     };
 

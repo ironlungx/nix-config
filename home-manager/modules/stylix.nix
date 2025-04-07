@@ -3,11 +3,11 @@
   home.packages = with pkgs; [ bibata-cursors ];
 
   stylix = {
+    enable = true;
     image = pkgs.fetchurl {
-      url = "https://raw.githubusercontent.com/NixOS/nixos-artwork/master/wallpapers/nix-wallpaper-nineish-catppuccin-mocha.png";
-      sha256 = "ce562a4a27794352f9b14ac072f47eeda3768c89a2ba847d832801464f31f56a";
-    }; 
-
+      url = "https://github.com/zhichaoh/catppuccin-wallpapers/blob/main/landscapes/evening-sky.png?raw=true";
+      sha256 = "0kb87w736abdf794dk9fvqln56axzskxia1g6zdjrqzl7v539035";
+    };
     fonts = {
       sizes = {
         terminal = 9;
@@ -34,5 +34,7 @@
       name = "Bibata-Modern-Ice";
       size = 24;
     };
+    targets.neovim.enable = false;
+    targets.nixcord.enable = false;
   };
 }
