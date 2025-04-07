@@ -9,6 +9,8 @@
     inputs.nix-index-database.hmModules.nix-index # Black magic
     inputs.nixcord.homeManagerModules.nixcord
     inputs.spicetify-nix.homeManagerModules.default
+    inputs.stylix.homeManagerModules.stylix
+    inputs.zen-browser.packages.x86_64-linux.default
 
     ./modules/nixcord.nix
     ./modules/nvim.nix
@@ -17,12 +19,12 @@
     ./modules/gaming.nix
     ./modules/stylix.nix
     ./modules/waybar.nix
+    ./modules/zen.nix
   ];
 
   nixpkgs = {
     # You can add overlays here
     overlays = [
-     inputs.hyprpanel.overlay
     ];
     # Configure your nixpkgs instance
     config = {
@@ -47,7 +49,6 @@
     fish
     xclip
     stow
-    pkgs.hyprpanel
   ];
 
   programs.home-manager.enable = true;

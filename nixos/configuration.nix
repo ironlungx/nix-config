@@ -42,7 +42,15 @@
 
   # Enable the GNOME Desktop Environment.
   services.xserver.displayManager.gdm.enable = true;
-  services.xserver.desktopManager.gnome.enable = true;
+  # services.xserver.desktopManager.gnome.enable = true;
+
+  stylix.enable = true;
+  stylix.autoEnable = false;
+  stylix.base16Scheme = "${pkgs.base16-schemes}/share/themes/catppuccin-frappe.yaml";
+
+  stylix.targets = {
+    gnome.enable = true;
+  };
 
   services.teamviewer.enable = true;
 

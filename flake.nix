@@ -6,7 +6,6 @@
     nixcord.url = "github:kaylorben/nixcord";
     spicetify-nix.url = "github:Gerg-L/spicetify-nix";
     stylix.url = "github:danth/stylix";
-    hyprpanel.url = "github:Jas-SinghFSU/HyprPanel";
 
     home-manager = {
       url = "github:nix-community/home-manager";
@@ -17,6 +16,13 @@
       url = "github:nix-community/nix-index-database";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    firefox-addons = {
+      url = "gitlab:rycee/nur-expressions?dir=pkgs/firefox-addons";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    zen-browser.url = "github:0xc000022070/zen-browser-flake";
   };
 
   outputs = {
@@ -24,7 +30,6 @@
     nixpkgs,
     home-manager,
     stylix,
-    hyprpanel,
     ...
   } @ inputs: let
     inherit (self) outputs;
