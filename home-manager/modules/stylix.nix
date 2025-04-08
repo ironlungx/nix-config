@@ -4,8 +4,8 @@
   stylix = {
     enable = true;
     image = pkgs.fetchurl {
-      url = "https://i.redd.it/4yiwgcddr8hb1.jpg";
-      sha256 = "1b1hl9s4b0lpqr29vpwanq4qj6g1vv5269wlasd0dg3kypn2ng1a";
+      url = "https://raw.githubusercontent.com/zhichaoh/catppuccin-wallpapers/refs/heads/main/landscapes/evening-sky.png";
+      sha256 = "0kb87w736abdf794dk9fvqln56axzskxia1g6zdjrqzl7v539035";
     };
     fonts = {
       sizes = {
@@ -39,6 +39,7 @@
       nixcord.enable = false;
       kitty.variant256Colors = true;
       fish.enable = false;
+      tmux.enable = false;
 
       firefox.profileNames = ["ironlung"];
       hyprlock = {

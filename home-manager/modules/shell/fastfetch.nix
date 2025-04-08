@@ -1,5 +1,5 @@
 {
-  home.fastfetch = {
+  programs.fastfetch = {
     enable = true;
     settings = {
       logo = {
@@ -23,38 +23,37 @@
         "break"
         {
           type = "os";
-          key = " ";
+          key = " ";
           keyColor = "33"; # = color3
         }
         {
           type = "kernel";
-          key = " ";
+          key = " ";
           keyColor = "33";
         }
         {
           type = "packages";
-          format = "{} (pacman)";
-          key = " ";
+          key = " ";
           keyColor = "33";
         }
         {
           type = "shell";
-          key = " ";
+          key = " ";
           keyColor = "33";
         }
         {
           type = "terminal";
-          key = " ";
+          key = " ";
           keyColor = "33";
         }
         {
           type = "wm";
-          key = " ";
+          key = " ";
           keyColor = "33";
         }
         {
           type = "uptime";
-          key = " ";
+          key = " ";
           keyColor = "33";
         }
         {

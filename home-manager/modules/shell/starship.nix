@@ -32,7 +32,7 @@
         read_only = " ";
         truncation_length = 3;
         truncation_symbol = "./";
-        style = "bold magenta";
+        style = "bold bright-purple";
       };
 
       git_branch = {
