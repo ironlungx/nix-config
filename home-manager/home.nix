@@ -10,7 +10,6 @@
     inputs.nixcord.homeManagerModules.nixcord
     inputs.spicetify-nix.homeManagerModules.default
     inputs.stylix.homeManagerModules.stylix
-    inputs.zen-browser.packages.x86_64-linux.default
 
     ./modules/nixcord.nix
     ./modules/nvim.nix
@@ -20,6 +19,8 @@
     ./modules/stylix.nix
     ./modules/waybar.nix
     ./modules/zen.nix
+    ./modules/kitty.nix
+    ./modules/fish.nix
   ];
 
   nixpkgs = {
@@ -45,7 +46,6 @@
 
   home.packages = with pkgs; [
     alacritty
-    kitty
     fish
     xclip
     stow

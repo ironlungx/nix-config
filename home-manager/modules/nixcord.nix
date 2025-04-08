@@ -1,5 +1,8 @@
 {
   programs.nixcord = {
+    discord.enable = false;
+    vesktop.enable = true;
+
     enable = true; # enable Nixcord. Also installs discord package
     config = {
       themeLinks = [
@@ -9,6 +12,7 @@
       plugins = {
         fakeNitro.enable = true;
         fixSpotifyEmbeds.enable = true;
+        spotifyShareCommands.enable = true;
       };
     };
   };

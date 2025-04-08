@@ -34,7 +34,18 @@
       name = "Bibata-Modern-Ice";
       size = 24;
     };
-    targets.neovim.enable = false;
-    targets.nixcord.enable = false;
+
+    targets = {
+      neovim.enable = false;
+      nixcord.enable = false;
+      kitty.variant256Colors = true;
+      fish.enable = false;
+
+      firefox.profileNames = ["ironlung"];
+      hyprlock = {
+        enable = true;
+        useWallpaper = true;
+      };
+    };
   };
 }

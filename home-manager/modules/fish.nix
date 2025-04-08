@@ -1,8 +1,9 @@
 {pkgs, ...}: {
   home.packages = with pkgs; [
-    bat
-    exa
+    eza
   ];
+
+  programs.bat.enable = true;
 
   programs.fish = {
     enable = true;
@@ -10,6 +11,8 @@
       cat = "bat";
       v = "nvim";
       t = "tmux";
+
+      ls = "eza -A -l -U --no-filesize --no-permissions --no-user --color=auto --group-directories-first";
     };
   };
 }
