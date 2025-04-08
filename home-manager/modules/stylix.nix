@@ -1,12 +1,11 @@
 { config, pkgs, ... }:
 {
   home.packages = with pkgs; [ bibata-cursors ];
-
   stylix = {
     enable = true;
     image = pkgs.fetchurl {
-      url = "https://github.com/zhichaoh/catppuccin-wallpapers/blob/main/landscapes/evening-sky.png?raw=true";
-      sha256 = "0kb87w736abdf794dk9fvqln56axzskxia1g6zdjrqzl7v539035";
+      url = "https://i.redd.it/4yiwgcddr8hb1.jpg";
+      sha256 = "1b1hl9s4b0lpqr29vpwanq4qj6g1vv5269wlasd0dg3kypn2ng1a";
     };
     fonts = {
       sizes = {
