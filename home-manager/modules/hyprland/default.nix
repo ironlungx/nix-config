@@ -1,5 +1,8 @@
-{config, pkgs, ...}: 
 {
+  config,
+  pkgs,
+  ...
+}: {
   home.packages = with pkgs; [
     wofi
     nautilus
@@ -10,6 +13,7 @@
     wl-clipboard
     hyprshot
     hyprpaper
+    hyprlock
   ];
   wayland.windowManager.hyprland = {
     enable = true;
@@ -120,7 +124,7 @@
 
       # https://wiki.hyprland.org/Configuring/Variables/#animations
       animations = {
-        enabled = "yes, please :)";
+        enabled = true;
 
         # Default animations, see https://wiki.hyprland.org/Configuring/Animations/ for more
 
@@ -170,13 +174,14 @@
 
       # See https://wiki.hyprland.org/Configuring/Master-Layout/ for more
       master = {
-        new_status = "master";
+        new_status = "inherit";
+        allow_small_split = true;
       };
 
       # https://wiki.hyprland.org/Configuring/Variables/#misc
       misc = {
         force_default_wallpaper = -1; # Set to 0 or 1 to disable the anime mascot wallpapers
-        disable_hyprland_logo = false; # If true disables the random hyprland logo / anime girl background. :(
+        disable_hyprland_logo = true; # If true disables the random hyprland logo / anime girl background. :(
       };
 
       #############
@@ -215,7 +220,6 @@
       # See https://wiki.hyprland.org/Configuring/Keywords/
       "$mainMod" = "SUPER"; # Sets "Windows" key as main modifier
       bind = [
-
         "$mainMod SHIFT, Return, exec, $terminal"
         "$mainMod CTRL, Return, exec, $browser"
         "$mainMod SHIFT, Q, killactive,"
@@ -230,11 +234,11 @@
         "$mainMod, K, movefocus, u"
         "$mainMod, L, movefocus, r"
 
-        "$mainMod SHIFT, H, movewindow, l"
-        "$mainMod SHIFT, J, movewindow, d"
-        "$mainMod SHIFT, K, movewindow, u"
-        "$mainMod SHIFT, L, movewindow, r"
-        
+        "$mainMod CTRL, H, movewindow, l"
+        "$mainMod CTRL, J, movewindow, d"
+        "$mainMod CTRL, K, movewindow, u"
+        "$mainMod CTRL, L, movewindow, r"
+
         "$mainMod, Return, layoutmsg, swapwithmaster master"
 
         "$mainMod, comma, layoutmsg, addmaster"
@@ -264,13 +268,14 @@
         "$mainMod SHIFT, W, movetoworkspace, special:magic"
 
         "$mainMod, M, exec, hyprshot -m region"
+        "$mainMod, Escape, exec, hyprlock"
       ];
 
       binde = [
-        "$mainMod CTRL, H, resizeactive, -20 0"
-        "$mainMod CTRL, J, resizeactive, 0 20"
-        "$mainMod CTRL, K, resizeactive, 0 -20"
-        "$mainMod CTRL, L, resizeactive, 20 0"
+        "$mainMod SHIFT, H, resizeactive, -20 0"
+        "$mainMod SHIFT, J, resizeactive, 0 20"
+        "$mainMod SHIFT, K, resizeactive, 0 -20"
+        "$mainMod SHIFT, L, resizeactive, 20 0"
       ];
 
       bindm = [
@@ -313,7 +318,8 @@
   };
 
   # FIXME: Work on pyprland scratchpads
-  /* home.file.".config/hypr/pyprland.toml".source = pkgs.writers.writeTOML "pyprland-config" { 
+  /*
+     home.file.".config/hypr/pyprland.toml".source = pkgs.writers.writeTOML "pyprland-config" {
     pyprland.plugins = [ "scratchpads" ];
 
     scratchpads.term = {
@@ -322,5 +328,6 @@
       animation = "fromTop";
       lazy = false;
     };
-  }; */
+  };
+  */
 }
