@@ -11,16 +11,7 @@
     inputs.spicetify-nix.homeManagerModules.default
     inputs.stylix.homeManagerModules.stylix
 
-    ./modules/nixcord.nix
-    ./modules/nvim.nix
-    ./modules/hyprland
-    ./modules/spicetify.nix
-    ./modules/gaming.nix
-    ./modules/stylix.nix
-    ./modules/waybar.nix
-    ./modules/zen.nix
-    ./modules/kitty.nix
-    ./modules/fish.nix
+    ./modules
   ];
 
   nixpkgs = {
