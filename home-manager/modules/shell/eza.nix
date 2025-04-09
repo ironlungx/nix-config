@@ -4,9 +4,13 @@
     icons = "auto";
     colors = "always";
     extraOptions = [
-      "--no-filesize"
-      "--long"
+      "-A"
+      "-l"
+      "-U"
+      "--no-permissions"
       "--no-user"
+      "--color=auto"
+      "--group-directories-first"
     ];
     enableFishIntegration = true;
   };
