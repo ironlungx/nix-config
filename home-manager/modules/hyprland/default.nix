@@ -4,7 +4,6 @@
   ...
 }: {
   home.packages = with pkgs; [
-    wofi
     nautilus
     nwg-look
     playerctl
@@ -14,7 +13,15 @@
     hyprshot
     hyprpaper
     hyprlock
+    libnotify
   ];
+
+  imports = [
+    ./dunst.nix
+  ];
+
+  services.swayosd.enable = true;
+
   wayland.windowManager.hyprland = {
     enable = true;
     settings = {
@@ -31,10 +38,10 @@
       # See https://wiki.hyprland.org/Configuring/Keywords/
 
       # Set programs that you use
-      "$terminal" = "kitty";
-      "$browser" = "firefox";
-      "$fileManager" = "nautilus";
-      "$menu" = "wofi --show drun";
+      "$terminal" = "${pkgs.kitty}/bin/kitty";
+      "$browser" = "${pkgs.firefox}/bin/firefox";
+      "$fileManager" = "${pkgs.nautilus}/bin/nautilus";
+      "$menu" = "rofi -show drun";
 
       #################
       ### AUTOSTART ###
@@ -42,17 +49,12 @@
 
       exec-once = [
         "${pkgs.pyprland}/bin/pypr"
-        "wl-paste --type text --watch cliphist store"
-        "wl-paste --type image --watch cliphist store"
-        "hyprpaper"
+        "${pkgs.wl-clipboard}/bin/wl-paste --type text --watch cliphist store"
+        "${pkgs.wl-clipboard}/bin/wl-paste --type image --watch cliphist store"
+        "${pkgs.hyprpaper}/bin/hyprpaper"
+        "${pkgs.dunst}/bin/dunst"
+        "${pkgs.swayosd}/bin/swayosd-server"
       ];
-      # Autostart necessary processes (like notifications daemons, status bars, etc.)
-      # Or execute your favorite apps at launch like this:
-
-      # exec-once = $terminal
-      # exec-once = nm-applet &
-      # exec-once = waybar & hyprpaper & firefox
-
       #############################
       ### ENVIRONMENT VARIABLES ###
       #############################
@@ -91,10 +93,6 @@
 
         layout = "master";
       };
-
-      # Managed by stylix?
-      # "general:col.active_border" = "rgba(33ccffee) rgba(00ff99ee) 45deg";
-      # "general:col.inactive_border" = "rgba(595959aa)";
 
       # https://wiki.hyprland.org/Configuring/Variables/#decoration
       decoration = {
@@ -264,9 +262,6 @@
 
         "SUPER, V, exec, cliphist list | wofi --dmenu | cliphist decode | wl-copy"
 
-        "$mainMod, W, togglespecialworkspace, magic"
-        "$mainMod SHIFT, W, movetoworkspace, special:magic"
-
         "$mainMod, M, exec, hyprshot -m region"
         "$mainMod, Escape, exec, hyprlock"
       ];
@@ -284,12 +279,10 @@
       ];
 
       bindel = [
-        ",XF86AudioRaiseVolume, exec, wpctl set-volume -l 1 @DEFAULT_AUDIO_SINK@ 5%+"
-        ",XF86AudioLowerVolume, exec, wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-"
+        ",XF86AudioRaiseVolume, exec, ${pkgs.swayosd}/bin/swayosd-client --output-volume=+5"
+        ",XF86AudioLowerVolume, exec, ${pkgs.swayosd}/bin/swayosd-client --output-volume=-5"
         ",XF86AudioMute, exec, wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"
         ",XF86AudioMicMute, exec, wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle"
-        ",XF86MonBrightnessUp, exec, brightnessctl s 10%+"
-        ",XF86MonBrightnessDown, exec, brightnessctl s 10%-"
       ];
 
       bindl = [
@@ -313,21 +306,48 @@
       windowrule = [
         "suppressevent maximize, class:.*"
         "nofocus,class:^$,title:^$,xwayland:1,floating:1,fullscreen:0,pinned:0"
+        "float, title:Vesktop"
       ];
     };
+    extraConfig = ''
+      $reset = hyprctl dispatch submap reset &&
+      bind = $mainMod, W, submap, scratchpads
+      submap = scratchpads
+
+      binde = , D, exec, $reset ${pkgs.pyprland}/bin/pypr toggle "vesktop"
+      binde = , S, exec, $reset ${pkgs.pyprland}/bin/pypr toggle "spotify"
+      binde = , Return, exec, $reset ${pkgs.pyprland}/bin/pypr toggle "term"
+
+      submap = reset
+    '';
   };
 
-  # FIXME: Work on pyprland scratchpads
-  /*
-     home.file.".config/hypr/pyprland.toml".source = pkgs.writers.writeTOML "pyprland-config" {
-    pyprland.plugins = [ "scratchpads" ];
+  home.file.".config/hypr/pyprland.toml".source = pkgs.writers.writeTOML "pyprland-config" {
+    pyprland.plugins = ["scratchpads"];
 
     scratchpads.term = {
-      command = "kitty";
-      margin = 50;
       animation = "fromTop";
-      lazy = false;
+      command = "kitty";
+      class = "kitty";
+      lazy = true;
+    };
+
+    scratchpads.vesktop = {
+      animation = "fromTop";
+      command = "vesktop";
+      match_by = "title";
+      title = "Vesktop";
+      lazy = true;
+      size = "80% 80%";
+      position = "10% 10%";
+    };
+    scratchpads.spotify = {
+      animation = "fromTop";
+      command = "spotify";
+      class = "Spotify";
+      lazy = true;
+      size = "80% 80%";
+      position = "10% 10%";
     };
   };
-  */
 }
