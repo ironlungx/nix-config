@@ -1,9 +1,12 @@
-{ config, pkgs, ... }:
 {
-  imports =
-    [ # Include the results of the hardware scan.
-      ./hardware-configuration.nix
-    ];
+  config,
+  pkgs,
+  ...
+}: {
+  imports = [
+    # Include the results of the hardware scan.
+    ./hardware-configuration.nix
+  ];
 
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
@@ -40,6 +43,7 @@
   # Enable the X11 windowing system.
   services.xserver.enable = true;
 
+
   # Enable the GNOME Desktop Environment.
   services.xserver.displayManager.gdm.enable = true;
   # services.xserver.desktopManager.gnome.enable = true;
@@ -70,7 +74,6 @@
     Defaults pwfeedback
   '';
 
-
   services.pipewire = {
     enable = true;
     alsa.enable = true;
@@ -91,23 +94,27 @@
   users.users.ironlung = {
     isNormalUser = true;
     description = "ironlung";
-    extraGroups = [ "networkmanager" "wheel" ];
+    extraGroups = [
+      "networkmanager"
+      "wheel"
+      "input"
+      "docker"
+      "kvm"
+      "libvirtd"
+    ];
     packages = with pkgs; [
-    #  thunderbird
     ];
     shell = pkgs.fish;
   };
 
-  # Install firefox.
-  programs.firefox.enable = true;
   programs.fish.enable = true;
+  programs.udevil.enable = true;
 
   programs.nh = {
     enable = true;
     clean.enable = true;
     flake = "/home/ironlung/nix-config/";
   };
-
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
@@ -117,20 +124,20 @@
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
-     vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
-     neovim
-     wget
-     git
-     gcc
-     python3
-     unzip
+    vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
+    neovim
+    wget
+    git
+    gcc
+    python3
+    unzip
   ];
 
-  fonts.packages = with pkgs; [
-    nerd-fonts.jetbrains-mono
-  ];
+  # fonts.packages = with pkgs; [
+  #   nerd-fonts.jetbrains-mono
+  # ];
 
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
+  nix.settings.experimental-features = ["nix-command" "flakes"];
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
@@ -143,7 +150,7 @@
   # List services that you want to enable:
 
   # Enable the OpenSSH daemon.
-  # services.openssh.enable = true;
+  services.openssh.enable = true;
 
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];

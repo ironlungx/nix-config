@@ -40,6 +40,7 @@
       kitty.variant256Colors = true;
       fish.enable = false;
       tmux.enable = false;
+      rofi.enable = false;
 
       firefox.profileNames = ["ironlung"];
       hyprlock = {
