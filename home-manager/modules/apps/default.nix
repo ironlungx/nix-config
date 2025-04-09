@@ -5,6 +5,7 @@
     ./kitty.nix
     ./nixcord.nix
     ./spicetify.nix
-    ./waybar.nix
+    ./rofi
+    ./waybar
   ];
 }
