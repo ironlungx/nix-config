@@ -1,6 +1,13 @@
 {pkgs, ...}: {
   programs.neovim.enable = true;
   home.packages = with pkgs; [
+    zip
+    unzip
+    lazygit
+    gnumake
+    ripgrep
+
+    # LSP servers
     nixd
     black
     stylua
@@ -9,8 +16,6 @@
     clang-tools
     ruff
     basedpyright
-    lazygit
-    gnumake
-    ripgrep
+    fixjson
   ];
 }
