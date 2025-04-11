@@ -36,7 +36,6 @@
         "${pkgs.wl-clipboard}/bin/wl-paste --type image --watch cliphist store"
         "${pkgs.hyprpaper}/bin/hyprpaper"
         "${pkgs.dunst}/bin/dunst"
-        "${pkgs.swayosd}/bin/swayosd-server"
       ];
       #############################
       ### ENVIRONMENT VARIABLES ###
