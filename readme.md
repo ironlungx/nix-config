@@ -1,0 +1,2 @@
+# NixOS config 
+
