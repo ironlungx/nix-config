@@ -28,7 +28,7 @@
       "$terminal" = "${pkgs.kitty}/bin/kitty";
       "$browser" = "${pkgs.firefox}/bin/firefox";
       "$fileManager" = "${pkgs.nautilus}/bin/nautilus";
-      "$menu" = "${pkgs.rofi} -show drun";
+      "$menu" = "rofi -show drun";
       "$screenshot" = "${pkgs.grim}/bin/grim -g \"$(${pkgs.slurp}/bin/slurp)\" - | ${pkgs.wl-clipboard}/bin/wl-copy";
 
       #################

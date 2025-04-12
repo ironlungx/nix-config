@@ -60,13 +60,17 @@
         icon-size = 18;
         spacing = 10;
       };
-      custom.sep.format = "|";
+      "custom/sep".format = "|";
+
       mpris = {
         format = "  {title}";
         max-length = 30;
       };
+
       clock.format = "  {:%I:%M %p}";
-      custom.nix.format = "<span size='large'> </span>";
+
+      "custom/nix".format = "<span size='large'> </span>";
+
       pulseaudio = {
         format = "<span size='large'>󰕾 </span> {volume}%";
         format-muted = "  0%";
