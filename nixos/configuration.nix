@@ -133,10 +133,6 @@
     unzip
   ];
 
-  # fonts.packages = with pkgs; [
-  #   nerd-fonts.jetbrains-mono
-  # ];
-
   nix.settings.experimental-features = ["nix-command" "flakes"];
 
   # Some programs need SUID wrappers, can be configured further or are

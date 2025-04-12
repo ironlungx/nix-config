@@ -41,6 +41,7 @@
       fish.enable = false;
       tmux.enable = false;
       rofi.enable = false;
+      waybar.enable = false;
 
       firefox.profileNames = ["ironlung"];
       hyprlock = {

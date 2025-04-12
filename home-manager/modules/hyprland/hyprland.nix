@@ -1,6 +1,10 @@
 {pkgs, ...}: {
   home.packages = with pkgs; [
+    jq
+    libnotify
     hyprshot
+    grim
+    slurp
     playerctl
     cliphist
     wl-clipboard
@@ -24,7 +28,8 @@
       "$terminal" = "${pkgs.kitty}/bin/kitty";
       "$browser" = "${pkgs.firefox}/bin/firefox";
       "$fileManager" = "${pkgs.nautilus}/bin/nautilus";
-      "$menu" = "rofi -show drun";
+      "$menu" = "${pkgs.rofi} -show drun";
+      "$screenshot" = "${pkgs.grim}/bin/grim -g \"$(${pkgs.slurp}/bin/slurp)\" - | ${pkgs.wl-clipboard}/bin/wl-copy";
 
       #################
       ### AUTOSTART ###
@@ -36,7 +41,9 @@
         "${pkgs.wl-clipboard}/bin/wl-paste --type image --watch cliphist store"
         "${pkgs.hyprpaper}/bin/hyprpaper"
         "${pkgs.dunst}/bin/dunst"
+        "${pkgs.waybar}/bin/waybar"
       ];
+
       #############################
       ### ENVIRONMENT VARIABLES ###
       #############################
@@ -242,9 +249,9 @@
         "$mainMod SHIFT, Z, movetoworkspace, 6"
         "$mainMod SHIFT, X, movetoworkspace, 7"
 
-        "SUPER, V, exec, cliphist list | wofi --dmenu | cliphist decode | wl-copy"
+        "$mainMod, V, exec, cliphist list | rofi -dmenu -display-columns 2 | cliphist decode | wl-copy"
 
-        "$mainMod, M, exec, hyprshot -m region"
+        "$mainMod, M, exec, $screenshot"
         "$mainMod, Escape, exec, hyprlock"
       ];
 
