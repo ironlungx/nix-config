@@ -5,6 +5,7 @@
     ./cli
     ./apps
     ./shell
+    ./scripts
   ];
 }
 

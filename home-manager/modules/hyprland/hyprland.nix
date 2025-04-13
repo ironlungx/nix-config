@@ -8,13 +8,17 @@
     playerctl
     cliphist
     wl-clipboard
+    hyprpolkitagent
+    swayosd
   ];
+
   wayland.windowManager.hyprland = {
+    systemd.enable = false;
     enable = true;
     settings = {
       # See https://wiki.hyprland.org/Configuring/Monitors/
       monitor = [
-        "DVI-D-1, 1920x1200,auto,auto"
+        "DVI-D-1, 1920x1200,0x00,1"
         "WAYLAND-1, disable"
       ];
 
@@ -36,12 +40,14 @@
       #################
 
       exec-once = [
+        "dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAY"
         "${pkgs.pyprland}/bin/pypr"
         "${pkgs.wl-clipboard}/bin/wl-paste --type text --watch cliphist store"
         "${pkgs.wl-clipboard}/bin/wl-paste --type image --watch cliphist store"
         "${pkgs.hyprpaper}/bin/hyprpaper"
         "${pkgs.dunst}/bin/dunst"
         "${pkgs.waybar}/bin/waybar"
+        "swayosd-server"
       ];
 
       #############################

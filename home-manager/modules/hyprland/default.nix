@@ -16,6 +16,4 @@
     ./hyprpaper.nix
     ./pyprland.nix
   ];
-
-  services.swayosd.enable = true;
 }
