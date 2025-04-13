@@ -52,8 +52,13 @@
     userEmail = "hwlooverhello@gmail.com";
   };
 
-
   systemd.user.startServices = "sd-switch";
+  services.udiskie.enable = true;
+
+  services.focus-mode = {
+    enable = true;
+    blockedApps = ["electron"];
+  };
 
   # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
   home.stateVersion = "25.05";
