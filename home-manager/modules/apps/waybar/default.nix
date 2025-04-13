@@ -1,4 +1,8 @@
-{pkgs, ...}: let
+{
+  config,
+  pkgs,
+  ...
+}: let
   waybar_config = {
     mainBar = {
       "layer" = "top";
@@ -19,6 +23,8 @@
         "network"
         "pulseaudio"
         "custom/sep"
+        "custom/dunst"
+        "custom/focus"
         "tray"
       ];
       "hyprland/workspaces" = {
@@ -70,6 +76,30 @@
       clock.format = "  {:%I:%M %p}";
 
       "custom/nix".format = "<span size='large'> </span>";
+
+      "custom/dunst" = {
+        interval = 1;
+        exec = pkgs.writeShellScript "dunst_status" ''
+          COUNT=$(dunstctl count waiting)
+          ENABLED="<span size='large' color='${config.lib.stylix.colors.withHashtag.base0F}'>  </span>"
+          DISABLED="<span size='large' color='${config.lib.stylix.colors.withHashtag.base0F}'>  </span>"
+          if [ $COUNT != 0 ]; then DISABLED=" $COUNT"; fi
+          if dunstctl is-paused | grep -q "false" ; then echo $ENABLED; else echo $DISABLED; fi
+        '';
+
+        on-click = "dunstctl set-paused toggle";
+      };
+
+      "custom/focus" = {
+        interval = 1;
+        exec = pkgs.writeShellScript "focus_status" ''
+
+          FORMAT_ACTIVE="<span size='large' color='${config.lib.stylix.colors.withHashtag.base08}'> </span>"
+          FORMAT_INACTIVE="<span size='large' color='${config.lib.stylix.colors.withHashtag.base0C}'> </span>"
+
+          if focus status | grep yes > /dev/null; then echo $FORMAT_ACTIVE; else echo $FORMAT_INACTIVE; fi
+        '';
+      };
 
       pulseaudio = {
         format = "<span size='large'>󰕾 </span> {volume}%";

@@ -6,6 +6,7 @@
     ./alacritty.nix
     ./nixcord.nix
     ./spicetify.nix
+    ./ghostty.nix
     ./rofi
     ./waybar
   ];
