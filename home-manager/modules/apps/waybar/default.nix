@@ -81,8 +81,8 @@
         interval = 1;
         exec = pkgs.writeShellScript "dunst_status" ''
           COUNT=$(dunstctl count waiting)
-          ENABLED="<span size='large' color='${config.lib.stylix.colors.withHashtag.base0F}'>  </span>"
-          DISABLED="<span size='large' color='${config.lib.stylix.colors.withHashtag.base0F}'>  </span>"
+          ENABLED="<span size='large' color='${config.lib.stylix.colors.withHashtag.base0F}'>  </span>"
+          DISABLED="<span size='large' color='${config.lib.stylix.colors.withHashtag.base0F}'>  </span>"
           if [ $COUNT != 0 ]; then DISABLED=" $COUNT"; fi
           if dunstctl is-paused | grep -q "false" ; then echo $ENABLED; else echo $DISABLED; fi
         '';
@@ -99,6 +99,7 @@
 
           if focus status | grep yes > /dev/null; then echo $FORMAT_ACTIVE; else echo $FORMAT_INACTIVE; fi
         '';
+        on-click = "focus toggle";
       };
 
       pulseaudio = {
@@ -113,6 +114,7 @@ in {
   ];
   programs.waybar = {
     enable = true;
+    systemd.enable = true;
     settings = waybar_config;
     style = builtins.readFile ./style.css;
   };

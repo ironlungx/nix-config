@@ -13,7 +13,6 @@
   ];
 
   wayland.windowManager.hyprland = {
-    systemd.enable = false;
     enable = true;
     settings = {
       # See https://wiki.hyprland.org/Configuring/Monitors/
@@ -46,7 +45,6 @@
         "${pkgs.wl-clipboard}/bin/wl-paste --type image --watch cliphist store"
         "${pkgs.hyprpaper}/bin/hyprpaper"
         "${pkgs.dunst}/bin/dunst"
-        "${pkgs.waybar}/bin/waybar"
         "swayosd-server"
       ];
 

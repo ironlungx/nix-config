@@ -5,10 +5,10 @@
 }: {
   programs.kitty = {
     enable = true;
-    font = {
-      name = config.stylix.fonts.monospace.name;
-      size = config.stylix.fonts.sizes.terminal;
-    };
+    # font = {
+    #   name = config.stylix.fonts.monospace.name;
+    #   size = config.stylix.fonts.sizes.terminal;
+    # };
     settings = {
       cursor_shape = "underline";
       cursor_underline_thickness = 1.0;

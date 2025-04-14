@@ -1,6 +1,5 @@
 { config, pkgs, ... }:
 {
-  home.packages = with pkgs; [ bibata-cursors ];
   stylix = {
     enable = true;
     image = pkgs.fetchurl {

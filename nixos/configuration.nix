@@ -44,7 +44,6 @@
   services.xserver.enable = true;
   services.udisks2.enable = true;
 
-
   # Enable the GNOME Desktop Environment.
   services.xserver.displayManager.gdm.enable = true;
   # services.xserver.desktopManager.gnome.enable = true;
@@ -121,6 +120,15 @@
   nixpkgs.config.allowUnfree = true;
 
   programs.hyprland.enable = true;
+
+  programs.uwsm = {
+    enable = true;
+    waylandCompositors.Hyprland = {
+      prettyName = "Hyprland";
+      comment = "Compositor managed by UWSM";
+      binPath = "/run/current-system/sw/bin/Hyprland";
+    };
+  };
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
