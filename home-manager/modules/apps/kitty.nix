@@ -10,6 +10,7 @@
     #   size = config.stylix.fonts.sizes.terminal;
     # };
     settings = {
+      term = "xterm-256color";
       cursor_shape = "underline";
       cursor_underline_thickness = 1.0;
       window_padding_width = 10;
