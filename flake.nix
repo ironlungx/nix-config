@@ -7,6 +7,11 @@
     spicetify-nix.url = "github:Gerg-L/spicetify-nix";
     stylix.url = "github:danth/stylix";
 
+    seto = {
+      url = "github:unixpariah/seto";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -37,7 +42,7 @@
     nixosConfigurations = {
       valinor = nixpkgs.lib.nixosSystem {
         specialArgs = {inherit inputs outputs;};
-        modules = [  ./nixos/configuration.nix stylix.nixosModules.stylix ];
+        modules = [./nixos/configuration.nix stylix.nixosModules.stylix];
       };
     };
 
@@ -45,7 +50,7 @@
       "ironlung@valinor" = home-manager.lib.homeManagerConfiguration {
         pkgs = nixpkgs.legacyPackages.x86_64-linux;
         extraSpecialArgs = {inherit inputs outputs;};
-        modules = [ ./home-manager/home.nix ];
+        modules = [./home-manager/home.nix];
       };
     };
   };
