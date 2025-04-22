@@ -39,6 +39,17 @@
           updateInterval = 24 * 60 * 60 * 1000; # every day
           definedAliases = ["@nw"];
         };
+
+        "Duckduckgo" = {
+          urls = [{template = "https://duckduckgo.com/?q={searchTerms}";}];
+          iconUpdateURL = "https://duckduckgo.com/favicon.png";
+          definedAliases = ["@dg"];
+        };
+        "Perplexity" = {
+          urls = [{template = "https://www.perplexity.ai/?q={searchTerms}";}];
+          iconUpdateURL = "https://www.perplexity.ai/favicon.png";
+          definedAliases = ["@p"];
+        };
       };
 
       search.force = true;
