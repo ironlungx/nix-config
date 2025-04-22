@@ -83,7 +83,7 @@
           COUNT=$(dunstctl count waiting)
           ENABLED="<span size='large' color='${config.lib.stylix.colors.withHashtag.base0F}'>  </span>"
           DISABLED="<span size='large' color='${config.lib.stylix.colors.withHashtag.base0F}'>  </span>"
-          if [ $COUNT != 0 ]; then DISABLED=" $COUNT"; fi
+          if [ $COUNT != 0 ]; then DISABLED="<span size='large' color='${config.lib.stylix.colors.withHashtag.base0F}'>  </span>"; fi
           if dunstctl is-paused | grep -q "false" ; then echo $ENABLED; else echo $DISABLED; fi
         '';
 
