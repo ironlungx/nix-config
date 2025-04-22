@@ -101,6 +101,7 @@
       "docker"
       "kvm"
       "libvirtd"
+      "adbusers"
     ];
     packages = with pkgs; [
     ];
@@ -109,6 +110,12 @@
 
   programs.fish.enable = true;
   programs.udevil.enable = true;
+
+  programs.virt-manager.enable = true;
+
+  users.groups.libvirtd.members = ["ironlung"];
+  virtualisation.libvirtd.enable = true;
+  virtualisation.spiceUSBRedirection.enable = true;
 
   programs.nh = {
     enable = true;
@@ -140,9 +147,18 @@
     gcc
     python3
     unzip
+    android-tools
+    droidcam
+    # (pkgs.ollama.override {acceleration = "cuda";})
   ];
 
+  services.ollama = {
+    enable = true;
+    acceleration = "cuda";
+  };
+
   nix.settings.experimental-features = ["nix-command" "flakes"];
+  nix.settings.trusted-users = ["root" "ironlung"];
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
@@ -156,6 +172,11 @@
 
   # Enable the OpenSSH daemon.
   services.openssh.enable = true;
+
+  services.udev.packages = [
+    pkgs.platformio-core
+    pkgs.openocd
+  ];
 
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];

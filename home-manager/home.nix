@@ -36,10 +36,13 @@
   };
 
   home.packages = with pkgs; [
-    alacritty
-    fish
     xclip
     stow
+
+    devenv
+
+    aider-chat
+    inputs.seto.packages.${pkgs.system}.default
   ];
 
   fonts.fontconfig.enable = true;
@@ -58,6 +61,10 @@
   services.focus-mode = {
     enable = true;
     blockedApps = ["electron"];
+  };
+  services.ollama = {
+    enable = true;
+    acceleration = "cuda";
   };
 
   # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
