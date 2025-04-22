@@ -28,7 +28,7 @@
       # See https://wiki.hyprland.org/Configuring/Keywords/
 
       # Set programs that you use
-      "$terminal" = "${pkgs.kitty}/bin/kitty";
+      "$terminal" = "footclient";
       "$browser" = "${pkgs.firefox}/bin/firefox";
       "$fileManager" = "${pkgs.nautilus}/bin/nautilus";
       "$menu" = "rofi -show drun";
@@ -300,16 +300,24 @@
         "suppressevent maximize, class:.*"
         "nofocus,class:^$,title:^$,xwayland:1,floating:1,fullscreen:0,pinned:0"
         "float, title:Vesktop"
+        "float, title:discord"
       ];
     };
     extraConfig = ''
       $reset = hyprctl dispatch submap reset &&
+
       bind = $mainMod, W, submap, scratchpads
       submap = scratchpads
 
-      binde = , D, exec, $reset ${pkgs.pyprland}/bin/pypr toggle "vesktop"
+      binde = , D, exec, $reset ${pkgs.pyprland}/bin/pypr toggle "discord"
       binde = , S, exec, $reset ${pkgs.pyprland}/bin/pypr toggle "spotify"
       binde = , Return, exec, $reset ${pkgs.pyprland}/bin/pypr toggle "term"
+
+      bind = $mainMod, O, submap, utils
+      submap = utils
+
+      binde = , N, exec, $reset dunstctl set-paused toggle
+      binde = , F, exec, $reset focus toggle
 
       submap = reset
     '';
