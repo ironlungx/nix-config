@@ -35,10 +35,10 @@
       set-option -sa terminal-overrides ',xterm*:Tc'
 
       # Vim-style pane navigation with Alt + h/j/k/l
-      bind -n M-h select-pane -L
-      bind -n M-j select-pane -D
-      bind -n M-k select-pane -U
-      bind -n M-l select-pane -R
+      bind -n C-M-h select-pane -L
+      bind -n C-M-j select-pane -D
+      bind -n C-M-k select-pane -U
+      bind -n C-M-l select-pane -R
     '';
   };
 }
