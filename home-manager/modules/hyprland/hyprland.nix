@@ -309,7 +309,7 @@
       bind = $mainMod, W, submap, scratchpads
       submap = scratchpads
 
-      binde = , D, exec, $reset ${pkgs.pyprland}/bin/pypr toggle "discord"
+      binde = , D, exec, $reset ${pkgs.pyprland}/bin/pypr toggle "vesktop"
       binde = , S, exec, $reset ${pkgs.pyprland}/bin/pypr toggle "spotify"
       binde = , Return, exec, $reset ${pkgs.pyprland}/bin/pypr toggle "term"
 

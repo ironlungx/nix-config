@@ -1,6 +1,7 @@
 {
   programs.nixcord = {
-    discord.enable = true;
+    # discord.enable = true;
+    vesktop.enable = true;
 
     enable = true; # enable Nixcord. Also installs discord package
     config = {
