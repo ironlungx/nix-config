@@ -49,6 +49,7 @@
   fonts.fontconfig.enable = true;
 
   programs.home-manager.enable = true;
+  programs.btop.enable = true;
 
   programs.git = {
     enable = true;
