@@ -9,13 +9,23 @@
 
     # LSP servers
     nixd
-    black
     stylua
     alejandra
     lua-language-server
     clang-tools
-    ruff
-    basedpyright
     fixjson
+
+    ruff
+    black
+
+    (python3.withPackages (ps:
+      with ps; [
+        python-lsp-server
+        python-lsp-jsonrpc
+        pyls-isort
+        pyls-flake8
+        flake8
+        isort
+      ]))
   ];
 }

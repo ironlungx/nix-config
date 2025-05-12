@@ -28,7 +28,7 @@
       # See https://wiki.hyprland.org/Configuring/Keywords/
 
       # Set programs that you use
-      "$terminal" = "footclient";
+      "$terminal" = "kitty";
       "$browser" = "${pkgs.firefox}/bin/firefox";
       "$fileManager" = "${pkgs.nautilus}/bin/nautilus";
       "$menu" = "rofi -show drun";
@@ -312,12 +312,14 @@
       binde = , D, exec, $reset ${pkgs.pyprland}/bin/pypr toggle "vesktop"
       binde = , S, exec, $reset ${pkgs.pyprland}/bin/pypr toggle "spotify"
       binde = , Return, exec, $reset ${pkgs.pyprland}/bin/pypr toggle "term"
+      bind = , catchall, submap, reset
 
       bind = $mainMod, O, submap, utils
       submap = utils
 
       binde = , N, exec, $reset dunstctl set-paused toggle
       binde = , F, exec, $reset focus toggle
+      bind = , catchall, submap, reset
 
       submap = reset
     '';
