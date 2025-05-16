@@ -8,6 +8,9 @@
     baseIndex = 1;
     terminal = "xterm-256color";
 
+    shell = "${pkgs.fish}/bin/fish";
+
+
     plugins = with pkgs.tmuxPlugins; [
       yank
       sensible

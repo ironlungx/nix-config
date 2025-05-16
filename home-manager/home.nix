@@ -7,7 +7,7 @@
 }: {
   imports = [
     inputs.nix-index-database.hmModules.nix-index # Black magic
-    inputs.nixcord.homeManagerModules.nixcord
+    inputs.nixcord.homeModules.nixcord
     inputs.spicetify-nix.homeManagerModules.default
     inputs.stylix.homeManagerModules.stylix
 
