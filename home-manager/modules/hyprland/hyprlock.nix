@@ -58,15 +58,6 @@
           "halign " = "center";
           "valign " = "center";
         }
-        {
-          "monitor " = "";
-          "text " = ''cmd[update:1000] echo "$(playerctl metadata --format '  {{ artist }} - {{ title }}')"'';
-          "font_size " = " 18";
-          "font_family " = "JetBrains Mono Nerd Font";
-          "position " = " 0, 50";
-          "halign " = " center";
-          "valign " = " bottom";
-        }
       ];
 
       image = [
