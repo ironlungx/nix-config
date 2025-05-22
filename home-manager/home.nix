@@ -49,7 +49,13 @@
   fonts.fontconfig.enable = true;
 
   programs.home-manager.enable = true;
-  programs.btop.enable = true;
+  programs.btop = {
+    enable = true;
+    settings = {
+      update_ms = 200;
+      vim_keys = true;
+    };
+  };
 
   programs.git = {
     enable = true;
