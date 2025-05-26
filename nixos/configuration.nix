@@ -152,12 +152,14 @@
       "adbusers"
     ];
     packages = with pkgs; [
+      obs-studio
     ];
     shell = pkgs.fish;
   };
 
   programs.fish.enable = true;
   programs.udevil.enable = true;
+  programs.adb.enable = true;
 
   programs.virt-manager.enable = true;
 

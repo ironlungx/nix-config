@@ -49,6 +49,7 @@
   fonts.fontconfig.enable = true;
 
   programs.home-manager.enable = true;
+  programs.cava.enable = true;
   programs.btop = {
     enable = true;
     settings = {
