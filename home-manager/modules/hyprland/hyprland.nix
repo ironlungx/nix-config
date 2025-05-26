@@ -10,6 +10,7 @@
     wl-clipboard
     hyprpolkitagent
     swayosd
+    flameshot
   ];
 
   wayland.windowManager.hyprland = {
@@ -32,7 +33,8 @@
       "$browser" = "${pkgs.firefox}/bin/firefox";
       "$fileManager" = "${pkgs.nautilus}/bin/nautilus";
       "$menu" = "rofi -show drun";
-      "$screenshot" = "${pkgs.grim}/bin/grim -g \"$(${pkgs.slurp}/bin/slurp)\" - | ${pkgs.wl-clipboard}/bin/wl-copy";
+      # "$screenshot" = "${pkgs.grim}/bin/grim -g \"$(${pkgs.slurp}/bin/slurp)\" - | ${pkgs.wl-clipboard}/bin/wl-copy";
+      "$screenshot" = "${pkgs.flameshot}/bin/flameshot gui --raw | ${pkgs.wl-clipboard}/bin/wl-copy -f";
 
       #################
       ### AUTOSTART ###
@@ -301,6 +303,12 @@
         "nofocus,class:^$,title:^$,xwayland:1,floating:1,fullscreen:0,pinned:0"
         "float, title:Vesktop"
         "float, title:discord"
+      ];
+
+      windowrulev2 = [
+        "float,title:^(flameshot)"
+        "move 0 0,title:^(flameshot)"
+        "suppressevent fullscreen,title:^(flameshot)"
       ];
     };
     extraConfig = ''
