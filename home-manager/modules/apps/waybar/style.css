@@ -51,7 +51,7 @@
 }
 
 /* Common styling for elements with margin, padding and border-radius */
-#custom-nix, #workspaces, #window, #pulseaudio, #cpu, #memory, #mpris, #clock, #tray, #network {
+#custom-nix, #workspaces, #window, #pulseaudio, #cpu, #memory, #mpris, #tray, #clock, #network {
   margin: 7px;
   padding: 5px;
   padding-left: 8px;
@@ -61,23 +61,29 @@
 }
 
 #custom-dunst {
-  margin: 7px;
   padding-left: 8px;
   padding-right: 5px;
   border-radius: 4px 0 0 4px;
   background: @base;
-  margin-right: 0;
+  margin: 7px 0 7px 7px; /* right margin 0 */
   border: none;
 }
 
 #custom-focus {
-  margin: 7px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-radius: 0;
+  background: @base;
+  margin: 7px 0; /* no left or right margin */
+  border: none;
+}
+
+#tray {
   padding-left: 5px;
   padding-right: 8px;
   border-radius: 0 4px 4px 0;
   background: @base;
-  margin-left: 0;
-  border: none;
+  margin: 7px 7px 7px 0; /* left margin 0 */
 }
 
 #workspaces {
@@ -154,4 +160,3 @@
 #pulseaudio {
   color: @green;
 }
-
