@@ -176,6 +176,7 @@
   users.groups.libvirtd.members = ["ironlung"];
   virtualisation.libvirtd.enable = true;
   virtualisation.spiceUSBRedirection.enable = true;
+  virtualisation.docker.enable = true;
 
   programs.nh = {
     enable = true;
