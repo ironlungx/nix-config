@@ -1,5 +1,6 @@
 {pkgs, ...}: {
   programs.bat.enable = true;
+  programs.zoxide.enableFishIntegration = true;
 
   programs.fish = {
     enable = true;
@@ -13,6 +14,7 @@
       cat = "bat";
       v = "nvim";
       t = "tmux";
+      cd = "z";
     };
   };
 }
