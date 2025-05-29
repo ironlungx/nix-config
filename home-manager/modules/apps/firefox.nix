@@ -33,21 +33,27 @@
           definedAliases = ["@np"];
         };
 
+        "My NixOS" = {
+          urls = [{template = "https://mynixos.com/search?q={searchTerms}";}];
+          icon = "https://mynixos.com/favicon.png";
+          definedAliases = "@mynixos";
+        };
+
         "NixOS Wiki" = {
           urls = [{template = "https://nixos.wiki/index.php?search={searchTerms}";}];
-          iconUpdateURL = "https://nixos.wiki/favicon.png";
+          icon = "https://nixos.wiki/favicon.png";
           updateInterval = 24 * 60 * 60 * 1000; # every day
           definedAliases = ["@nw"];
         };
 
         "Duckduckgo" = {
           urls = [{template = "https://duckduckgo.com/?q={searchTerms}";}];
-          iconUpdateURL = "https://duckduckgo.com/favicon.png";
+          icon = "https://duckduckgo.com/favicon.png";
           definedAliases = ["@dg"];
         };
         "Perplexity" = {
           urls = [{template = "https://www.perplexity.ai/?q={searchTerms}";}];
-          iconUpdateURL = "https://www.perplexity.ai/favicon.png";
+          icon = "https://www.perplexity.ai/favicon.png";
           definedAliases = ["@p"];
         };
       };
