@@ -44,6 +44,8 @@
 
     aider-chat
     inputs.seto.packages.${pkgs.system}.default
+
+    tldr
   ];
 
   fonts.fontconfig.enable = true;
