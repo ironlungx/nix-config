@@ -133,6 +133,19 @@
     # use the example session manager (no others are packaged yet so this is enabled by default,
     # no need to redefine it in your config for now)
     #media-session.enable = true;
+    extraConfig.pipewire."99-null-sink" = {
+      "context.objects" = [
+        {
+          factory = "adapter";
+          args = {
+            "factory.name" = "support.null-audio-sink";
+            "node.name" = "music_share";
+            "node.description" = "Music Share";
+            "media.class" = "Audio/Sink";
+          };
+        }
+      ];
+    };
   };
 
   # Enable touchpad support (enabled default in most desktopManager).
@@ -153,6 +166,7 @@
     ];
     packages = with pkgs; [
       obs-studio
+      qpwgraph
     ];
     shell = pkgs.fish;
   };
