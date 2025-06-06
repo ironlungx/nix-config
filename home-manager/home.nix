@@ -46,6 +46,8 @@
     inputs.seto.packages.${pkgs.system}.default
 
     tldr
+
+    obsidian
   ];
 
   fonts.fontconfig.enable = true;
