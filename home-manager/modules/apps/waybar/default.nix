@@ -13,6 +13,7 @@
         "custom/sep"
         "cpu"
         "memory"
+        "disk"
       ];
       "modules-center" = [
         "clock"
@@ -46,20 +47,25 @@
         format = "  {usage}%";
         max-length = 10;
       };
-      network = {
-        format-wifi = "  {bandwidthTotalBytes}";
-        format-ethernet = "eth {ipaddr}/{cidr}";
-        format-disconnected = "net none";
-        tooltip-format = "{ifname} via {gwaddr}";
-        tooltip-format-wifi = "Connected to: {essid} {frequency} - ({signalStrength}%)";
-        tooltip-format-ethernet = "{ifname}";
-        tooltip-format-disconnected = "Disconnected";
-        max-length = 50;
-        interval = 5;
+      disk = {
+        interval = 30;
+        format = "  {specific_free:0.1f}G";
+        unit = "GB";
       };
       memory = {
         interval = 2;
-        format = "  {used:0.2f}G";
+        format = "  {used:0.1f}G";
+      };
+      network = {
+        format-wifi = "  {bandwidthTotalBytes}";
+        format-ethernet = "󰈀  {bandwidthTotalBytes}";
+        format-disconnected = "net none";
+        tooltip-format = "{ifname} via {gwaddr}";
+        tooltip-format-wifi = "Connected to: {essid} {frequency} - ({signalStrength}%)";
+        tooltip-format-ethernet = "{ifname} via {gwaddr}";
+        tooltip-format-disconnected = "Disconnected";
+        max-length = 50;
+        interval = 5;
       };
       hyprland.window.format = "{class}";
       tray = {

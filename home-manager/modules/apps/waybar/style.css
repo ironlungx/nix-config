@@ -51,7 +51,7 @@
 }
 
 /* Common styling for elements with margin, padding and border-radius */
-#custom-nix, #workspaces, #window, #pulseaudio, #cpu, #memory, #mpris, #tray, #clock, #network {
+#custom-nix, #workspaces, #window, #pulseaudio, #cpu, #memory, #disk, #mpris, #tray, #clock, #network {
   margin: 7px;
   padding: 5px;
   padding-left: 8px;
@@ -159,4 +159,8 @@
 
 #pulseaudio {
   color: @green;
+}
+
+#disk {
+  color: @maroon;
 }
