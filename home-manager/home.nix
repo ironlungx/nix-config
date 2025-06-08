@@ -70,6 +70,7 @@
 
   systemd.user.startServices = "sd-switch";
   services.udiskie.enable = true;
+  services.fluidsynth.enable = true;
 
   services.focus-mode = {
     enable = true;

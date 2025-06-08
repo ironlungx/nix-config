@@ -198,6 +198,11 @@
     flake = "/home/ironlung/nix-config/";
   };
 
+  programs.nix-ld.enable = true;
+  programs.nix-ld.libraries = with pkgs; [
+    libnotify
+  ];
+
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
 
