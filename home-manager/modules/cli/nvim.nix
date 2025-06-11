@@ -1,6 +1,7 @@
 {pkgs, ...}: {
-  programs.neovim.enable = true;
   home.packages = with pkgs; [
+    neovim # not doing programs.nvim.enable cus home manager complains about init.lua
+
     zip
     unzip
     lazygit
