@@ -6,6 +6,7 @@
     nixcord.url = "github:kaylorben/nixcord";
     spicetify-nix.url = "github:Gerg-L/spicetify-nix";
     stylix.url = "github:danth/stylix";
+    niri.url = "github:sodiboo/niri-flake";
 
     seto = {
       url = "github:unixpariah/seto";
