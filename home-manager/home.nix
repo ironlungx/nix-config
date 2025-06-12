@@ -48,6 +48,8 @@
     tldr
 
     obsidian
+
+    stremio
   ];
 
   fonts.fontconfig.enable = true;
