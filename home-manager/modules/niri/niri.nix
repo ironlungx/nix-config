@@ -23,7 +23,10 @@
         };
       };
 
-      environment.DISPLAY = ":0";
+      environment = {
+        DISPLAY = ":0";
+        ELECTRON_OZONE_PLATFORM_HINT = "auto";
+      };
       prefer-no-csd = true;
 
       layout = {
@@ -78,12 +81,11 @@
         "Mod+Shift+N".action.move-column-left = {};
         "Mod+Shift+M".action.move-column-right = {};
 
-        "Mod+Shift+Q".action.close-window = { };
+        "Mod+Shift+Q".action.close-window = {};
 
-        
-        "Mod+R".action.switch-preset-column-width = { };
-        "Mod+F".action.maximize-column = { };
-        "Mod+C".action.center-column = { };
+        "Mod+R".action.switch-preset-column-width = {};
+        "Mod+F".action.maximize-column = {};
+        "Mod+C".action.center-column = {};
       };
 
       animations = {
