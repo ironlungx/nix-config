@@ -168,7 +168,7 @@
       # See https://wiki.hyprland.org/Configuring/Master-Layout/ for more
       master = {
         new_status = "inherit";
-        allow_small_split = true;
+        allow_small_split = false;
       };
 
       # https://wiki.hyprland.org/Configuring/Variables/#misc
