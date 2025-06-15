@@ -4,7 +4,9 @@
   config,
   pkgs,
   ...
-}: {
+}: let
+  secrets = import ./secrets.nix;
+in {
   imports = [
     inputs.nix-index-database.hmModules.nix-index # Black magic
     inputs.spicetify-nix.homeManagerModules.default
@@ -78,10 +80,12 @@
     enable = true;
     blockedApps = ["electron"];
   };
-  # services.ollama = {
-  #   enable = true;
-  #   acceleration = "cuda";
-  # };
+  services.weather = {
+    enable = true;
+    latitude = secrets.latitude;
+    longitude = secrets.longitude;
+    format = "{icon}  {temp} {unit}";
+  };
 
   # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
   home.stateVersion = "25.05";
