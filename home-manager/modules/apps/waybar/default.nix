@@ -79,7 +79,29 @@
         max-length = 30;
       };
 
-      clock.format = "  {:%I:%M %p}";
+      clock = {
+        format = "  {:%I:%M %p}";
+        tooltip-format = "<tt><small>{calendar}</small></tt>";
+        calendar = {
+          mode = "year";
+          mode-mon-col = 3;
+          weeks-pos = "right";
+          on-scroll = 1;
+          format = {
+            months   = "<span color='${config.lib.stylix.colors.withHashtag.base0A}'><b>{}</b></span>"; # yellowish
+            days     = "<span color='${config.lib.stylix.colors.withHashtag.base08}'><b>{}</b></span>"; # red/pink
+            weeks    = "<span color='${config.lib.stylix.colors.withHashtag.base0C}'><b>W{}</b></span>"; # cyan
+            weekdays = "<span color='${config.lib.stylix.colors.withHashtag.base0E}'><b>{}</b></span>"; # orange/violet
+            today    = "<span color='${config.lib.stylix.colors.withHashtag.base09}'><b><u>{}</u></b></span>"; # bright highlight
+          };
+        };
+
+        actions = {
+          on-click-right = "mode";
+          on-scroll-up = "shift_up"; # or "tz_up"
+          on-scroll-down = "shift_down"; # or "tz_down"
+        };
+      };
 
       "custom/nix".format = "<span size='large'> </span>";
 
