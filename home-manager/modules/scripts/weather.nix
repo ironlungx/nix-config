@@ -14,16 +14,11 @@ with lib; let
   weatherScript = ./weather.py;
 
   # First script: calls weather.py with args
-  weatherExecutable = pkgs.writeScriptBin "weather-service" ''
+  weatherExecutable = pkgs.writeScriptBin "weather" ''
     #!${pkgs.bash}/bin/bash
-    exec ${pythonEnv}/bin/python3 ${weatherScript} "$@"
+    exec ${pythonEnv}/bin/python3 ${weatherScript} ${toString cfg.latitude} ${toString cfg.longitude} "$@"
   '';
 
-  # Second script: hardcodes lat, long, and format from config
-  weatherLauncher = pkgs.writeScriptBin "weather" ''
-    #!${pkgs.bash}/bin/bash
-    ${weatherExecutable}/bin/weather-service ${toString cfg.latitude} ${toString cfg.longitude} '${cfg.format}'
-  '';
 in {
   options.services.weather = {
     enable = mkEnableOption "weather service";
@@ -47,7 +42,6 @@ in {
   config = mkIf cfg.enable {
     home.packages = [
       weatherExecutable
-      weatherLauncher
     ];
   };
 }
