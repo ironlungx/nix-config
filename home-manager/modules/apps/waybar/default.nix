@@ -21,6 +21,7 @@
       "modules-right" = [
         "mpris"
         "custom/sep"
+        "custom/weather"
         "network"
         "pulseaudio"
         "custom/sep"
@@ -67,6 +68,12 @@
         max-length = 50;
         interval = 5;
       };
+
+      "custom/weather" = {
+        interval = 60 * 20;
+        exec = "weather \"{icon}  {temp}{unit}\"";
+      };
+
       hyprland.window.format = "{class}";
       tray = {
         icon-size = 18;
