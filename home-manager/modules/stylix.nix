@@ -3,8 +3,8 @@
   stylix = {
     enable = true;
     image = pkgs.fetchurl {
-      url = "https://raw.githubusercontent.com/zhichaoh/catppuccin-wallpapers/refs/heads/main/landscapes/evening-sky.png";
-      sha256 = "0kb87w736abdf794dk9fvqln56axzskxia1g6zdjrqzl7v539035";
+      url = "https://raw.githubusercontent.com/ironlungx/wallpapers/refs/heads/main/in%20rainbows_themed_catppuccin-frappe.jpg";
+      sha256 = "0hkrb2973ms6qy099i5d8kb9fbxqpl5vh1clf2735jwjzmlvn6sf";
     };
     fonts = {
       sizes = {
