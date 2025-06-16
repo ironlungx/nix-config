@@ -16,3 +16,5 @@ Notable programs/configs:
 
 
 I have no idea why you would ever steal everything from my config
+
+All the wallpapers are in my other repo [here](https://github.com/ironlungx/wallpapers)
