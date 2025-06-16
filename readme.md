@@ -13,3 +13,6 @@ Notable programs/configs:
 - Spicetify
 - Kitty
 - Tmux
+
+
+I have no idea why you would ever steal everything from my config
