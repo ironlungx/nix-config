@@ -15,6 +15,7 @@
       v = "nvim";
       t = "tmux";
       cd = "z";
+      nix-shell = "nix-shell --command 'fish' ";
     };
   };
 }
