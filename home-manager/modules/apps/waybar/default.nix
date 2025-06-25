@@ -23,7 +23,7 @@
         "custom/sep"
         "custom/weather"
         "network"
-        "pulseaudio"
+        "bluetooth"
         "custom/sep"
         "custom/dunst"
         "custom/focus"
@@ -141,6 +141,12 @@
         format = "<span size='large'>󰕾 </span> {volume}%";
         format-muted = "  0%";
       };
+      bluetooth = {
+          format-disconnected = "<span size='large'󰂯 </span>{device_alias}";
+          format-connected = "<span size='large'>󰂱 </span>{device_alias}";
+          tooltip = true;
+          tooltip-format = "{device_enumerate}";
+        };
     };
   };
 in {
