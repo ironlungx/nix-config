@@ -14,6 +14,16 @@
         fixSpotifyEmbeds.enable = true;
         spotifyShareCommands.enable = true;
         spotifyControls.enable = true;
+        messageLogger = {
+          enable = true;
+          logEdits = true;
+          logDeletes = true;
+          ignoreSelf = true;
+        };
+        silentTyping = {
+          enable = true;
+          showIcon = true;
+        };
       };
     };
   };
