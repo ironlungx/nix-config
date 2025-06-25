@@ -9,7 +9,14 @@
   ];
 
   # Bootloader.
-  boot.loader.systemd-boot.enable = true;
+  # boot.loader.systemd-boot.enable = true;
+  boot.loader.grub = {
+    enable = true;
+    efiSupport = true;
+    device = "nodev";
+    theme = pkgs.catppuccin-grub;
+  };
+
   boot.loader.efi.canTouchEfiVariables = true;
 
   networking.hostName = "valinor"; # Define your hostname.
@@ -117,6 +124,12 @@
 
   # Enable sound with pipewire.
   hardware.pulseaudio.enable = false;
+
+  # Bluetooth
+  hardware.bluetooth.enable = true; # enables support for Bluetooth
+  hardware.bluetooth.powerOnBoot = true; # powers up the default Bluetooth controller on boot
+  services.blueman.enable = true;
+
   security.rtkit.enable = true;
   security.sudo.extraConfig = ''
     Defaults pwfeedback
