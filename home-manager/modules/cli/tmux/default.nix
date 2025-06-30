@@ -42,6 +42,8 @@
       bind -n C-M-j select-pane -D
       bind -n C-M-k select-pane -U
       bind -n C-M-l select-pane -R
+
+      bind-key -n C-t display-popup -d "#{pane_current_path}" -w 75% -h 75% -E "${pkgs.fish}/bin/fish"
     '';
   };
 }
