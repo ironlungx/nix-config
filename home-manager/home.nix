@@ -52,6 +52,8 @@ in {
     obsidian
 
     stremio
+
+    rclone
   ];
 
   fonts.fontconfig.enable = true;
