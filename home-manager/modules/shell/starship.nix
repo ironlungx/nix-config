@@ -4,7 +4,7 @@
     settings = {
       scan_timeout = 10;
       add_newline = false;
-      format = "$directory $nix_shell $character";
+      format = "$directory $nix_shell$git_branch $character";
       right_format = "$cmd_duration";
       character = {
         success_symbol = "[ ](bold green)";
@@ -31,8 +31,8 @@
         style = "bold bright-purple";
       };
       git_branch = {
-        format = " on [$symbol$branch(:$remote_branch)]($style) ";
-        symbol = " ";
+        format = "[$symbol $branch(:$remote_branch)]($style) ";
+        symbol = "";
         style = "bold cyan";
       };
       cmd_duration = {
@@ -45,7 +45,6 @@
       line_break = {
         disabled = false;
       };
-      # --- nix_shell support added below ---
       nix_shell = {
         format = "[$symbol$name]($style) ";
         symbol = " ";
