@@ -1,0 +1,122 @@
+{
+  inputs,
+  config,
+  pkgs,
+  ...
+}: {
+  imports = [inputs.zen-browser.homeModules.default];
+
+  programs.zen-browser = {
+    enable = true;
+    policies = {
+      DisableAppUpdate = true;
+      DisableTelemetry = true;
+      AutofillAddressEnabled = false;
+      AutofillCreditCardEnabled = false;
+      DisableFirefoxStudies = true;
+      DisablePocket = true;
+      DontCheckDefaultBrowser = true;
+      NoDefaultBookmarks = true;
+      OfferToSaveLogins = false;
+    };
+
+    profiles.ironlung = {
+      userChrome = pkgs.fetchurl {
+        url = "https://raw.githubusercontent.com/catppuccin/zen-browser/refs/heads/main/themes/Frappe/Lavender/userChrome.css";
+        sha256 = "06cy1yrhfbnhsfacm48n817b4h3p1kgdw7aj6469sqci3wglyqwy";
+      };
+
+      userContent = pkgs.fetchurl {
+        url = "https://raw.githubusercontent.com/catppuccin/zen-browser/refs/heads/main/themes/Frappe/Lavender/userContent.css";
+        sha256 = "1xiabsqsm7x10q2kx6c5fd2nfii96c0hffbpx34h9pivx52f8vhz";
+      };
+      settings = {
+        "toolkit.legacyUserProfileCustomizations.stylesheets" = true;
+        "zen.welcome-screen.seen" = true;
+
+        "extensions.autoDisableScopes" = 0;
+        "browser.startup.homepage" = "https://ironlungx.github.io/Bento/";
+        "browser.search.defaultenginename" = "Duckduckgo";
+        "browser.aboutConfig.showWarning" = false;
+      };
+      search.force = true;
+      search.engines = {
+        "Nix Packages" = {
+          urls = [
+            {
+              template = "https://search.nixos.org/packages";
+              params = [
+                {
+                  name = "type";
+                  value = "packages";
+                }
+                {
+                  name = "query";
+                  value = "{searchTerms}";
+                }
+              ];
+            }
+          ];
+          icon = "''${pkgs.nixos-icons}/share/icons/hicolor/scalable/apps/nix-snowflake.svg";
+          definedAliases = ["@np"];
+        };
+
+        "My NixOS" = {
+          urls = [{template = "https://mynixos.com/search?q={searchTerms}";}];
+          icon = "https://mynixos.com/favicon.ico";
+          definedAliases = ["@mynixos"];
+        };
+
+        "NixOS Wiki" = {
+          urls = [{template = "https://nixos.wiki/index.php?search={searchTerms}";}];
+          icon = "https://nixos.wiki/favicon.png";
+          updateInterval = 24 * 60 * 60 * 1000; # every day
+          definedAliases = ["@nw"];
+        };
+
+        "Duckduckgo" = {
+          urls = [{template = "https://duckduckgo.com/?q={searchTerms}";}];
+          icon = "https://duckduckgo.com/favicon.png";
+          definedAliases = ["@dg"];
+        };
+
+        "Youtube" = {
+          urls = [{template = "https://youtube.com/search?q={searchTerms}";}];
+          icon = "https://youtube.com/favicon.ico";
+          definedAliases = ["@yt"];
+        };
+
+        "Perplexity" = {
+          urls = [{template = "https://www.perplexity.ai/?q={searchTerms}";}];
+          icon = "https://www.perplexity.ai/favicon.png";
+          definedAliases = ["@p"];
+        };
+
+        bing.metaData.hidden = true;
+        ebay.metaData.hidden = true;
+        google.metaData.alias = "@g";
+      };
+
+      extensions = {
+        force = true;
+        packages = with inputs.firefox-addons.packages.${pkgs.system}; [
+          ublock-origin
+          sponsorblock
+          darkreader
+          vimium
+          youtube-shorts-block
+          stylus
+        ];
+      };
+    };
+    settings."uBlock0@raymondhill.net".settings = {
+      selectedFilterLists = [
+        "ublock-filters"
+        "ublock-badware"
+        "ublock-privacy"
+        "ublock-unbreak"
+        "ublock-quick-fixes"
+      ];
+    };
+  };
+}
