@@ -35,8 +35,8 @@
 
         "My NixOS" = {
           urls = [{template = "https://mynixos.com/search?q={searchTerms}";}];
-          icon = "https://mynixos.com/favicon.png";
-          definedAliases = "@mynixos";
+          icon = "https://mynixos.com/favicon.ico";
+          definedAliases = ["@mynixos"];
         };
 
         "NixOS Wiki" = {
@@ -51,12 +51,25 @@
           icon = "https://duckduckgo.com/favicon.png";
           definedAliases = ["@dg"];
         };
+
+        "Youtube" = {
+          urls = [{template = "https://youtube.com/search?q={searchTerms}";}];
+          icon = "https://youtube.com/favicon.ico";
+          definedAliases = ["@yt"];
+        };
+
         "Perplexity" = {
           urls = [{template = "https://www.perplexity.ai/?q={searchTerms}";}];
           icon = "https://www.perplexity.ai/favicon.png";
           definedAliases = ["@p"];
         };
+
+        bing.metaData.hidden = true;
+        ebay.metaData.hidden = true;
+        google.metaData.alias = "@g";
       };
+
+      search.default = "ddg";
 
       search.force = true;
 
