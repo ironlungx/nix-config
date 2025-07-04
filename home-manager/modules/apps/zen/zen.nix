@@ -108,15 +108,15 @@
           stylus
         ];
       };
-    };
-    settings."uBlock0@raymondhill.net".settings = {
-      selectedFilterLists = [
-        "ublock-filters"
-        "ublock-badware"
-        "ublock-privacy"
-        "ublock-unbreak"
-        "ublock-quick-fixes"
-      ];
+      settings."uBlock0@raymondhill.net".settings = {
+        selectedFilterLists = [
+          "ublock-filters"
+          "ublock-badware"
+          "ublock-privacy"
+          "ublock-unbreak"
+          "ublock-quick-fixes"
+        ];
+      };
     };
   };
 }
