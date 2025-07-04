@@ -1,4 +1,4 @@
-{pkgs, ...}: {
+{pkgs, inputs, ...}: {
   home.packages = with pkgs; [
     jq
     libnotify
@@ -30,7 +30,7 @@
 
       # Set programs that you use
       "$terminal" = "kitty";
-      "$browser" = "${pkgs.firefox}/bin/firefox";
+      "$browser" = "${inputs.zen-browser.packages.${pkgs.system}.default}/bin/.zen-wrapped";
       "$fileManager" = "${pkgs.nautilus}/bin/nautilus";
       "$menu" = "rofi -show drun";
       # "$screenshot" = "${pkgs.grim}/bin/grim -g \"$(${pkgs.slurp}/bin/slurp)\" - | ${pkgs.wl-clipboard}/bin/wl-copy";
