@@ -43,7 +43,7 @@ def get_weather(latitude: str, longitude: str, fmt: str) -> str:
     url = f"https://api.open-meteo.com/v1/forecast?latitude={latitude}&longitude={longitude}&current=temperature_2m,weather_code,is_day&forecast_days=1&daily=sunrise,sunset&timezone=GMT&timeformat=unixtime"
     data = requests.get(url).json()
 
-    temperature = data["current"]["temperature_2m"]
+    temperature = str(data["current"]["temperature_2m"])
 
     icon = ""
 
