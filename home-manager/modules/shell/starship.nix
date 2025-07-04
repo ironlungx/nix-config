@@ -4,8 +4,8 @@
     settings = {
       scan_timeout = 10;
       add_newline = false;
-      format = "$directory $nix_shell$git_branch $character";
-      right_format = "$cmd_duration";
+      format = "$directory $nix_shell $character";
+      right_format = "$git_branch$cmd_duration";
       character = {
         success_symbol = "[ ](bold green)";
         error_symbol = "[ ](bold red)";
@@ -33,7 +33,7 @@
       git_branch = {
         format = "[$symbol $branch(:$remote_branch)]($style) ";
         symbol = "";
-        style = "bold cyan";
+        style = "bold purple";
       };
       cmd_duration = {
         min_time = 2000;
