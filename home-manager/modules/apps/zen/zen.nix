@@ -21,10 +21,15 @@
     };
 
     profiles.ironlung = {
-      userChrome = pkgs.fetchurl {
-        url = "https://raw.githubusercontent.com/catppuccin/zen-browser/refs/heads/main/themes/Frappe/Lavender/userChrome.css";
-        sha256 = "06cy1yrhfbnhsfacm48n817b4h3p1kgdw7aj6469sqci3wglyqwy";
-      };
+      userChrome = pkgs.runCommand "userChrome.css" {} ''
+        cat ${pkgs.fetchurl {
+          url = "https://raw.githubusercontent.com/catppuccin/zen-browser/refs/heads/main/themes/Frappe/Lavender/userChrome.css";
+          sha256 = "06cy1yrhfbnhsfacm48n817b4h3p1kgdw7aj6469sqci3wglyqwy";
+        }} > $out
+        echo ':root {
+          --zen-main-browser-background: rgba(26,27,38,0.8) !important;
+        }' >> $out
+      '';
 
       userContent = pkgs.fetchurl {
         url = "https://raw.githubusercontent.com/catppuccin/zen-browser/refs/heads/main/themes/Frappe/Lavender/userContent.css";
@@ -33,11 +38,16 @@
       settings = {
         "toolkit.legacyUserProfileCustomizations.stylesheets" = true;
         "zen.welcome-screen.seen" = true;
+        "zen.view.show-newtab-button-border-top" = true;
+        "zen.view.show-newtab-button-top" = false;
 
         "extensions.autoDisableScopes" = 0;
+        "extensions.webextensions.restrictedDomains" = "";
         "browser.startup.homepage" = "https://ironlungx.github.io/Bento/";
         "browser.search.defaultenginename" = "Duckduckgo";
         "browser.aboutConfig.showWarning" = false;
+        "browser.startup.page" = 1;
+        "browser.download.useDownloadDir" = false;
       };
       search.force = true;
       search.engines = {
@@ -96,6 +106,8 @@
         ebay.metaData.hidden = true;
         google.metaData.alias = "@g";
       };
+
+      search.default = "ddg";
 
       extensions = {
         force = true;
