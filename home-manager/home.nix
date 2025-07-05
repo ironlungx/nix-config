@@ -33,8 +33,6 @@ in {
     sessionPath = [
       "$HOME/.local/bin" # Add support for .local/bin in order to make mason work on NixOS
     ];
-
-    file = {}; # TODO: Move from stow to this
   };
 
   home.packages = with pkgs; [
