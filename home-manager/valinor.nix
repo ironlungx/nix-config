@@ -62,6 +62,8 @@ in {
   systemd.user.startServices = "sd-switch";
   services.udiskie.enable = true;
 
+  services.kdeconnect.enable = true;
+
   services.focus-mode = {
     enable = true;
     blockedApps = ["electron"];
