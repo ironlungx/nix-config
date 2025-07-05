@@ -323,7 +323,7 @@
       submap = scratchpads
 
       binde = , D, exec, $reset ${pkgs.pyprland}/bin/pypr toggle "vesktop"
-      binde = , S, exec, $reset ${pkgs.pyprland}/bin/pypr toggle "spotify"
+      # binde = , S, exec, $reset ${pkgs.pyprland}/bin/pypr toggle "spotify"
       binde = , Return, exec, $reset ${pkgs.pyprland}/bin/pypr toggle "term"
       bind = , catchall, submap, reset
 

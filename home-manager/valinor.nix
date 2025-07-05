@@ -17,10 +17,7 @@ in {
   ];
 
   nixpkgs = {
-    # You can add overlays here
-    overlays = [
-    ];
-    # Configure your nixpkgs instance
+    overlays = [];
     config = {
       allowUnfree = true;
       allowUnfreePredicate = _: true;
@@ -31,40 +28,29 @@ in {
     username = "ironlung";
     homeDirectory = "/home/ironlung";
     sessionPath = [
-      "$HOME/.local/bin" # Add support for .local/bin in order to make mason work on NixOS
+      "$HOME/.local/bin" # Add support for .local/bin
     ];
   };
 
   home.packages = with pkgs; [
-    youtube-music
     xclip
-    stow
 
     devenv
-    arduino-ide
 
     aider-chat
-    inputs.seto.packages.${pkgs.system}.default
-
     tldr
 
     obsidian
 
     stremio
-
-    rclone
   ];
 
   fonts.fontconfig.enable = true;
 
-  programs.home-manager.enable = true;
-  programs.cava.enable = true;
-  programs.btop = {
-    enable = true;
-    settings = {
-      update_ms = 200;
-      vim_keys = true;
-    };
+  programs = {
+    home-manager.enable = true;
+    cava.enable = true;
+    zen-browser.enable = true;
   };
 
   programs.git = {
@@ -75,12 +61,12 @@ in {
 
   systemd.user.startServices = "sd-switch";
   services.udiskie.enable = true;
-  services.fluidsynth.enable = true;
 
   services.focus-mode = {
     enable = true;
     blockedApps = ["electron"];
   };
+
   services.weather = {
     enable = true;
     latitude = secrets.latitude;

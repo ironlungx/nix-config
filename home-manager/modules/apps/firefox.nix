@@ -1,4 +1,5 @@
 {
+  lib,
   pkgs,
   inputs,
   ...
@@ -8,9 +9,6 @@
   # ];
 
   programs.firefox = {
-    enable = true;
-    # package = inputs.zen-browser.packages."${pkgs.system}".default;
-
     profiles.ironlung = {
       search.engines = {
         "Nix Packages" = {
