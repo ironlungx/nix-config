@@ -13,7 +13,7 @@
     stylua
     alejandra
     lua-language-server
-    clang-tools
+    # clang-tools
     fixjson
 
     ruff
