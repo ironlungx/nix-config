@@ -8,6 +8,8 @@
     shellInit = ''
       set fish_greeting ""
       fish_vi_key_bindings
+      export PAGER=bat
+      export MANPAGER=bat
     '';
 
     shellAliases = {
