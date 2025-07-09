@@ -1,7 +1,7 @@
 {
   imports = [
     ./firefox.nix
-    ./zen/zen.nix
+    ./zen
     ./gaming.nix
     ./kitty.nix
     ./alacritty.nix
