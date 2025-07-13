@@ -43,12 +43,23 @@
     nixosConfigurations = {
       valinor = nixpkgs.lib.nixosSystem {
         specialArgs = {inherit inputs outputs;};
-        modules = [./nixos/configuration.nix stylix.nixosModules.stylix];
+        modules = [./nixos/valinor/configuration.nix stylix.nixosModules.stylix];
+      };
+
+      gondor = nixpkgs.lib.nixosSystem {
+        specialArgs = {inherit inputs outputs;};
+        modules = [./nixos/valinor/configuration.nix stylix.nixosModules.stylix];
       };
     };
 
     homeConfigurations = {
       "ironlung@valinor" = home-manager.lib.homeManagerConfiguration {
+        pkgs = nixpkgs.legacyPackages.x86_64-linux;
+        extraSpecialArgs = {inherit inputs outputs;};
+        modules = [./home-manager/valinor.nix];
+      };
+
+      "ironlung@gondor" = home-manager.lib.homeManagerConfiguration {
         pkgs = nixpkgs.legacyPackages.x86_64-linux;
         extraSpecialArgs = {inherit inputs outputs;};
         modules = [./home-manager/valinor.nix];
