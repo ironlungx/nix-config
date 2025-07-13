@@ -48,7 +48,7 @@
 
       gondor = nixpkgs.lib.nixosSystem {
         specialArgs = {inherit inputs outputs;};
-        modules = [./nixos/valinor/configuration.nix stylix.nixosModules.stylix];
+        modules = [./nixos/gondor/configuration.nix stylix.nixosModules.stylix];
       };
     };
 
