@@ -1,4 +1,8 @@
-{config, ...}: {
+{config, pkgs, ...}: let
+  mediaScript = pkgs.writeShellScript "hyprlock-media" ''
+    exec ${pkgs.playerctl}/bin/playerctl metadata --format '    {{ artist }} — {{ title }}'
+  '';
+in {
   programs.hyprlock = {
     enable = true;
     settings = {
@@ -57,6 +61,16 @@
           "position " = "0, 300";
           "halign " = "center";
           "valign " = "center";
+        }
+
+        {
+          "monitor" = "";
+          "text" = "cmd[update:1000] ${mediaScript}";
+          "font_size" = 18;
+          "font_family" = "JetBrains Mono Propo";
+          "position" = "0, 50";
+          "halign" = "center";
+          "valign" = "bottom";
         }
       ];
 
