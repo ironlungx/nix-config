@@ -28,6 +28,8 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    nixos-wsl.url = "github:nix-community/NixOS-WSL/main";
+
     zen-browser.url = "github:0xc000022070/zen-browser-flake";
   };
 
@@ -35,6 +37,7 @@
     self,
     nixpkgs,
     home-manager,
+    nixos-wsl,
     stylix,
     ...
   } @ inputs: let
@@ -47,8 +50,9 @@
       };
 
       gondor = nixpkgs.lib.nixosSystem {
+        system = "x86_64-linux";
         specialArgs = {inherit inputs outputs;};
-        modules = [./nixos/gondor/configuration.nix stylix.nixosModules.stylix];
+        modules = [ nixos-wsl.nixosModules.default ./nixos/gondor/configuration.nix stylix.nixosModules.stylix];
       };
     };
 
@@ -62,7 +66,7 @@
       "ironlung@gondor" = home-manager.lib.homeManagerConfiguration {
         pkgs = nixpkgs.legacyPackages.x86_64-linux;
         extraSpecialArgs = {inherit inputs outputs;};
-        modules = [./home-manager/valinor.nix];
+        modules = [./home-manager/gondor.nix];
       };
     };
   };
