@@ -12,9 +12,7 @@
     ./modules/shell/zoxide.nix
     ./modules/shell/starship.nix
     ./modules/shell/eza.nix
-    ./modules/stylix.nix
 
-    ./modules/apps/kitty.nix
     ./modules/cli
   ];
 
@@ -36,7 +34,12 @@
 
 
   home.packages = with pkgs; [
-    firefox
+    neovim
+    wget
+    git
+    gcc
+    python3
+    unzip
   ];
 
 
