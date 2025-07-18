@@ -190,7 +190,7 @@
         kb_layout = "us";
 
         repeat_rate = 50; # repeats per second (higher = faster)
-        repeat_delay = 170; # milliseconds (lower = shorter initial delay)
+        repeat_delay = 200; # milliseconds (lower = shorter initial delay)
 
         follow_mouse = 1;
 
