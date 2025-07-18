@@ -19,6 +19,8 @@
 
   boot.loader.efi.canTouchEfiVariables = true;
 
+  boot.binfmt.emulatedSystems = [ "aarch64-linux" ];
+
   networking.hostName = "valinor"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
@@ -133,6 +135,7 @@
   security.rtkit.enable = true;
   security.sudo.extraConfig = ''
     Defaults pwfeedback
+    Defaults insults
   '';
 
   services.pipewire = {
@@ -176,6 +179,8 @@
       "kvm"
       "libvirtd"
       "adbusers"
+      "uucp"
+      "dialout"
     ];
     packages = with pkgs; [];
     shell = pkgs.fish;
@@ -211,10 +216,15 @@
   programs.nix-ld.enable = true;
   programs.nix-ld.libraries = with pkgs; [
     libnotify
+    libusb1
+    python2Full
   ];
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
+  nixpkgs.config.permittedInsecurePackages = [
+    "python-2.7.18.8"
+  ];
 
   programs.hyprland.enable = true;
 
@@ -266,6 +276,7 @@
   services.udev.packages = [
     pkgs.platformio-core
     pkgs.openocd
+    pkgs.esptool
   ];
 
   # Open ports in the firewall.
