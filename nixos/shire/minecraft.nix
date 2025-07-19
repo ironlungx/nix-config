@@ -4,9 +4,8 @@
   ...
 }:
 with lib; {
-  imports = [
-    ./tunneler.nix
-  ];
+  imports = [];
+
   services.minecraft-servers = let
     myPlugins = pkgs.linkFarm "paper-plugins" [
       {
@@ -136,9 +135,19 @@ with lib; {
     };
   };
 
-  services.tunneler = {
-    enable = true;
-    secrets = "~/secrets.yaml";
-    ports = "25565:25565"; # local:remote port pairs
+  environment.systemPackages = let
+    pythonEnv = pkgs.python3.withPackages (ps: with ps; [pyyaml]);
+  in [
+    pythonEnv
+  ];
+
+  systemd.user.services.tunneler = {
+    description = "Tunneler";
+    serviceConfig = {
+      ExecStart = "${pythonEnv}/bin/python3 ${toString ./tunneler.py} ~/secrets.yaml 25565:25565";
+      WorkingDirectory = "/home/user";
+      Restart = "on-failure";
+    };
+    wantedBy = ["default.target"];
   };
 }
