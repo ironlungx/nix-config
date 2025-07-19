@@ -96,6 +96,11 @@
         systemd-socket.enable = true;
       };
       files.plugins = myPlugins;
+      files."world/datapacks/blaze_and_caves.zip" = pkgs.fetchurl {
+        name = "blaze_and_caves.zip";
+        url = "https://cdn.modrinth.com/data/VoVJ47kN/versions/cFFa5Axs/BlazeandCave%27s%20Advancements%20Pack%201.19.1.zip";
+        sha256 = "0jlkn0s08z1a7700w8mssyb3b7rmr6m5i8xkszda22kbkxgy5hfz";
+      };
       jvmOpts = "-Xmx4G";
       package = customPaper;
       serverProperties = {
