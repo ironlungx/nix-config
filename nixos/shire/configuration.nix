@@ -1,10 +1,12 @@
 {
-  config,
   pkgs,
+  inputs,
   ...
 }: {
   imports = [
     ./hardware-configuration.nix
+    ./minecraft.nix
+    inputs.nix-minecraft.nixosModules.minecraft-servers
   ];
 
   boot.loader.grub.enable = true;
@@ -40,7 +42,7 @@
     isNormalUser = true;
     description = "user";
     extraGroups = ["networkmanager" "wheel"];
-    packages = with pkgs; [];
+    # packages = with pkgs; [];
   };
 
   programs.nh = {
