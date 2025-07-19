@@ -137,17 +137,15 @@ with lib; {
 
   environment.systemPackages = let
     pythonEnv = pkgs.python3.withPackages (ps: with ps; [pyyaml]);
-  in [
-    pythonEnv
-  ];
-
-  systemd.user.services.tunneler = {
-    description = "Tunneler";
-    serviceConfig = {
-      ExecStart = "${pythonEnv}/bin/python3 ${toString ./tunneler.py} ~/secrets.yaml 25565:25565";
-      WorkingDirectory = "/home/user";
-      Restart = "on-failure";
+  in {
+    systemd.user.services.tunneler = {
+      description = "Tunneler";
+      serviceConfig = {
+        ExecStart = "${pythonEnv}/bin/python3 ${toString ./tunneler.py} ~/secrets.yaml 25565:25565";
+        WorkingDirectory = "/home/user";
+        Restart = "on-failure";
+      };
+      wantedBy = ["default.target"];
     };
-    wantedBy = ["default.target"];
   };
 }
