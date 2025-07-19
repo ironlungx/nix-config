@@ -52,7 +52,12 @@
       gondor = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
         specialArgs = {inherit inputs outputs;};
-        modules = [ nixos-wsl.nixosModules.default ./nixos/gondor/configuration.nix stylix.nixosModules.stylix];
+        modules = [nixos-wsl.nixosModules.default ./nixos/gondor/configuration.nix stylix.nixosModules.stylix];
+      };
+      shire = nixpkgs.lib.nixosSystem {
+        system = "x86_64-linux";
+        specialArgs = {inherit inputs outputs;};
+        modules = [./nixos/shire/configuration.nix stylix.nixosModules.stylix];
       };
     };
 
