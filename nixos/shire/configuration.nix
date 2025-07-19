@@ -12,7 +12,7 @@
   boot.loader.grub.useOSProber = true;
 
   networking.hostName = "shire";
-  networking.wireless.enable = true;
+  # networking.wireless.enable = true; # skill issue?
   networking.networkmanager.enable = true;
 
   time.timeZone = "Europe/London";
