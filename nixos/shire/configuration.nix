@@ -48,7 +48,7 @@
   programs.nh = {
     enable = true;
     clean.enable = true;
-    flake = "/home/ironlung/nix-config/";
+    flake = "/home/user/nix-config/";
   };
 
   # Allow unfree packages

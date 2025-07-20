@@ -3,7 +3,7 @@
   lib,
   ...
 }: let
-  pythonEnv = pkgs.python3.withPackages (ps: with ps; [pyyaml]);
+  pythonEnv = pkgs.python3.withPackages (ps: with ps; [requests pyyaml]);
 in
   with lib; {
     imports = [];
@@ -43,6 +43,20 @@ in
           path = pkgs.fetchurl {
             url = "https://cdn.modrinth.com/data/jnw9A185/versions/BZ47T5h9/BoundlessForging-1.0-SNAPSHOT.jar";
             sha256 = "1jdihzydhvz70n8ibj6ny1pgys2hkj7r6dgfqnlhddm4d41nxq2x";
+          };
+        }
+        {
+          name = "EssentialsX.jar";
+          path = pkgs.fetchurl {
+            url = "https://ci.ender.zone/job/EssentialsX/lastSuccessfulBuild/artifact/jars/EssentialsX-2.21.2-dev+32-0417624.jar";
+            sha256 = "10v14v7j3ynxjalkmm6n29474f2mjzm44yvci636263r87qs81kf";
+          };
+        }
+        {
+          name = "EssentialsX-Chat.jar";
+          path = pkgs.fetchurl {
+            url = "https://ci.ender.zone/job/EssentialsX/lastSuccessfulBuild/artifact/jars/EssentialsXChat-2.21.2-dev+32-0417624.jar";
+            sha256 = "1ilprq9ajk46z9dnxk70zs74z2i1kkp35fsh8hjsskh943nf5bsn";
           };
         }
       ];
@@ -137,17 +151,25 @@ in
       };
     };
 
-    environment.systemPackages = [pythonEnv];
+    environment.systemPackages = [
+      pythonEnv
+      pkgs.procps
+    ];
 
     systemd.user.services.tunneler = {
       description = "Tunneler";
       serviceConfig = {
         ExecStart = "${pythonEnv}/bin/python3 /home/user/tunneler.py /home/user/secrets.yaml 25565:25565";
-        WorkingDirectory = "/home/user";
+        WorkingDirectory = "%h";
+        Environment = [
+          "HOME=%h"
+          "PATH=${lib.makeBinPath [ pkgs.procps pkgs.openssh pkgs.coreutils ]}"
+        ];
         Restart = "on-failure";
         StandardOutput = "journal";
         StandardError = "journal";
       };
       wantedBy = ["default.target"];
     };
-  }
+
+}
