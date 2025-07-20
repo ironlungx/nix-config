@@ -145,6 +145,8 @@ in
         ExecStart = "${pythonEnv}/bin/python3 /home/user/tunneler.py /home/user/secrets.yaml 25565:25565";
         WorkingDirectory = "/home/user";
         Restart = "on-failure";
+        StandardOutput = "journal";
+        StandardError = "journal";
       };
       wantedBy = ["default.target"];
     };
