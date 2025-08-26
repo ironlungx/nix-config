@@ -17,7 +17,7 @@
     fixjson
 
     ruff
-    black
+    # black
 
     (python3.withPackages (ps:
       with ps; [
