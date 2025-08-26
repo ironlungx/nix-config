@@ -6,6 +6,10 @@
 }: {
   imports = [inputs.zen-browser.homeModules.default];
 
+  # Zen and Stylix DO NOT mix well...
+  stylix.targets.zen-browser.enable = false;
+  # stylix.targets.zen-browser.profileNames = [ "ironlung" ];
+
   programs.zen-browser = {
     policies = {
       DisableAppUpdate = true;
