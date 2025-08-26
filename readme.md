@@ -15,6 +15,6 @@ Notable programs/configs:
 - Tmux
 
 
-I have no idea why you would ever steal everything from my config
+I have no idea why you would ever steal anything from my config
 
 All the wallpapers are in my other repo [here](https://github.com/ironlungx/wallpapers)
