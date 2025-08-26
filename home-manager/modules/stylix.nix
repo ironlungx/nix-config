@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ inputs, config, pkgs, ... }:
 {
   stylix = {
     enable = true;
@@ -8,11 +8,11 @@
     };
     fonts = {
       sizes = {
-        terminal = 10;
+        terminal = 9;
       };
       monospace = {
-        package = pkgs.nerd-fonts.iosevka;
-        name = "Iosevka Nerd Font";
+        package = pkgs.aporetic-bin;
+        name = "Aporetic Mono";
       };
       serif = {
         package = pkgs.aleo-fonts;
