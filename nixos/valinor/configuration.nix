@@ -19,7 +19,7 @@
 
   boot.loader.efi.canTouchEfiVariables = true;
 
-  boot.binfmt.emulatedSystems = [ "aarch64-linux" ];
+  boot.binfmt.emulatedSystems = ["aarch64-linux"];
 
   networking.hostName = "valinor"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
@@ -47,6 +47,7 @@
   };
 
   services.xserver.videoDrivers = ["nvidia"];
+  services.flatpak.enable = true;
 
   hardware.nvidia = {
     # Modesetting is required.
@@ -203,7 +204,17 @@
   };
 
   users.groups.libvirtd.members = ["ironlung"];
-  virtualisation.libvirtd.enable = true;
+  # Enable and configure libvirt with QEMU/KVM, TPM, and UEFI (OVMF) support
+  virtualisation.libvirtd = {
+    enable = true;
+    qemu = {
+      swtpm.enable = true; # Software TPM (for Windows 11)
+      ovmf.enable = true; # UEFI firmware
+      ovmf.packages = [pkgs.OVMFFull.fd]; # Make sure you have full OVMF for Secure Boot option
+    };
+  };
+  services.spice-vdagentd.enable = true;
+
   virtualisation.spiceUSBRedirection.enable = true;
   virtualisation.docker.enable = true;
 
@@ -216,6 +227,8 @@
   programs.nix-ld.enable = true;
   programs.nix-ld.libraries = with pkgs; [
     libnotify
+    expat
+    alsa-lib
     libusb1
     python2Full
   ];
@@ -250,6 +263,14 @@
     android-tools
     droidcam
     # (pkgs.ollama.override {acceleration = "cuda";})
+
+    virt-manager
+    virt-viewer
+    spice
+    spice-gtk
+    spice-protocol
+    win-virtio
+    swtpm # For emulated TPM device
   ];
 
   # services.ollama = {
@@ -284,6 +305,8 @@
   # networking.firewall.allowedUDPPorts = [ ... ];
   # Or disable the firewall altogether.
   # networking.firewall.enable = false;
+
+  networking.firewall.trustedInterfaces = ["virbr0"];
 
   networking.firewall.allowedTCPPortRanges = [
     {
