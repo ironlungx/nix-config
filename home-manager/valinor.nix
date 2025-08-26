@@ -37,12 +37,13 @@ in {
 
     devenv
 
-    aider-chat
+    # aider-chat
     tldr
 
     obsidian
 
     stremio
+    inputs.seto.packages.${pkgs.system}.default
   ];
 
   fonts.fontconfig.enable = true;
