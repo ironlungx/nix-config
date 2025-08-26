@@ -8,11 +8,11 @@
     };
     fonts = {
       sizes = {
-        terminal = 9;
+        terminal = 10;
       };
       monospace = {
-        package = pkgs.aporetic-bin;
-        name = "Aporetic Mono";
+        package = pkgs.aporetic;
+        name = "Aporetic Sans Mono";
       };
       serif = {
         package = pkgs.aleo-fonts;
