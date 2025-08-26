@@ -16,6 +16,7 @@
   networking.hostName = "shire";
   # networking.wireless.enable = true; # skill issue?
   networking.networkmanager.enable = true;
+  networking.bridges.br-988f5524e813.interfaces = [ "wlp5s0" ];
 
   time.timeZone = "Europe/London";
   i18n.defaultLocale = "en_GB.UTF-8";
