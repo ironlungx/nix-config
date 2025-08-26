@@ -1,6 +1,6 @@
 {pkgs, ...}: {
   programs.foot = {
-    enable = false;
+    enable = true;
     server.enable = true;
     settings.main = {
       pad = "10x10";
