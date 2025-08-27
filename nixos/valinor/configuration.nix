@@ -31,6 +31,8 @@
   # Enable networking
   networking.networkmanager.enable = true;
 
+  networking.firewall.checkReversePath = false;
+
   # networking.wireless.iwd.settings = {
   #   IPv6 = {
   #     Enabled = true;
@@ -271,6 +273,8 @@
     spice-protocol
     win-virtio
     swtpm # For emulated TPM device
+
+    wireguard-tools protonvpn-gui
   ];
 
   # services.ollama = {
