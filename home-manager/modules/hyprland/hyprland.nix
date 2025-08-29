@@ -33,9 +33,9 @@
       # See https://wiki.hyprland.org/Configuring/Keywords/
 
       # Set programs that you use
-      "$terminal" = "kitty";
+      "$terminal" = "ghostty";
       "$browser" = "${inputs.zen-browser.packages.${pkgs.system}.default}/bin/.zen-wrapped";
-      "$fileManager" = "${pkgs.nautilus}/bin/nautilus";
+      "$fileManager" = "";
       "$menu" = "rofi -show drun";
       # "$screenshot" = "${pkgs.grim}/bin/grim -g \"$(${pkgs.slurp}/bin/slurp)\" - | ${pkgs.wl-clipboard}/bin/wl-copy";
       "$screenshot" = "${pkgs.flameshot}/bin/flameshot gui --raw | ${pkgs.wl-clipboard}/bin/wl-copy -f";

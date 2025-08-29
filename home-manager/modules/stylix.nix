@@ -8,7 +8,7 @@
     };
     fonts = {
       sizes = {
-        terminal = 10;
+        terminal = 10.25;
       };
       monospace = {
         package = pkgs.aporetic;
