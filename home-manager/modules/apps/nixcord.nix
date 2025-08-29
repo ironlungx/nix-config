@@ -13,12 +13,19 @@
         fixSpotifyEmbeds.enable = true;
         spotifyShareCommands.enable = true;
         spotifyControls.enable = true;
+        anonymiseFileNames = {
+          enable = true;
+          anonymiseByDefault = true;
+        };
         messageLogger = {
           enable = true;
           logEdits = true;
           logDeletes = true;
           ignoreSelf = true;
         };
+        ctrlEnterSend.enable = true;
+        favoriteEmojiFirst.enable = true;
+        fixCodeblockGap.enable = true;
         silentTyping = {
           enable = true;
           showIcon = true;
