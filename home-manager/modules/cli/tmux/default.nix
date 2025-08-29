@@ -15,7 +15,7 @@
       yank
       sensible
       tmux-fzf
-      vim-tmux-navigator
+      # vim-tmux-navigator
       cpu
       {
         plugin = catppuccin;
