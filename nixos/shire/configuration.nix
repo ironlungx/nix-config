@@ -41,9 +41,11 @@
   users.users.user = {
     isNormalUser = true;
     description = "user";
-    extraGroups = ["networkmanager" "wheel"];
+    extraGroups = ["networkmanager" "wheel" "docker" ];
     # packages = with pkgs; [];
   };
+
+  virtualisation.docker.enable = true;
 
   programs.nh = {
     enable = true;
