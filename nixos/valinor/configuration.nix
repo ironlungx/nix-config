@@ -17,6 +17,8 @@
     theme = pkgs.catppuccin-grub;
   };
 
+  boot.tmp.useTmpfs = true;
+
   boot.loader.efi.canTouchEfiVariables = true;
 
   boot.binfmt.emulatedSystems = ["aarch64-linux"];
