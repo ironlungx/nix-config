@@ -15,5 +15,6 @@
     ./hyprlock.nix
     ./hyprpaper.nix
     ./pyprland.nix
+    ./hyprsunset.nix
   ];
 }
