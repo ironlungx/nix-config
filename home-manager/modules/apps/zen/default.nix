@@ -120,6 +120,7 @@
           vimium
           youtube-shorts-block
           stylus
+          i-dont-care-about-cookies
         ];
       };
       settings."uBlock0@raymondhill.net".settings = {
