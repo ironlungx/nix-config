@@ -12,8 +12,8 @@ in {
       {
         name = "LuckPerms.jar";
         path = pkgs.fetchurl {
-          url = "https://download.luckperms.net/1594/bukkit/loader/LuckPerms-Bukkit-5.5.9.jar";
-          sha256 = "0rslb3bwyw4si23crnax9h1py8q0vnbf8l47y6ai67asmmjk1fzq"; # replace with actual hash!
+          url = "https://download.luckperms.net/1596/bukkit/loader/LuckPerms-Bukkit-5.5.11.jar";
+          sha256 = "1qh2lblwrhvz4dadyv05nnv88qzikgvi3gff6vmxxiq36yxvh650";
         };
       }
       {
@@ -26,15 +26,15 @@ in {
       {
         name = "ViaVersion.jar";
         path = pkgs.fetchurl {
-          url = "https://github.com/ViaVersion/ViaVersion/releases/download/5.4.1/ViaVersion-5.4.1.jar";
-          sha256 = "1bbh5g872nds9vs61s9zzr4lfx5rivqvyyaf5riqkkbxxq4fdshv";
+          url = "https://github.com/ViaVersion/ViaVersion/releases/download/5.4.2/ViaVersion-5.4.2.jar";
+          sha256 = "0lyzgqfiwx3m0w76kdg7b2llqgnrpzrakfpyi6l8di9xlbg9n07h";
         };
       }
       {
         name = "Voicechat.jar";
         path = pkgs.fetchurl {
-          url = "https://cdn.modrinth.com/data/9eGKb6K1/versions/ZemsH7tW/voicechat-bukkit-2.5.34.jar";
-          sha256 = "0diwbw8xhqvvgmwzr00fxk6dp4plr0ixq1mxgspx4n0g0naa2wxl";
+          url = "https://cdn.modrinth.com/data/9eGKb6K1/versions/bNX2205a/voicechat-bukkit-2.5.35.jar";
+          sha256 = "1n07i4shdb3mn09ziw5g0p8az5wfbgl625k9i1jdz2d5vd2bmrmk";
         };
       }
       {
@@ -47,15 +47,15 @@ in {
       {
         name = "EssentialsX.jar";
         path = pkgs.fetchurl {
-          url = "https://ci.ender.zone/job/EssentialsX/lastSuccessfulBuild/artifact/jars/EssentialsX-2.21.2-dev+32-0417624.jar";
-          sha256 = "10v14v7j3ynxjalkmm6n29474f2mjzm44yvci636263r87qs81kf";
+          url = "https://github.com/EssentialsX/Essentials/releases/download/2.21.2/EssentialsX-2.21.2.jar";
+          sha256 = "1inz1c6zs4w3ckjil51yyz7r87rwvdk3cvw869y58g1gy0k90x8b";
         };
       }
       {
         name = "EssentialsX-Chat.jar";
         path = pkgs.fetchurl {
-          url = "https://ci.ender.zone/job/EssentialsX/lastSuccessfulBuild/artifact/jars/EssentialsXChat-2.21.2-dev+32-0417624.jar";
-          sha256 = "1ilprq9ajk46z9dnxk70zs74z2i1kkp35fsh8hjsskh943nf5bsn";
+          url = "https://github.com/EssentialsX/Essentials/releases/download/2.21.2/EssentialsXChat-2.21.2.jar";
+          sha256 = "1nq903fdyfq6x41my8anfnm1xd846bfsygj8r7m54b8lb8r3kmqy";
         };
       }
     ];
@@ -73,8 +73,8 @@ in {
           version = "1.21.8-6";
 
           src = fetchurl {
-            url = "https://fill-data.papermc.io/v1/objects/37b7ca967d81ba06ccb7986efc7f41b9faaaca1e06b351b8b3da102d35f9574e/paper-1.21.8-6.jar";
-            sha256 = "0kjpz4sjs46snfw53cq63v5amymr85zzqvlqnz60dfl1gnbcmdrp";
+            url = "https://fill-data.papermc.io/v1/objects/8de7c52c3b02403503d16fac58003f1efef7dd7a0256786843927fa92ee57f1e/paper-1.21.8-60.jar";
+            sha256 = "07kzwlpajzwj8dl7hmh2gbfzgzhy7w05ib3gs41kah027cncbrwd";
           };
 
           installPhase = ''
@@ -118,24 +118,26 @@ in {
         systemd-socket.enable = true;
       };
       files.plugins = myPlugins;
+
       files."world/datapacks/blaze_and_caves.zip" = pkgs.fetchurl {
         name = "blaze_and_caves.zip";
         url = "https://cdn.modrinth.com/data/VoVJ47kN/versions/cFFa5Axs/BlazeandCave%27s%20Advancements%20Pack%201.19.1.zip";
         sha256 = "0jlkn0s08z1a7700w8mssyb3b7rmr6m5i8xkszda22kbkxgy5hfz";
       };
+
       jvmOpts = "-Xms6G -Xmx6G -XX:+UseZGC -XX:+ZGenerational";
       package = customPaper;
       serverProperties = {
-        seed = -5902773664138819552;
+        seed = -4104965072236284201;
         server-port = 25565;
         difficulty = 3;
         gamemode = 1;
-        motd = "hmmmmmmmmm";
+        motd = "A very cool minecraft server gang";
         sync-chunk-writes = false;
         simulation-distance = "8";
         white-list = true;
         enable-rcon = true;
-        "rcon.password" = "hunter2";
+        "rcon.password" = "hunter1";
         "rcon.port" = 25575;
         "plugin-remapping" = false;
       };
@@ -148,6 +150,8 @@ in {
         subsonichunter1 = "b2be56fd-b076-43fd-bdeb-911b3a2e508a";
         Pyro_Gaming_TF2 = "570682b0-8a20-4c47-9b84-123c7aa12c9c";
         Vorpld = "9423d24c-04cf-4ead-a14e-360c79f3d99e";
+        Sub_Scope = "5ad3c563-057b-4629-bc22-04f42c31eb09";
+        Spilled_Squid = "5fd52b26-e0ac-4394-809f-01ae980c4204";
       };
     };
   };
@@ -172,5 +176,5 @@ in {
     };
     wantedBy = ["default.target"];
   };
-  systemd.user.services.tunneler.enable = true;
+  systemd.user.services.tunneler.enable = false;
 }

@@ -65,6 +65,8 @@
     neovim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
     rsync
     git
+    python313Packages.servefile
+    tmux
   ];
   services.openssh.enable = true;
 
