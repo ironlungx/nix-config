@@ -42,8 +42,8 @@ in {
 
     obsidian
 
-    stremio
-    inputs.seto.packages.${pkgs.system}.default
+    # stremio
+    # inputs.seto.packages.${pkgs.system}.default
   ];
 
   fonts.fontconfig.enable = true;
