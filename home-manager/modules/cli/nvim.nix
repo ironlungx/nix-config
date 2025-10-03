@@ -15,6 +15,8 @@
     lua-language-server
     clang-tools
     fixjson
+    tree-sitter
+    imagemagick
 
     ruff
     # black
