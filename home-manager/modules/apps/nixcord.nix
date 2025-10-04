@@ -23,7 +23,6 @@
           logDeletes = true;
           ignoreSelf = true;
         };
-        ctrlEnterSend.enable = true;
         favoriteEmojiFirst.enable = true;
         fixCodeblockGap.enable = true;
         silentTyping = {
