@@ -26,7 +26,7 @@
       userChrome = pkgs.runCommand "userChrome.css" {} ''
         cat ${pkgs.fetchurl {
           url = "https://raw.githubusercontent.com/catppuccin/zen-browser/refs/heads/main/themes/Frappe/Lavender/userChrome.css";
-          sha256 = "06cy1yrhfbnhsfacm48n817b4h3p1kgdw7aj6469sqci3wglyqwy";
+          sha256 = "09fn63mx9rq9f02dvwjd76iiqlzrkq6ciljwxlfbjc2rddji3qc2";
         }} > $out
         echo ':root {
           --zen-main-browser-background: rgba(26,27,38,0.8) !important;
