@@ -42,6 +42,8 @@ in {
 
     obsidian
 
+    lutris
+
     # stremio
     # inputs.seto.packages.${pkgs.system}.default
   ];
