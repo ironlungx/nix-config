@@ -148,6 +148,7 @@
     alsa.enable = true;
     alsa.support32Bit = true;
     pulse.enable = true;
+    wireplumber.enable = true;
     # If you want to use JACK applications, uncomment this
     #jack.enable = true;
 
@@ -208,13 +209,10 @@
   };
 
   users.groups.libvirtd.members = ["ironlung"];
-  # Enable and configure libvirt with QEMU/KVM, TPM, and UEFI (OVMF) support
   virtualisation.libvirtd = {
     enable = true;
     qemu = {
       swtpm.enable = true; # Software TPM (for Windows 11)
-      ovmf.enable = true; # UEFI firmware
-      ovmf.packages = [pkgs.OVMFFull.fd]; # Make sure you have full OVMF for Secure Boot option
     };
   };
   services.spice-vdagentd.enable = true;
