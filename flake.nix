@@ -8,6 +8,8 @@
     stylix.url = "github:danth/stylix";
     niri.url = "github:sodiboo/niri-flake";
 
+    awww.url = "git+https://codeberg.org/LGFae/awww";
+
     seto = {
       url = "github:unixpariah/seto";
       inputs.nixpkgs.follows = "nixpkgs";
