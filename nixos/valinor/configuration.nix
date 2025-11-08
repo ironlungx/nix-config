@@ -102,12 +102,12 @@
   };
 
   # Enable the X11 windowing system.
-  services.xserver.enable = true;
+  # services.xserver.enable = true;
   services.udisks2.enable = true;
   services.ratbagd.enable = true;
 
   # Enable the GNOME Desktop Environment.
-  services.xserver.displayManager.gdm.enable = true;
+  # services.xserver.displayManager.gdm.enable = true;
   # services.xserver.desktopManager.gnome.enable = true;
 
   stylix.enable = true;
@@ -233,16 +233,13 @@
     expat
     alsa-lib
     libusb1
-    python2Full
   ];
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
-  nixpkgs.config.permittedInsecurePackages = [
-    "python-2.7.18.8"
-  ];
 
   programs.hyprland.enable = true;
+  programs.niri.enable = true;
 
   programs.uwsm = {
     enable = true;
@@ -250,6 +247,12 @@
       prettyName = "Hyprland";
       comment = "Compositor managed by UWSM";
       binPath = "/run/current-system/sw/bin/Hyprland";
+    };
+
+    waylandCompositors.hyprland = {
+      prettyName = "Niri";
+      comment = "Niri compositor managed by UWSM";
+      binPath = "/run/current-system/sw/bin/niri";
     };
   };
 
@@ -272,7 +275,7 @@
     spice
     spice-gtk
     spice-protocol
-    win-virtio
+    virtio-win
     swtpm # For emulated TPM device
 
     wireguard-tools protonvpn-gui
