@@ -113,7 +113,7 @@
 }
 
 #workspaces button.default {
-  color: @overlay0;  /* Occupied but not active workspaces */
+  color: @surface2;  /* Occupied but not active workspaces */
 }
 
 #workspaces button.special {
