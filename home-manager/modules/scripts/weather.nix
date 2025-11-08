@@ -4,11 +4,12 @@
   pkgs,
   ...
 }:
-with lib; let
+with lib;
+let
   cfg = config.services.weather;
 
   # Python environment with required packages
-  pythonEnv = pkgs.python3.withPackages (ps: with ps; [requests]);
+  pythonEnv = pkgs.python3.withPackages (ps: with ps; [ requests ]);
 
   # Path to your weather.py script (must be in same directory as this module)
   weatherScript = ./weather.py;
@@ -19,7 +20,8 @@ with lib; let
     exec ${pythonEnv}/bin/python3 ${weatherScript} ${toString cfg.latitude} ${toString cfg.longitude} "$@"
   '';
 
-in {
+in
+{
   options.services.weather = {
     enable = mkEnableOption "weather service";
 

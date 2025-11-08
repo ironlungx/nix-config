@@ -2,7 +2,8 @@
   pkgs,
   inputs,
   ...
-}: {
+}:
+{
   imports = [
     ./hardware-configuration.nix
     ./minecraft.nix
@@ -44,7 +45,11 @@
   users.users.user = {
     isNormalUser = true;
     description = "user";
-    extraGroups = ["networkmanager" "wheel" "docker" ];
+    extraGroups = [
+      "networkmanager"
+      "wheel"
+      "docker"
+    ];
     shell = pkgs.fish;
     # packages = with pkgs; [];
   };
@@ -59,7 +64,10 @@
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
-  nix.settings.experimental-features = ["nix-command" "flakes"];
+  nix.settings.experimental-features = [
+    "nix-command"
+    "flakes"
+  ];
 
   environment.systemPackages = with pkgs; [
     neovim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.

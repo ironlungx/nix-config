@@ -2,7 +2,8 @@
   pkgs,
   inputs,
   ...
-}: {
+}:
+{
   home.packages = with pkgs; [
     jq
     libnotify

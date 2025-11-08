@@ -1,4 +1,9 @@
-{ inputs, config, pkgs, ... }:
+{
+  inputs,
+  config,
+  pkgs,
+  ...
+}:
 {
   stylix = {
     enable = true;
@@ -22,11 +27,11 @@
       sansSerif = {
         package = pkgs.noto-fonts-cjk-sans;
         name = "Noto Sans CJK JP";
-      }; 
+      };
     };
 
     base16Scheme = "${pkgs.base16-schemes}/share/themes/catppuccin-frappe.yaml";
-    
+
     cursor = {
       package = pkgs.bibata-cursors;
       name = "Bibata-Modern-Ice";
@@ -42,7 +47,7 @@
       rofi.enable = false;
       waybar.enable = false;
 
-      firefox.profileNames = ["ironlung"];
+      firefox.profileNames = [ "ironlung" ];
       hyprlock = {
         enable = true;
         useWallpaper = true;

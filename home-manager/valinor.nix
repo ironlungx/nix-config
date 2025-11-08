@@ -4,9 +4,11 @@
   config,
   pkgs,
   ...
-}: let
+}:
+let
   secrets = import ./secrets.nix;
-in {
+in
+{
   imports = [
     inputs.nix-index-database.hmModules.nix-index # Black magic
     inputs.spicetify-nix.homeManagerModules.default
@@ -17,7 +19,7 @@ in {
   ];
 
   nixpkgs = {
-    overlays = [];
+    overlays = [ ];
     config = {
       allowUnfree = true;
       allowUnfreePredicate = _: true;
@@ -71,7 +73,7 @@ in {
 
   services.focus-mode = {
     enable = true;
-    blockedApps = ["electron"];
+    blockedApps = [ "electron" ];
   };
 
   services.weather = {

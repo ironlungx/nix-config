@@ -3,7 +3,8 @@
   pkgs,
   inputs,
   ...
-}: {
+}:
+{
   # home.packages = with pkgs; [
   #   inputs.zen-browser.packages."${system}".default
   # ];
@@ -28,38 +29,38 @@
             }
           ];
           icon = "''${pkgs.nixos-icons}/share/icons/hicolor/scalable/apps/nix-snowflake.svg";
-          definedAliases = ["@np"];
+          definedAliases = [ "@np" ];
         };
 
         "My NixOS" = {
-          urls = [{template = "https://mynixos.com/search?q={searchTerms}";}];
+          urls = [ { template = "https://mynixos.com/search?q={searchTerms}"; } ];
           icon = "https://mynixos.com/favicon.ico";
-          definedAliases = ["@mynixos"];
+          definedAliases = [ "@mynixos" ];
         };
 
         "NixOS Wiki" = {
-          urls = [{template = "https://nixos.wiki/index.php?search={searchTerms}";}];
+          urls = [ { template = "https://nixos.wiki/index.php?search={searchTerms}"; } ];
           icon = "https://nixos.wiki/favicon.png";
           updateInterval = 24 * 60 * 60 * 1000; # every day
-          definedAliases = ["@nw"];
+          definedAliases = [ "@nw" ];
         };
 
         "Duckduckgo" = {
-          urls = [{template = "https://duckduckgo.com/?q={searchTerms}";}];
+          urls = [ { template = "https://duckduckgo.com/?q={searchTerms}"; } ];
           icon = "https://duckduckgo.com/favicon.png";
-          definedAliases = ["@dg"];
+          definedAliases = [ "@dg" ];
         };
 
         "Youtube" = {
-          urls = [{template = "https://youtube.com/search?q={searchTerms}";}];
+          urls = [ { template = "https://youtube.com/search?q={searchTerms}"; } ];
           icon = "https://youtube.com/favicon.ico";
-          definedAliases = ["@yt"];
+          definedAliases = [ "@yt" ];
         };
 
         "Perplexity" = {
-          urls = [{template = "https://www.perplexity.ai/?q={searchTerms}";}];
+          urls = [ { template = "https://www.perplexity.ai/?q={searchTerms}"; } ];
           icon = "https://www.perplexity.ai/favicon.png";
-          definedAliases = ["@p"];
+          definedAliases = [ "@p" ];
         };
 
         bing.metaData.hidden = true;
@@ -77,7 +78,7 @@
         settings = [
           {
             name = "wikipedia";
-            tags = ["wiki"];
+            tags = [ "wiki" ];
             keyword = "wiki";
             url = "https://en.wikipedia.org/wiki/Special:Search?search=%s&go=Go";
           }
@@ -146,17 +147,44 @@
         "browser.uiCustomization.state" = builtins.toJSON {
           currentVersion = 20;
           newElementCount = 5;
-          dirtyAreaCache = ["nav-bar" "PersonalToolbar" "toolbar-menubar" "TabsToolbar" "widget-overflow-fixed-list"];
+          dirtyAreaCache = [
+            "nav-bar"
+            "PersonalToolbar"
+            "toolbar-menubar"
+            "TabsToolbar"
+            "widget-overflow-fixed-list"
+          ];
 
           placements = {
-            PersonalToolbar = ["personal-bookmarks"];
-            TabsToolbar = ["customizableui-special-spring4" "tabbrowser-tabs" "new-tab-button" "alltabs-button"];
-            nav-bar = ["back-button" "forward-button" "stop-reload-button" "vertical-spacer" "urlbar-container" "downloads-button" "ublock0_raymondhill_net-browser-action" "_testpilot-containers-browser-action" "reset-pbm-toolbar-button" "unified-extensions-button"];
-            toolbar-menubar = ["menubar-items"];
-            unified-extensions-area = [];
-            widget-overflow-fixed-list = [];
+            PersonalToolbar = [ "personal-bookmarks" ];
+            TabsToolbar = [
+              "customizableui-special-spring4"
+              "tabbrowser-tabs"
+              "new-tab-button"
+              "alltabs-button"
+            ];
+            nav-bar = [
+              "back-button"
+              "forward-button"
+              "stop-reload-button"
+              "vertical-spacer"
+              "urlbar-container"
+              "downloads-button"
+              "ublock0_raymondhill_net-browser-action"
+              "_testpilot-containers-browser-action"
+              "reset-pbm-toolbar-button"
+              "unified-extensions-button"
+            ];
+            toolbar-menubar = [ "menubar-items" ];
+            unified-extensions-area = [ ];
+            widget-overflow-fixed-list = [ ];
           };
-          seen = ["save-to-pocket-button" "developer-button" "ublock0_raymondhill_net-browser-action" "_testpilot-containers-browser-action"];
+          seen = [
+            "save-to-pocket-button"
+            "developer-button"
+            "ublock0_raymondhill_net-browser-action"
+            "_testpilot-containers-browser-action"
+          ];
         };
       };
 

@@ -2,8 +2,9 @@
   inputs,
   pkgs,
   ...
-}: {
-  imports = [inputs.zen-browser.homeModules.default];
+}:
+{
+  imports = [ inputs.zen-browser.homeModules.default ];
 
   # Zen and Stylix DO NOT mix well...
   stylix.targets.zen-browser.enable = false;
@@ -23,11 +24,13 @@
     };
 
     profiles.ironlung = {
-      userChrome = pkgs.runCommand "userChrome.css" {} ''
-        cat ${pkgs.fetchurl {
-          url = "https://raw.githubusercontent.com/catppuccin/zen-browser/refs/heads/main/themes/Frappe/Lavender/userChrome.css";
-          sha256 = "09fn63mx9rq9f02dvwjd76iiqlzrkq6ciljwxlfbjc2rddji3qc2";
-        }} > $out
+      userChrome = pkgs.runCommand "userChrome.css" { } ''
+        cat ${
+          pkgs.fetchurl {
+            url = "https://raw.githubusercontent.com/catppuccin/zen-browser/refs/heads/main/themes/Frappe/Lavender/userChrome.css";
+            sha256 = "09fn63mx9rq9f02dvwjd76iiqlzrkq6ciljwxlfbjc2rddji3qc2";
+          }
+        } > $out
         echo ':root {
           --zen-main-browser-background: rgba(26,27,38,0.8) !important;
         }' >> $out
@@ -70,38 +73,38 @@
             }
           ];
           icon = "''${pkgs.nixos-icons}/share/icons/hicolor/scalable/apps/nix-snowflake.svg";
-          definedAliases = ["@np"];
+          definedAliases = [ "@np" ];
         };
 
         "My NixOS" = {
-          urls = [{template = "https://mynixos.com/search?q={searchTerms}";}];
+          urls = [ { template = "https://mynixos.com/search?q={searchTerms}"; } ];
           icon = "https://mynixos.com/favicon.ico";
-          definedAliases = ["@mynixos"];
+          definedAliases = [ "@mynixos" ];
         };
 
         "NixOS Wiki" = {
-          urls = [{template = "https://nixos.wiki/index.php?search={searchTerms}";}];
+          urls = [ { template = "https://nixos.wiki/index.php?search={searchTerms}"; } ];
           icon = "https://nixos.wiki/favicon.png";
           updateInterval = 24 * 60 * 60 * 1000; # every day
-          definedAliases = ["@nw"];
+          definedAliases = [ "@nw" ];
         };
 
         "Duckduckgo" = {
-          urls = [{template = "https://duckduckgo.com/?q={searchTerms}";}];
+          urls = [ { template = "https://duckduckgo.com/?q={searchTerms}"; } ];
           icon = "https://duckduckgo.com/favicon.png";
-          definedAliases = ["@dg"];
+          definedAliases = [ "@dg" ];
         };
 
         "Youtube" = {
-          urls = [{template = "https://youtube.com/search?q={searchTerms}";}];
+          urls = [ { template = "https://youtube.com/search?q={searchTerms}"; } ];
           icon = "https://youtube.com/favicon.ico";
-          definedAliases = ["@yt"];
+          definedAliases = [ "@yt" ];
         };
 
         "Perplexity" = {
-          urls = [{template = "https://www.perplexity.ai/?q={searchTerms}";}];
+          urls = [ { template = "https://www.perplexity.ai/?q={searchTerms}"; } ];
           icon = "https://www.perplexity.ai/favicon.png";
-          definedAliases = ["@p"];
+          definedAliases = [ "@p" ];
         };
 
         bing.metaData.hidden = true;

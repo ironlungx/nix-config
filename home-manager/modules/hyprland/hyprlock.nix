@@ -1,12 +1,14 @@
 {
   pkgs,
   ...
-}: let
+}:
+let
   mediaScript = pkgs.writeShellScript "hyprlock-media" ''
     exec ${pkgs.playerctl}/bin/playerctl metadata --format '    {{ artist }} — {{ title }}'
   '';
-  bdPlakatbau = pkgs.callPackage ../../../packages/bd-plakatbau.nix {inherit pkgs;};
-in {
+  bdPlakatbau = pkgs.callPackage ../../../packages/bd-plakatbau.nix { inherit pkgs; };
+in
+{
   home.packages = [ bdPlakatbau ];
 
   programs.hyprlock = {

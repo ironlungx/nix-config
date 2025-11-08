@@ -7,7 +7,7 @@ pkgs.stdenvNoCC.mkDerivation {
   pname = "bd-plakatbau";
   version = "1.0";
   src = ./bdplakatt.ttf;
-  phases = [ "installPhase" ];  # Skip unpack and other phases
+  phases = [ "installPhase" ]; # Skip unpack and other phases
   installPhase = ''
     mkdir -p $out/share/fonts/opentype
     install -Dm644 $src $out/share/fonts/opentype/BDPlakatbau.otf
@@ -17,4 +17,3 @@ pkgs.stdenvNoCC.mkDerivation {
     platforms = pkgs.lib.platforms.all;
   };
 }
-

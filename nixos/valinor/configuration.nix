@@ -2,7 +2,8 @@
   config,
   pkgs,
   ...
-}: {
+}:
+{
   imports = [
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
@@ -21,7 +22,7 @@
 
   boot.loader.efi.canTouchEfiVariables = true;
 
-  boot.binfmt.emulatedSystems = ["aarch64-linux"];
+  boot.binfmt.emulatedSystems = [ "aarch64-linux" ];
 
   networking.hostName = "valinor"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
@@ -50,7 +51,7 @@
     enable32Bit = true;
   };
 
-  services.xserver.videoDrivers = ["nvidia"];
+  services.xserver.videoDrivers = [ "nvidia" ];
   services.flatpak.enable = true;
 
   hardware.nvidia = {
@@ -188,7 +189,7 @@
       "uucp"
       "dialout"
     ];
-    packages = with pkgs; [];
+    packages = with pkgs; [ ];
     shell = pkgs.fish;
   };
 
@@ -208,7 +209,7 @@
     gamescopeSession.enable = true;
   };
 
-  users.groups.libvirtd.members = ["ironlung"];
+  users.groups.libvirtd.members = [ "ironlung" ];
   virtualisation.libvirtd = {
     enable = true;
     qemu = {
@@ -278,7 +279,8 @@
     virtio-win
     swtpm # For emulated TPM device
 
-    wireguard-tools protonvpn-gui
+    wireguard-tools
+    protonvpn-gui
   ];
 
   # services.ollama = {
@@ -286,8 +288,14 @@
   #   acceleration = "cuda";
   # };
 
-  nix.settings.experimental-features = ["nix-command" "flakes"];
-  nix.settings.trusted-users = ["root" "ironlung"];
+  nix.settings.experimental-features = [
+    "nix-command"
+    "flakes"
+  ];
+  nix.settings.trusted-users = [
+    "root"
+    "ironlung"
+  ];
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
@@ -314,7 +322,7 @@
   # Or disable the firewall altogether.
   # networking.firewall.enable = false;
 
-  networking.firewall.trustedInterfaces = ["virbr0"];
+  networking.firewall.trustedInterfaces = [ "virbr0" ];
 
   networking.firewall.allowedTCPPortRanges = [
     {

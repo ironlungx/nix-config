@@ -8,7 +8,7 @@
       font-thicken = true;
       confirm-close-surface = false;
       # cursor-style = "underline";
-      # shell-integration-features = "no-cursor"; 
+      # shell-integration-features = "no-cursor";
       # shell-integration = "fish";
     };
   };

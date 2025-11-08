@@ -2,7 +2,8 @@
   config,
   pkgs,
   ...
-}: let
+}:
+let
   waybar_config = {
     mainBar = {
       "layer" = "top";
@@ -107,11 +108,11 @@
           weeks-pos = "right";
           on-scroll = 1;
           format = {
-            months   = "<span color='${config.lib.stylix.colors.withHashtag.base0A}'><b>{}</b></span>"; # yellowish
-            days     = "<span color='${config.lib.stylix.colors.withHashtag.base08}'><b>{}</b></span>"; # red/pink
-            weeks    = "<span color='${config.lib.stylix.colors.withHashtag.base0C}'><b>W{}</b></span>"; # cyan
+            months = "<span color='${config.lib.stylix.colors.withHashtag.base0A}'><b>{}</b></span>"; # yellowish
+            days = "<span color='${config.lib.stylix.colors.withHashtag.base08}'><b>{}</b></span>"; # red/pink
+            weeks = "<span color='${config.lib.stylix.colors.withHashtag.base0C}'><b>W{}</b></span>"; # cyan
             weekdays = "<span color='${config.lib.stylix.colors.withHashtag.base0E}'><b>{}</b></span>"; # orange/violet
-            today    = "<span color='${config.lib.stylix.colors.withHashtag.base09}'><b><u>{}</u></b></span>"; # bright highlight
+            today = "<span color='${config.lib.stylix.colors.withHashtag.base09}'><b><u>{}</u></b></span>"; # bright highlight
           };
         };
 
@@ -154,14 +155,15 @@
         format-muted = "  0%";
       };
       bluetooth = {
-          format-disconnected = "<span size='large'󰂯 </span>{device_alias}";
-          format-connected = "<span size='large'>󰂱 </span>{device_alias}";
-          tooltip = true;
-          tooltip-format = "{device_enumerate}";
-        };
+        format-disconnected = "<span size='large'󰂯 </span>{device_alias}";
+        format-connected = "<span size='large'>󰂱 </span>{device_alias}";
+        tooltip = true;
+        tooltip-format = "{device_enumerate}";
+      };
     };
   };
-in {
+in
+{
   home.packages = with pkgs; [
     nerd-fonts.iosevka
   ];

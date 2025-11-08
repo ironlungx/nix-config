@@ -3,8 +3,8 @@
   inputs,
   config,
   ...
-}: 
-let 
+}:
+let
   terminal = pkgs.ghostty;
 in
 {
@@ -53,7 +53,7 @@ in
             let
               radius = 10.0;
             in
-              {
+            {
               bottom-left = radius;
               bottom-right = radius;
               top-left = radius;
@@ -72,7 +72,7 @@ in
       prefer-no-csd = true;
 
       spawn-at-startup = [
-        { 
+        {
           command = [ "dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAY" ];
         }
         {
@@ -114,9 +114,9 @@ in
         };
 
         preset-column-widths = [
-          {proportion = 0.25;}
-          {proportion = 0.5;}
-          {proportion = 0.75;}
+          { proportion = 0.25; }
+          { proportion = 0.5; }
+          { proportion = 0.75; }
         ];
 
         default-column-width.proportion = 1.0;
@@ -149,16 +149,22 @@ in
         "Mod+Shift+8".action.move-column-to-workspace = 8;
         "Mod+Shift+9".action.move-column-to-workspace = 9;
 
-        "Mod+Return".action.spawn = ["${pkgs.ghostty}/bin/ghostty"];
-        "Mod+Control+Return".action.spawn = ["${inputs.zen-browser.packages.${pkgs.system}.default}/bin/.zen-wrapped"];
-        "Mod+P".action.spawn = ["rofi" "-show" "drun"];
-        "Mod+Control+Escape".action.spawn = ["pkill niri"];
+        "Mod+Return".action.spawn = [ "${pkgs.ghostty}/bin/ghostty" ];
+        "Mod+Control+Return".action.spawn = [
+          "${inputs.zen-browser.packages.${pkgs.system}.default}/bin/.zen-wrapped"
+        ];
+        "Mod+P".action.spawn = [
+          "rofi"
+          "-show"
+          "drun"
+        ];
+        "Mod+Control+Escape".action.spawn = [ "pkill niri" ];
 
-        "Mod+Shift+Q".action.close-window = {};
+        "Mod+Shift+Q".action.close-window = { };
 
-        "Mod+R".action.switch-preset-column-width = {};
-        "Mod+F".action.maximize-column = {};
-        "Mod+C".action.center-column = {};
+        "Mod+R".action.switch-preset-column-width = { };
+        "Mod+F".action.maximize-column = { };
+        "Mod+C".action.center-column = { };
 
         "Mod+H".action.focus-column-left = { };
         "Mod+J".action.focus-window-or-monitor-down = { };
@@ -166,7 +172,9 @@ in
         "Mod+L".action.focus-column-right = { };
 
         "Mod+O".action.toggle-overview = { };
-        "Mod+V".action.spawn-sh = [ "cliphist list | rofi -dmenu -display-columns 2 | cliphist decode | wl-copy" ];
+        "Mod+V".action.spawn-sh = [
+          "cliphist list | rofi -dmenu -display-columns 2 | cliphist decode | wl-copy"
+        ];
 
         "Mod+Shift+H".action.move-column-left = { };
         "Mod+Shift+J".action.move-window-to-monitor-down = { };
@@ -184,8 +192,12 @@ in
 
         "Mod+M".action.screenshot = { };
 
-        "XF86AudioRaiseVolume".action.spawn-sh = [ "${pkgs.swayosd}/bin/swayosd-client --output-volume=+5" ];
-        "XF86AudioLowerVolume".action.spawn-sh = [ "${pkgs.swayosd}/bin/swayosd-client --output-volume=-5" ];
+        "XF86AudioRaiseVolume".action.spawn-sh = [
+          "${pkgs.swayosd}/bin/swayosd-client --output-volume=+5"
+        ];
+        "XF86AudioLowerVolume".action.spawn-sh = [
+          "${pkgs.swayosd}/bin/swayosd-client --output-volume=-5"
+        ];
 
         "XF86AudioNext".action.spawn-sh = [ "playerctl next" ];
         "XF86AudioPrev".action.spawn-sh = [ "playerctl previous" ];

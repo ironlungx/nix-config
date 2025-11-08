@@ -4,7 +4,7 @@ pkgs.stdenvNoCC.mkDerivation {
   pname = "opti-edgar";
   version = "1.0";
   src = ./OPTIEdgarBold-Extended.otf;
-  phases = [ "installPhase" ];  # Skip unpack and other phases
+  phases = [ "installPhase" ]; # Skip unpack and other phases
   installPhase = ''
     mkdir -p $out/share/fonts/opentype
     install -Dm644 $src $out/share/fonts/opentype/OPTIEdgarBold.otf
@@ -14,5 +14,3 @@ pkgs.stdenvNoCC.mkDerivation {
     platforms = pkgs.lib.platforms.all;
   };
 }
-
-

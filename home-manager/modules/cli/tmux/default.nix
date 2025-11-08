@@ -1,4 +1,5 @@
-{pkgs, ...}: {
+{ pkgs, ... }:
+{
   programs.tmux = {
     enable = true;
     mouse = true;
@@ -9,7 +10,6 @@
     terminal = "xterm-256color";
 
     shell = "${pkgs.fish}/bin/fish";
-
 
     plugins = with pkgs.tmuxPlugins; [
       yank

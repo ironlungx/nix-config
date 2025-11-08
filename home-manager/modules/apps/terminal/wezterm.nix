@@ -1,6 +1,6 @@
 {
   programs.wezterm = {
-    
+
     enable = true;
     extraConfig = ''
       local p = 11

@@ -1,4 +1,5 @@
-{pkgs, ...}: {
+{ pkgs, ... }:
+{
   services.hypridle = {
     enable = true;
     settings = {

@@ -1,4 +1,5 @@
-{pkgs, ...}: {
+{ pkgs, ... }:
+{
   home.packages = with pkgs; [
     neovim # not doing programs.nvim.enable cus home manager complains about init.lua
 
@@ -10,6 +11,7 @@
 
     # LSP servers
     nixd
+    nixfmt
     stylua
     alejandra
     lua-language-server
@@ -21,14 +23,15 @@
     ruff
     # black
 
-    (python3.withPackages (ps:
-      with ps; [
+    (python3.withPackages (
+      ps: with ps; [
         python-lsp-server
         python-lsp-jsonrpc
         pyls-isort
         pyls-flake8
         flake8
         isort
-      ]))
+      ]
+    ))
   ];
 }

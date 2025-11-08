@@ -1,10 +1,11 @@
-{ pkgs, ... }: {
+{ pkgs, ... }:
+{
   home.packages = with pkgs; [
     pyprland
   ];
 
   home.file.".config/hypr/pyprland.toml".source = pkgs.writers.writeTOML "pyprland-config" {
-    pyprland.plugins = ["scratchpads"];
+    pyprland.plugins = [ "scratchpads" ];
 
     scratchpads.term = {
       animation = "fromTop";

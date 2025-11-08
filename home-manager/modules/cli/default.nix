@@ -4,7 +4,6 @@
     ./tmux
   ];
 
-
   programs.btop = {
     enable = true;
     settings = {

@@ -4,10 +4,11 @@
   config,
   pkgs,
   ...
-}: {
+}:
+{
   imports = [
     inputs.stylix.homeModules.stylix
-    
+
     ./modules/shell/fish.nix
     ./modules/shell/zoxide.nix
     ./modules/shell/starship.nix
@@ -17,7 +18,7 @@
   ];
 
   nixpkgs = {
-    overlays = [];
+    overlays = [ ];
     config = {
       allowUnfree = true;
       allowUnfreePredicate = _: true;
@@ -32,7 +33,6 @@
     ];
   };
 
-
   home.packages = with pkgs; [
     neovim
     wget
@@ -41,7 +41,6 @@
     python3
     unzip
   ];
-
 
   programs = {
     home-manager.enable = true;

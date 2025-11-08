@@ -36,49 +36,62 @@
 
     nix-minecraft.url = "github:Infinidoge/nix-minecraft";
 
-    apple-fonts.url= "github:Lyndeno/apple-fonts.nix";
+    apple-fonts.url = "github:Lyndeno/apple-fonts.nix";
   };
 
-  outputs = {
-    self,
-    nixpkgs,
-    home-manager,
-    nixos-wsl,
-    stylix,
-    ...
-  } @ inputs: let
-    inherit (self) outputs;
-  in {
-    nixosConfigurations = {
-      valinor = nixpkgs.lib.nixosSystem {
-        specialArgs = {inherit inputs outputs;};
-        modules = [./nixos/valinor/configuration.nix stylix.nixosModules.stylix];
+  outputs =
+    {
+      self,
+      nixpkgs,
+      home-manager,
+      nixos-wsl,
+      stylix,
+      ...
+    }@inputs:
+    let
+      inherit (self) outputs;
+    in
+    {
+      nixosConfigurations = {
+        valinor = nixpkgs.lib.nixosSystem {
+          specialArgs = { inherit inputs outputs; };
+          modules = [
+            ./nixos/valinor/configuration.nix
+            stylix.nixosModules.stylix
+          ];
+        };
+
+        gondor = nixpkgs.lib.nixosSystem {
+          system = "x86_64-linux";
+          specialArgs = { inherit inputs outputs; };
+          modules = [
+            nixos-wsl.nixosModules.default
+            ./nixos/gondor/configuration.nix
+            stylix.nixosModules.stylix
+          ];
+        };
+        shire = nixpkgs.lib.nixosSystem {
+          system = "x86_64-linux";
+          specialArgs = { inherit inputs outputs; };
+          modules = [
+            ./nixos/shire/configuration.nix
+            stylix.nixosModules.stylix
+          ];
+        };
       };
 
-      gondor = nixpkgs.lib.nixosSystem {
-        system = "x86_64-linux";
-        specialArgs = {inherit inputs outputs;};
-        modules = [nixos-wsl.nixosModules.default ./nixos/gondor/configuration.nix stylix.nixosModules.stylix];
-      };
-      shire = nixpkgs.lib.nixosSystem {
-        system = "x86_64-linux";
-        specialArgs = {inherit inputs outputs;};
-        modules = [./nixos/shire/configuration.nix stylix.nixosModules.stylix];
+      homeConfigurations = {
+        "ironlung@valinor" = home-manager.lib.homeManagerConfiguration {
+          pkgs = nixpkgs.legacyPackages.x86_64-linux;
+          extraSpecialArgs = { inherit inputs outputs; };
+          modules = [ ./home-manager/valinor.nix ];
+        };
+
+        "ironlung@gondor" = home-manager.lib.homeManagerConfiguration {
+          pkgs = nixpkgs.legacyPackages.x86_64-linux;
+          extraSpecialArgs = { inherit inputs outputs; };
+          modules = [ ./home-manager/gondor.nix ];
+        };
       };
     };
-
-    homeConfigurations = {
-      "ironlung@valinor" = home-manager.lib.homeManagerConfiguration {
-        pkgs = nixpkgs.legacyPackages.x86_64-linux;
-        extraSpecialArgs = {inherit inputs outputs;};
-        modules = [./home-manager/valinor.nix];
-      };
-
-      "ironlung@gondor" = home-manager.lib.homeManagerConfiguration {
-        pkgs = nixpkgs.legacyPackages.x86_64-linux;
-        extraSpecialArgs = {inherit inputs outputs;};
-        modules = [./home-manager/gondor.nix];
-      };
-    };
-  };
 }

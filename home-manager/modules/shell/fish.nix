@@ -1,4 +1,5 @@
-{pkgs, ...}: {
+{ pkgs, ... }:
+{
   programs.bat.enable = true;
   programs.zoxide.enableFishIntegration = true;
 

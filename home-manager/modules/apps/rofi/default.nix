@@ -3,9 +3,11 @@
   lib,
   pkgs,
   ...
-}: let
+}:
+let
   rofiTheme = ./catppuccin-frappe.rasi;
-in {
+in
+{
   home.packages = with pkgs; [
     adwaita-icon-theme
   ];
@@ -14,7 +16,10 @@ in {
     terminal = "kitty";
     theme = rofiTheme;
 
-    plugins = with pkgs; [rofi-calc rofi-emoji];
+    plugins = with pkgs; [
+      rofi-calc
+      rofi-emoji
+    ];
 
     extraConfig = {
       modi = "run,drun,emoji,calc";
