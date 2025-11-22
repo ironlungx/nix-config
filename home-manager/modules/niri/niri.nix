@@ -88,9 +88,6 @@ in
           command = [ "waybar" ];
         }
         {
-          command = [ "blueman" ];
-        }
-        {
           command = [ "${pkgs.hyprpaper}/bin/hyprpaper" ];
         }
         {
@@ -98,6 +95,10 @@ in
         }
         {
           command = [ "${pkgs.wl-clipboard}/bin/wl-paste --type image --watch cliphist store" ];
+        }
+
+        {
+          command = [ "blueman-applet" ];
         }
 
         {
