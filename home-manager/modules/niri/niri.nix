@@ -160,6 +160,7 @@ in
           "drun"
         ];
         "Mod+Control+Escape".action.spawn = [ "pkill niri" ];
+        "Mod+Escape".action.spawn-sh = [ "hyprlock --grace 4" ];
 
         "Mod+Shift+Q".action.close-window = { };
 
