@@ -1,5 +1,6 @@
 {
   imports = [
+    ./qute
     ./zen
     ./terminal
     ./rofi
