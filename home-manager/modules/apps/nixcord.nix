@@ -25,10 +25,10 @@
         };
         favoriteEmojiFirst.enable = true;
         fixCodeblockGap.enable = true;
-        silentTyping = {
-          enable = true;
-          showIcon = true;
-        };
+        # silentTyping = {
+        #   enable = true;
+        #   showIcon = true;
+        # };
       };
     };
   };
