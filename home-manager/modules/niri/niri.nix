@@ -178,13 +178,13 @@ in
           "cliphist list | rofi -dmenu -display-columns 2 | cliphist decode | wl-copy"
         ];
 
-        "Mod+Shift+H".action.move-column-left = { };
-        "Mod+Shift+J".action.move-window-to-monitor-down = { };
-        "Mod+Shift+K".action.move-window-to-monitor-up = { };
-        "Mod+Shift+L".action.move-column-right = { };
+        "Mod+Control+H".action.move-column-left = { };
+        "Mod+Control+J".action.move-window-to-monitor-down = { };
+        "Mod+Control+K".action.move-window-to-monitor-up = { };
+        "Mod+Control+L".action.move-column-right = { };
 
-        "Mod+Control+H".action.set-column-width = "-10%";
-        "Mod+Control+L".action.set-column-width = "+10%";
+        "Mod+Shift+H".action.set-column-width = "-10%";
+        "Mod+Shift+L".action.set-column-width = "+10%";
 
         "Mod+Comma".action.consume-or-expel-window-left = { };
         "Mod+Period".action.consume-or-expel-window-right = { };
