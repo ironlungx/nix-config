@@ -22,6 +22,7 @@ in
     pamixer
     hyprpaper
     xwayland-satellite
+    swaybg
   ];
 
   programs.niri = {
@@ -73,10 +74,19 @@ in
 
       spawn-at-startup = [
         {
-          command = [ "dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAY" ];
+          command = [
+            "dbus-update-activation-environment"
+            "--systemd"
+            "DISPLAY"
+            "WAYLAND_DISPLAY"
+          ];
         }
         {
-          command = [ "${pkgs.swaybg}" ];
+          command = [
+            "swaybg"
+            "-i"
+            "${config.stylix.image}"
+          ];
         }
         {
           command = [ "${pkgs.dunst}/bin/dunst" ];
@@ -91,10 +101,24 @@ in
           command = [ "${pkgs.hyprpaper}/bin/hyprpaper" ];
         }
         {
-          command = [ "${pkgs.wl-clipboard}/bin/wl-paste --type text --watch cliphist store" ];
+          command = [
+            "${pkgs.wl-clipboard}/bin/wl-paste "
+            "--type"
+            "text "
+            "--watch"
+            "cliphist"
+            "store"
+          ];
         }
         {
-          command = [ "${pkgs.wl-clipboard}/bin/wl-paste --type image --watch cliphist store" ];
+          command = [
+            "${pkgs.wl-clipboard}/bin/wl-paste "
+            "--type "
+            "image"
+            "--watch"
+            "cliphist"
+            "store"
+          ];
         }
 
         {
