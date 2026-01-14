@@ -54,6 +54,10 @@
   services.xserver.videoDrivers = [ "nvidia" ];
   services.flatpak.enable = true;
 
+  hardware.opengl = {
+    enable = true;
+  };
+
   hardware.nvidia = {
     # Modesetting is required.
     modesetting.enable = true;
@@ -138,6 +142,8 @@
   hardware.bluetooth.powerOnBoot = true; # powers up the default Bluetooth controller on boot
   services.blueman.enable = true;
 
+  hardware.enableAllFirmware = true;
+
   security.rtkit.enable = true;
   security.sudo.extraConfig = ''
     Defaults pwfeedback
@@ -195,7 +201,6 @@
 
   programs.fish.enable = true;
   programs.udevil.enable = true;
-  programs.adb.enable = true;
 
   programs.virt-manager.enable = true;
 
