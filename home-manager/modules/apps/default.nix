@@ -6,6 +6,7 @@
     ./rofi
     ./waybar
 
+    ./audio.nix
     ./gaming.nix
     ./nixcord.nix
     ./spicetify.nix
