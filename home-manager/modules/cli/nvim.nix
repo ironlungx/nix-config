@@ -12,6 +12,7 @@
     # LSP servers
     nixd
     nixfmt
+    statix
     stylua
     alejandra
     lua-language-server
