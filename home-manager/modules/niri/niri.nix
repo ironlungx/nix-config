@@ -23,6 +23,7 @@ in
     hyprpaper
     xwayland-satellite
     swaybg
+    wayscriber
   ];
 
   programs.niri = {
@@ -90,6 +91,12 @@ in
         }
         {
           command = [ "${pkgs.dunst}/bin/dunst" ];
+        }
+        {
+          command = [
+            "${pkgs.wayscriber}/bin/wayscriber"
+            "--daemon"
+          ];
         }
         {
           command = [ "swayosd-server" ];
@@ -196,6 +203,8 @@ in
         "Mod+J".action.focus-window-or-monitor-down = { };
         "Mod+K".action.focus-window-or-monitor-up = { };
         "Mod+L".action.focus-column-right = { };
+
+        "Mod+S".action.spawn-sh = [ "pkill -SIGUSR1 wayscriber" ];
 
         "Mod+O".action.toggle-overview = { };
         "Mod+V".action.spawn-sh = [
