@@ -183,7 +183,7 @@ in
 
         "Mod+Return".action.spawn = [ "${pkgs.ghostty}/bin/ghostty" ];
         "Mod+Control+Return".action.spawn = [
-          "${inputs.zen-browser.packages.${pkgs.system}.default}/bin/.zen-wrapped"
+          "${inputs.zen-browser.packages.${pkgs.system}.default}/bin/zen-beta"
         ];
         "Mod+P".action.spawn = [
           "rofi"

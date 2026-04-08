@@ -32,7 +32,7 @@
 
     nixos-wsl.url = "github:nix-community/NixOS-WSL/main";
 
-    zen-browser.url = "github:0xc000022070/zen-browser-flake/6b8585d94444d6f13e59524e7f8e5d27016e92ac";
+    zen-browser.url = "github:0xc000022070/zen-browser-flake";
 
     nix-minecraft.url = "github:Infinidoge/nix-minecraft";
 

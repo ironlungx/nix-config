@@ -27,8 +27,8 @@
       userChrome = pkgs.runCommand "userChrome.css" { } ''
         cat ${
           pkgs.fetchurl {
-            url = "https://raw.githubusercontent.com/catppuccin/zen-browser/refs/heads/main/themes/Frappe/Lavender/userChrome.css";
-            sha256 = "09fn63mx9rq9f02dvwjd76iiqlzrkq6ciljwxlfbjc2rddji3qc2";
+            url = "https://raw.githubusercontent.com/catppuccin/zen-browser/refs/heads/main/themes/Frappe/Flamingo/userChrome.css";
+            sha256 = "0vnr5l65ciij7ai1f5zimwpqs9ry7v79nfrrk70qxbvqagx2ak08";
           }
         } > $out
         echo ':root {
@@ -37,14 +37,19 @@
       '';
 
       userContent = pkgs.fetchurl {
-        url = "https://raw.githubusercontent.com/catppuccin/zen-browser/refs/heads/main/themes/Frappe/Lavender/userContent.css";
-        sha256 = "1xiabsqsm7x10q2kx6c5fd2nfii96c0hffbpx34h9pivx52f8vhz";
+        url = "https://raw.githubusercontent.com/catppuccin/zen-browser/refs/heads/main/themes/Frappe/Flamingo/userContent.css";
+        sha256 = "1v9q3qxn6cphn9sgnfm6z7dgkr76r6c0kfgp04rjihl4y5d496pg";
       };
+
       settings = {
         "toolkit.legacyUserProfileCustomizations.stylesheets" = true;
         "zen.welcome-screen.seen" = true;
         "zen.view.show-newtab-button-border-top" = true;
         "zen.view.show-newtab-button-top" = false;
+        "zen.theme.disable-lightweight" = false;
+
+        "zen.tabs.vertical.right-side" = true;
+        "layout.css.prefers-color-scheme.content-override" = true;
 
         "extensions.autoDisableScopes" = 0;
         "extensions.webextensions.restrictedDomains" = "";
@@ -53,6 +58,9 @@
         "browser.aboutConfig.showWarning" = false;
         "browser.startup.page" = 1;
         "browser.download.useDownloadDir" = false;
+
+        "browser.uiCustomization.state" =
+          ''{"placements":{"widget-overflow-fixed-list":[],"unified-extensions-area":["addon_darkreader_org-browser-action","jid1-kkzogwgsw3ao4q_jetpack-browser-action","_34daeb50-c2d2-4f14-886a-7160b24d66a4_-browser-action","_7a7a4a92-a2a0-41d1-9fd7-1e92480d612d_-browser-action"],"nav-bar":["back-button","forward-button","vertical-spacer","urlbar-container","_d7742d87-e61d-4b78-b8a1-b469842139fa_-browser-action","ublock0_raymondhill_net-browser-action","sponsorblocker_ajay_app-browser-action","unified-extensions-button","myallychou_gmail_com-browser-action"],"toolbar-menubar":["menubar-items"],"TabsToolbar":["tabbrowser-tabs"],"vertical-tabs":[],"PersonalToolbar":["import-button","personal-bookmarks"],"zen-sidebar-top-buttons":[],"zen-sidebar-foot-buttons":["downloads-button","zen-workspaces-button","zen-create-new-button"]},"seen":["_d7742d87-e61d-4b78-b8a1-b469842139fa_-browser-action","addon_darkreader_org-browser-action","jid1-kkzogwgsw3ao4q_jetpack-browser-action","_34daeb50-c2d2-4f14-886a-7160b24d66a4_-browser-action","ublock0_raymondhill_net-browser-action","sponsorblocker_ajay_app-browser-action","_7a7a4a92-a2a0-41d1-9fd7-1e92480d612d_-browser-action","developer-button","screenshot-button","myallychou_gmail_com-browser-action"],"dirtyAreaCache":["unified-extensions-area","nav-bar","vertical-tabs","zen-sidebar-foot-buttons","PersonalToolbar","zen-sidebar-top-buttons","toolbar-menubar","TabsToolbar"],"currentVersion":23,"newElementCount":7}'';
       };
       search.force = true;
       search.engines = {
@@ -124,6 +132,7 @@
           youtube-shorts-block
           stylus
           i-dont-care-about-cookies
+          unhook
         ];
       };
       settings."uBlock0@raymondhill.net".settings = {
