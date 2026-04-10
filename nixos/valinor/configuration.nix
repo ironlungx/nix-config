@@ -51,13 +51,9 @@
     enable32Bit = true;
   };
 
-  services.xserver.videoDrivers = [ "nvidia" ];
   services.flatpak.enable = true;
 
-  hardware.opengl = {
-    enable = true;
-  };
-
+  services.xserver.videoDrivers = [ "nvidia" ];
   hardware.nvidia = {
     # Modesetting is required.
     modesetting.enable = true;
@@ -84,8 +80,9 @@
     # accessible via `nvidia-settings`.
     nvidiaSettings = true;
 
-    # Optionally, you may need to select the appropriate driver version for your specific GPU.
-    package = config.boot.kernelPackages.nvidiaPackages.stable;
+    # Tragic times indeed...
+    # package = config.boot.kernelPackages.nvidiaPackages.stable;
+    package = config.boot.kernelPackages.nvidiaPackages.legacy_580;
   };
 
   # Set your time zone.
@@ -263,6 +260,8 @@
       binPath = "/run/current-system/sw/bin/niri";
     };
   };
+
+  hardware.opentabletdriver.enable = true;
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
