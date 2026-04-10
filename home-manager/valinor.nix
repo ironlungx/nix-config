@@ -19,7 +19,9 @@ in
   ];
 
   nixpkgs = {
-    overlays = [ ];
+    overlays = [
+      inputs.firefox-addons.overlays.default
+    ];
     config = {
       allowUnfree = true;
       allowUnfreePredicate = _: true;
