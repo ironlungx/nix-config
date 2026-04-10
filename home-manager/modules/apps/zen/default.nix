@@ -58,6 +58,7 @@
         "browser.aboutConfig.showWarning" = false;
         "browser.startup.page" = 1;
         "browser.download.useDownloadDir" = false;
+        "zen.tabs.select-recently-used-on-close" = false;
 
         "browser.uiCustomization.state" =
           ''{"placements":{"widget-overflow-fixed-list":[],"unified-extensions-area":["addon_darkreader_org-browser-action","jid1-kkzogwgsw3ao4q_jetpack-browser-action","_34daeb50-c2d2-4f14-886a-7160b24d66a4_-browser-action","_7a7a4a92-a2a0-41d1-9fd7-1e92480d612d_-browser-action"],"nav-bar":["back-button","forward-button","vertical-spacer","urlbar-container","_d7742d87-e61d-4b78-b8a1-b469842139fa_-browser-action","ublock0_raymondhill_net-browser-action","sponsorblocker_ajay_app-browser-action","unified-extensions-button","myallychou_gmail_com-browser-action"],"toolbar-menubar":["menubar-items"],"TabsToolbar":["tabbrowser-tabs"],"vertical-tabs":[],"PersonalToolbar":["import-button","personal-bookmarks"],"zen-sidebar-top-buttons":[],"zen-sidebar-foot-buttons":["downloads-button","zen-workspaces-button","zen-create-new-button"]},"seen":["_d7742d87-e61d-4b78-b8a1-b469842139fa_-browser-action","addon_darkreader_org-browser-action","jid1-kkzogwgsw3ao4q_jetpack-browser-action","_34daeb50-c2d2-4f14-886a-7160b24d66a4_-browser-action","ublock0_raymondhill_net-browser-action","sponsorblocker_ajay_app-browser-action","_7a7a4a92-a2a0-41d1-9fd7-1e92480d612d_-browser-action","developer-button","screenshot-button","myallychou_gmail_com-browser-action"],"dirtyAreaCache":["unified-extensions-area","nav-bar","vertical-tabs","zen-sidebar-foot-buttons","PersonalToolbar","zen-sidebar-top-buttons","toolbar-menubar","TabsToolbar"],"currentVersion":23,"newElementCount":7}'';
@@ -124,15 +125,16 @@
 
       extensions = {
         force = true;
-        packages = with inputs.firefox-addons.packages.${pkgs.system}; [
+        packages = with pkgs.firefoxAddons; [
           ublock-origin
           sponsorblock
           darkreader
-          vimium
+          vimium-ff
           youtube-shorts-block
+          return-youtube-dislikes
           stylus
-          i-dont-care-about-cookies
-          unhook
+          istilldontcareaboutcookies
+          youtube-unhook
         ];
       };
       settings."uBlock0@raymondhill.net".settings = {
