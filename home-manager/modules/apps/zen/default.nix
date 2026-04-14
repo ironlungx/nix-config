@@ -47,6 +47,7 @@
         "zen.view.show-newtab-button-border-top" = true;
         "zen.view.show-newtab-button-top" = false;
         "zen.theme.disable-lightweight" = false;
+        "zen.window-sync.sync-only-pinned-tabs" = true; # stupid zen feature
 
         "zen.tabs.vertical.right-side" = true;
         "layout.css.prefers-color-scheme.content-override" = true;
