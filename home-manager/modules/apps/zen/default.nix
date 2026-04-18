@@ -127,6 +127,7 @@
       extensions = {
         force = true;
         packages = with pkgs.firefoxAddons; [
+          leechblock-ng
           ublock-origin
           sponsorblock
           darkreader
