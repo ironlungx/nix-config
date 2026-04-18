@@ -8,8 +8,8 @@
   stylix = {
     enable = true;
     image = pkgs.fetchurl {
-      url = "https://raw.githubusercontent.com/ironlungx/wallpapers/refs/heads/main/flowers.jpeg";
-      sha256 = "1xj6gw4zz644xdp2pa0sphm66a4ib3d5snb1lj2iy8bvwhpby8iz";
+      url = "https://raw.githubusercontent.com/ironlungx/wallpapers/refs/heads/main/clouds-3.png";
+      sha256 = "06jvwq4gfq542bn6m1k13yaxkdkkd27niiqm4b53d8nwnqj85qvq";
     };
     fonts = {
       sizes = {
