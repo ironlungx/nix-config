@@ -20,6 +20,7 @@
     fixjson
     tree-sitter
     imagemagick
+    tinymist
 
     ruff
     # black

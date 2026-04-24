@@ -16,8 +16,8 @@
         terminal = 10.25;
       };
       monospace = {
-        package = pkgs.aporetic;
-        name = "Aporetic Sans Mono";
+        package = pkgs.iosevka;
+        name = "Iosevka";
       };
       serif = {
         package = pkgs.aleo-fonts;

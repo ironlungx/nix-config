@@ -6,6 +6,7 @@
       window-padding-y = 10;
       font-style = "Medium";
       font-thicken = true;
+      font-feature = "+calt";
       confirm-close-surface = false;
       # cursor-style = "underline";
       # shell-integration-features = "no-cursor";
