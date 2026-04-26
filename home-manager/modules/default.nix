@@ -2,7 +2,7 @@
   imports = [
     ./stylix.nix
     ./hyprland
-    ./niri
+    # ./niri
     ./cli
     ./apps
     ./shell

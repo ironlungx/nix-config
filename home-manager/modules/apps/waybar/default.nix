@@ -10,7 +10,8 @@ let
       "position" = "bottom";
       "modules-left" = [
         "custom/nix"
-        "niri/workspaces"
+        # "niri/workspaces"
+        "hyprland/workspaces"
         "custom/sep"
         "cpu"
         "memory"
@@ -31,20 +32,20 @@ let
         "tray"
       ];
 
-      # "hyprland/workspaces" = {
-      #   disable-scroll = true;
-      #   sort-by-name = true;
-      #   format = "{icon}";
-      #   format-icons = {
-      #     empty = "";
-      #     active = "";
-      #     default = "";
-      #   };
-      #   icon-size = 9;
-      #   persistent-workspaces = {
-      #     "*" = 6;
-      #   };
-      # };
+      "hyprland/workspaces" = {
+        disable-scroll = true;
+        sort-by-name = true;
+        format = "{icon}";
+        format-icons = {
+          empty = "";
+          active = "";
+          default = "";
+        };
+        icon-size = 9;
+        persistent-workspaces = {
+          "*" = 6;
+        };
+      };
 
       "niri/workspaces" = {
         format = "{icon}";

@@ -35,7 +35,7 @@
 
       # Set programs that you use
       "$terminal" = "ghostty";
-      "$browser" = "${inputs.zen-browser.packages.${pkgs.system}.default}/bin/.zen-wrapped";
+      "$browser" = "zen-beta";
       "$fileManager" = "";
       "$menu" = "rofi -show drun";
       # "$screenshot" = "${pkgs.grim}/bin/grim -g \"$(${pkgs.slurp}/bin/slurp)\" - | ${pkgs.wl-clipboard}/bin/wl-copy";
@@ -53,6 +53,8 @@
         "${pkgs.hyprpaper}/bin/hyprpaper"
         "${pkgs.dunst}/bin/dunst"
         "swayosd-server"
+        "blueman-applet"
+        "${pkgs.wayscriber}/bin/wayscriber --daemon"
       ];
 
       #############################
@@ -78,10 +80,10 @@
 
       # https://wiki.hyprland.org/Configuring/Variables/#general
       general = {
-        gaps_in = "5";
-        gaps_out = "20";
+        gaps_in = "2";
+        gaps_out = "10";
 
-        border_size = "2";
+        border_size = "1";
 
         # https://wiki.hyprland.org/Configuring/Variables/#variable-types for info about colors
 
@@ -96,7 +98,7 @@
 
       # https://wiki.hyprland.org/Configuring/Variables/#decoration
       decoration = {
-        rounding = 10;
+        rounding = 2;
         rounding_power = 2;
 
         # Change transparency of focused and unfocused windows
@@ -216,7 +218,7 @@
       # See https://wiki.hyprland.org/Configuring/Keywords/
       "$mainMod" = "SUPER"; # Sets "Windows" key as main modifier
       bind = [
-        "$mainMod SHIFT, Return, exec, $terminal"
+        "$mainMod, Return, exec, $terminal"
         "$mainMod CTRL, Return, exec, $browser"
         "$mainMod SHIFT, Q, killactive,"
         "$mainMod CTRL, Escape, exit,"
@@ -235,7 +237,7 @@
         "$mainMod CTRL, K, movewindow, u"
         "$mainMod CTRL, L, movewindow, r"
 
-        "$mainMod, Return, layoutmsg, swapwithmaster master"
+        "$mainMod SHIFT, Return, layoutmsg, swapwithmaster master"
 
         "$mainMod, comma, layoutmsg, addmaster"
         "$mainMod, period, layoutmsg, removemaster"
@@ -301,19 +303,19 @@
       # windowrule = float,class:^(kitty)$,title:^(kitty)$
 
       # Ignore maximize requests from apps. You'll probably like this.
-      windowrule = [
-        "suppressevent maximize, class:.*"
-        "nofocus,class:^$,title:^$,xwayland:1,floating:1,fullscreen:0,pinned:0"
-        "float, title:Vesktop"
-        "float, title:discord"
-        "opacity 0.99999, class:zen"
-      ];
+      # windowrule = [
+      #   "suppressevent maximize, class:.*"
+      #   "nofocus,class:^$,title:^$,xwayland:1,floating:1,fullscreen:0,pinned:0"
+      #   "float, title:Vesktop"
+      #   "float, title:discord"
+      #   "opacity 0.99999, class:zen"
+      # ];
 
-      windowrulev2 = [
-        "float,title:^(flameshot)"
-        "move 0 0,title:^(flameshot)"
-        "suppressevent fullscreen,title:^(flameshot)"
-      ];
+      # windowrulev2 = [
+      #   "float,title:^(flameshot)"
+      #   "move 0 0,title:^(flameshot)"
+      #   "suppressevent fullscreen,title:^(flameshot)"
+      # ];
     };
     extraConfig = ''
       $reset = hyprctl dispatch submap reset &&
