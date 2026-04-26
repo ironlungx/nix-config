@@ -11,6 +11,12 @@
       # cursor-style = "underline";
       # shell-integration-features = "no-cursor";
       # shell-integration = "fish";
+
+      keybind = [
+        "\"alt+v=text:nvim +\\\":norm G\\\" +\\\":set nowrap\\\"\      \""
+        "chain=write_screen_file:paste"
+        "chain=text:\\n"
+      ];
     };
   };
 }
