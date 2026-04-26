@@ -286,7 +286,6 @@
     swtpm # For emulated TPM device
 
     wireguard-tools
-    protonvpn-gui
   ];
 
   # services.ollama = {

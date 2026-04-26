@@ -38,18 +38,9 @@ in
 
   home.packages = with pkgs; [
     xclip
-
     devenv
-
-    # aider-chat
     tldr
-
     obsidian
-
-    lutris
-
-    # stremio
-    # inputs.seto.packages.${pkgs.system}.default
   ];
 
   fonts.fontconfig.enable = true;
