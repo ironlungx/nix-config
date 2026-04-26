@@ -1,5 +1,10 @@
 { pkgs, ... }:
 {
+  home.sessionVariables = {
+    EDITOR = "nvim";
+    VISUAL = "nvim";
+  };
+
   home.packages = with pkgs; [
     neovim # not doing programs.nvim.enable cus home manager complains about init.lua
 
