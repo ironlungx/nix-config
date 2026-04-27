@@ -16,6 +16,7 @@
     hyprpolkitagent
     swayosd
     flameshot
+    wayscriber
   ];
 
   wayland.windowManager.hyprland = {
@@ -40,6 +41,7 @@
       "$menu" = "rofi -show drun";
       # "$screenshot" = "${pkgs.grim}/bin/grim -g \"$(${pkgs.slurp}/bin/slurp)\" - | ${pkgs.wl-clipboard}/bin/wl-copy";
       "$screenshot" = "${pkgs.flameshot}/bin/flameshot gui --raw | ${pkgs.wl-clipboard}/bin/wl-copy -f";
+      "$wayscriber" = "pkill -SIGUSR1 wayscriber";
 
       #################
       ### AUTOSTART ###
@@ -243,6 +245,7 @@
         "$mainMod, period, layoutmsg, removemaster"
 
         "$mainMod, t, togglefloating"
+        "$mainMod, s, exec, $wayscriber"
 
         "$mainMod, 1, workspace, 1"
         "$mainMod, 2, workspace, 2"
