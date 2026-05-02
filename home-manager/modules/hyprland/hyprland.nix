@@ -39,8 +39,9 @@
       "$browser" = "zen-beta";
       "$fileManager" = "";
       "$menu" = "rofi -show drun";
-      # "$screenshot" = "${pkgs.grim}/bin/grim -g \"$(${pkgs.slurp}/bin/slurp)\" - | ${pkgs.wl-clipboard}/bin/wl-copy";
-      "$screenshot" = "${pkgs.flameshot}/bin/flameshot gui --raw | ${pkgs.wl-clipboard}/bin/wl-copy -f";
+      "$screenshot" =
+        "${pkgs.grim}/bin/grim -g \"$(${pkgs.slurp}/bin/slurp)\" - | ${pkgs.wl-clipboard}/bin/wl-copy";
+      # "$screenshot" = "${pkgs.flameshot}/bin/flameshot gui --raw | ${pkgs.wl-clipboard}/bin/wl-copy -f";
       "$wayscriber" = "pkill -SIGUSR1 wayscriber";
 
       #################
