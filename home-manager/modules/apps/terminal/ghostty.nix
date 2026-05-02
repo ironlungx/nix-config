@@ -12,6 +12,8 @@
       # shell-integration-features = "no-cursor";
       # shell-integration = "fish";
 
+      working-directory = "~/";
+
       keybind = [
         "\"alt+v=text:nvim +\\\":norm G\\\" +\\\":set nowrap\\\"\      \""
         "chain=write_screen_file:paste"
