@@ -41,6 +41,7 @@ in
     devenv
     tldr
     obsidian
+    anki
   ];
 
   fonts.fontconfig.enable = true;
