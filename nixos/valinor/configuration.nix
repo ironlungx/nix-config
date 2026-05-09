@@ -16,6 +16,11 @@
     efiSupport = true;
     device = "nodev";
     theme = pkgs.catppuccin-grub;
+    # extraEntries = ''
+    #   menuentry "UEFI Firmware Settings" {
+    #     fwsetup
+    #   }
+    # '';
   };
 
   boot.tmp.useTmpfs = true;
@@ -52,6 +57,10 @@
   };
 
   services.flatpak.enable = true;
+  xdg.portal.enable = true;
+  xdg.portal.extraPortals = with pkgs; [
+    xdg-desktop-portal-hyprland
+  ];
 
   services.xserver.videoDrivers = [ "nvidia" ];
   hardware.nvidia = {
@@ -135,8 +144,29 @@
   hardware.pulseaudio.enable = false;
 
   # Bluetooth
-  hardware.bluetooth.enable = true; # enables support for Bluetooth
-  hardware.bluetooth.powerOnBoot = true; # powers up the default Bluetooth controller on boot
+
+  hardware.bluetooth = {
+    enable = true;
+    powerOnBoot = true;
+    settings = {
+      General = {
+        # Shows battery charge of connected devices on supported
+        # Bluetooth adapters. Defaults to 'false'.
+        Experimental = true;
+        # When enabled other devices can connect faster to us, however
+        # the tradeoff is increased power consumption. Defaults to
+        # 'false'.
+        FastConnectable = true;
+      };
+      Policy = {
+        # Enable all controllers when they are found. This includes
+        # adapters present on start as well as adapters that are plugged
+        # in later on. Defaults to 'true'.
+        AutoEnable = true;
+      };
+    };
+  };
+
   services.blueman.enable = true;
 
   hardware.enableRedistributableFirmware = true;
@@ -242,9 +272,6 @@
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
-
-  programs.hyprland.enable = true;
-  programs.niri.enable = true;
 
   programs.uwsm = {
     enable = true;

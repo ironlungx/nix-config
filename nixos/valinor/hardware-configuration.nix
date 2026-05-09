@@ -21,12 +21,18 @@
       "usbhid"
       "sd_mod"
       "uinput"
+      "btusb"
     ];
     blacklistedKernelModules = [ "hid_uclogic" ];
     initrd.kernelModules = [ ];
     kernelModules = [ "kvm-amd" ];
     extraModulePackages = [ ];
   };
+
+  boot.kernelParams = [
+    "quiet"
+    "loglevel=3"
+  ];
 
   fileSystems."/" = {
     device = "/dev/disk/by-uuid/07dfacd0-f6a1-452b-93f7-b1ac735763fc";
