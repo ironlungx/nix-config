@@ -8,8 +8,10 @@
   stylix = {
     enable = true;
     image = pkgs.fetchurl {
-      url = "https://raw.githubusercontent.com/ironlungx/wallpapers/refs/heads/main/clouds-3.png";
-      sha256 = "06jvwq4gfq542bn6m1k13yaxkdkkd27niiqm4b53d8nwnqj85qvq";
+      # url = "https://raw.githubusercontent.com/ironlungx/wallpapers/refs/heads/main/clouds-3.png";
+      # sha256 = "06jvwq4gfq542bn6m1k13yaxkdkkd27niiqm4b53d8nwnqj85qvq";
+      url = "https://raw.githubusercontent.com/ironlungx/wallpapers/refs/heads/main/kittensgame_themed_catppuccin-frappe.jpg";
+      sha256 = "07hq49kxg67g0d4fq7g0krm9v2y4hqd8i86bhqsahg1lmwxpj478";
     };
     fonts = {
       sizes = {
