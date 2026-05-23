@@ -7,6 +7,7 @@
     spicetify-nix.url = "github:Gerg-L/spicetify-nix";
     stylix.url = "github:danth/stylix";
     niri.url = "github:sodiboo/niri-flake";
+    audiorelay-flake.url = "github:JamesReynolds/audiorelay-flake";
 
     awww.url = "git+https://codeberg.org/LGFae/awww";
 
