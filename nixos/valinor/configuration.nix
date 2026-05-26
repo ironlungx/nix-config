@@ -174,6 +174,7 @@
   hardware.enableAllFirmware = true;
 
   security.rtkit.enable = true;
+  security.polkit.enable = true;
   security.sudo.extraConfig = ''
     Defaults pwfeedback
     Defaults insults
@@ -355,7 +356,8 @@
   # networking.firewall.enable = false;
 
   networking.firewall.trustedInterfaces = [ "virbr0" ];
-
+  networking.firewall.allowedTCPPorts = [ 59100 ];
+  networking.firewall.allowedUDPPorts = [ 59100 ];
   networking.firewall.allowedTCPPortRanges = [
     {
       from = 1714;

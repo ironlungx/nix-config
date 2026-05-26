@@ -5,6 +5,7 @@
   config,
   lib,
   modulesPath,
+  pkgs,
   ...
 }:
 {
@@ -29,9 +30,12 @@
     extraModulePackages = [ ];
   };
 
+  boot.kernelPackages = pkgs.linuxPackages_latest;
+
   boot.kernelParams = [
     "quiet"
     "loglevel=3"
+    "btusb.enable_autosuspend=0"
   ];
 
   fileSystems."/" = {

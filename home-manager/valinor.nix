@@ -24,7 +24,7 @@ in
     ];
     config = {
       allowUnfree = true;
-      allowUnfreePredicate = _: true;
+      allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [ "audio-relay" ];
     };
   };
 
@@ -42,6 +42,10 @@ in
     tldr
     obsidian
     anki
+    carla
+    qsynth
+    qsynth
+    pavucontrol
   ];
 
   fonts.fontconfig.enable = true;
