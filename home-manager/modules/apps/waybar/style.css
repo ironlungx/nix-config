@@ -53,7 +53,7 @@
 }
 
 /* Common styling for elements with margin, padding and border-radius */
-#custom-weather, #custom-nix, #workspaces, #window, #bluetooth, #pulseaudio, #cpu, #memory, #disk, #mpris, #tray, #clock, #network {
+#mode, #custom-weather, #custom-nix, #workspaces, #window, #bluetooth, #pulseaudio, #cpu, #memory, #disk, #mpris, #tray, #clock, #network {
   margin: 7px;
   padding: 5px;
   padding-left: 8px;
@@ -92,6 +92,10 @@
 #workspaces {
   margin: 7px;
   padding: 4.5px;
+}
+
+#workspaces button.focused {
+  color: @mauve;  /* Active workspace */
 }
 
 #workspaces button {
@@ -153,6 +157,10 @@
 }
 
 #window {
+  color: @blue;
+}
+
+#mode {
   color: @blue;
 }
 

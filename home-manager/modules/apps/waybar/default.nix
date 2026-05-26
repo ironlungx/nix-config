@@ -11,7 +11,9 @@ let
       "modules-left" = [
         "custom/nix"
         # "niri/workspaces"
-        "hyprland/workspaces"
+        # "hyprland/workspaces"
+        "sway/workspaces"
+        "sway/mode"
         "custom/sep"
         "cpu"
         "memory"
@@ -32,6 +34,11 @@ let
         "tray"
       ];
 
+      "sway/mode" = {
+        "format" = "{}";
+        "max-length" = 50;
+      };
+
       "hyprland/workspaces" = {
         disable-scroll = true;
         sort-by-name = true;
@@ -45,6 +52,30 @@ let
         persistent-workspaces = {
           "*" = 6;
         };
+      };
+
+      #"sway/workspaces": {
+      #   "format": "<span size='larger'>{name}</span> {windows}",
+      #   "format-window-separator": " | ",
+      #   "window-rewrite-default": "{name}",
+      #   "window-format": "<span color='#e0e0e0'>{name}</span>",
+      #   "window-rewrite": {
+      #     "class<firefox> title<.*chat.gig.tech.*>": "",
+      #     "class<kitty>": "",
+      #   }
+      # }
+
+      # "1": "",
+      # "2": "",
+      # "3": "",
+      # "4": "",
+      # "5": "",
+      # "urgent": "",
+      # "focused": "",
+      # "default": "",
+
+      "sway/workspaces" = {
+        "format" = "{name}";
       };
 
       "niri/workspaces" = {

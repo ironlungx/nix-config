@@ -95,8 +95,8 @@ in
             done
           ''
         );
-        Restart = "always";
-        RestartSec = 3;
+        # Restart = "always";
+        # RestartSec = 3;
       };
 
       Install = {
