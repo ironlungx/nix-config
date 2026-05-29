@@ -1,5 +1,6 @@
 {
   inputs,
+  system,
   lib,
   config,
   pkgs,
@@ -43,9 +44,12 @@ in
     obsidian
     anki
     carla
+    calf
     qsynth
     qsynth
     pavucontrol
+    inputs.concord.packages.${pkgs.system}.default
+    wl-kbptr
   ];
 
   fonts.fontconfig.enable = true;
@@ -70,7 +74,7 @@ in
   services.kdeconnect.enable = true;
 
   services.focus-mode = {
-    enable = true;
+    enable = false;
     blockedApps = [ "electron" ];
   };
 

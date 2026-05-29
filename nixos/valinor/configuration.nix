@@ -302,18 +302,15 @@
     python3
     unzip
     android-tools
-    droidcam
-    # (pkgs.ollama.override {acceleration = "cuda";})
 
     virt-manager
     virt-viewer
     spice
     spice-gtk
     spice-protocol
-    virtio-win
-    swtpm # For emulated TPM device
 
     wireguard-tools
+    winboat
   ];
 
   # services.ollama = {
