@@ -10,6 +10,10 @@
     audiorelay-flake.url = "github:JamesReynolds/audiorelay-flake";
 
     awww.url = "git+https://codeberg.org/LGFae/awww";
+    concord = {
+      url = "github:chojs23/concord";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
     seto = {
       url = "github:unixpariah/seto";
