@@ -28,18 +28,18 @@
         { command = "swayosd-server"; }
         { command = "blueman-applet"; }
         { command = "${pkgs.wayscriber}/bin/wayscriber --daemon"; }
-        # Optional: enable Waybar instead
-        # { command = "waybar"; }
+        { command = "waybar"; }
       ];
     };
 
     extraConfig = ''
       set $menu "rofi -show drun"
       set $browser "zen-beta"
-      set $screenshot "grim -g \\$\\(slurp\\) - \\| wl-copy"
+      set $screenshot "fish -c 'grim -g (slurp) - | wl-copy'"
+      set $wayscriber "pkill -SIGUSR1 wayscriber"
 
       bindsym Mod4+p exec $menu
-      bindsym Mod4+m exec $screenshot
+      bindsym Mod4+Shift+m exec $screenshot
       bindsym Mod4+Control+Return exec $browser
 
       bindsym XF86AudioRaiseVolume exec "${pkgs.swayosd}/bin/swayosd-client --output-volume=+5"
@@ -50,6 +50,9 @@
       bindsym XF86AudioPrev exec "playerctl previous"         
       bindsym XF86AudioPause exec "playerctl play-pause"
       bindsym XF86AudioPlay exec "playerctl play-pause"
+
+      bindsym Mod4+Shift+s exec $wayscriber
+      bindsym Mod4+m exec "${pkgs.wl-kbptr}/bin/wl-kbptr"
 
       input type:keyboard {
 

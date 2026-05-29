@@ -11,5 +11,6 @@
     ./nixcord.nix
     ./spicetify.nix
     ./foot.nix
+    ./kbptr.nix
   ];
 }
