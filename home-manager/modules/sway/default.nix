@@ -35,7 +35,7 @@
     extraConfig = ''
       set $menu "rofi -show drun"
       set $browser "zen-beta"
-      set $screenshot "fish -c 'grim -g (slurp) - | wl-copy'"
+      set $screenshot "screenshot"
       set $wayscriber "pkill -SIGUSR1 wayscriber"
 
       bindsym Mod4+p exec $menu
