@@ -118,6 +118,12 @@
           definedAliases = [ "@p" ];
         };
 
+        "Pi-Hut" = {
+          urls = [ { template = "https://thepihut.com/search?q={searchTerms}"; } ];
+          icon = "https://thepihut.com/cdn/shop/files/the_pi_hut_favicon.png";
+          definedAliases = [ "@ph" ];
+        };
+
         bing.metaData.hidden = true;
         ebay.metaData.hidden = true;
         google.metaData.alias = "@g";
