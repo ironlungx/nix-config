@@ -44,7 +44,8 @@ in
     obsidian
     anki
     carla
-    calf
+    sooperlooper
+    dragonfly-reverb
     qsynth
     qsynth
     pavucontrol
