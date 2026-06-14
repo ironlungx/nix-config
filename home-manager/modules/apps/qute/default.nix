@@ -1,7 +1,7 @@
-{ pkgs, home, ... }:
+{ pkgs, ... }:
 {
   home.packages = with pkgs; [
-    mpv
+    python3Packages.adblock
   ];
   programs.qutebrowser = {
     enable = true;
@@ -13,398 +13,310 @@
       yt = "https://www.youtube.com/results?search_query={}";
       p = "https://www.perplexity.ai/?q={}";
     };
+    settings.content.headers.user_agent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36";
 
-    keyBindings = {
-      normal = {
-        "<alt-shift-a>" = "config-cycle colors.webpage.darkmode.enabled ";
-        ",m" = "spawn mpv {url}";
-        ",M" = "hint links spawn mpv {hint-url}";
-      };
-    };
+    extraConfig = builtins.readFile ./config.py;
 
-    settings = {
-      tabs.position = "left";
+    greasemonkey = [
+      (pkgs.writeText "my-script.js" ''
+        // ==UserScript==
+        // @name            Auto adblock skipper on Youtube
+        // @namespace       https://greasyfork.org/nl/users/1486038-JooostS
+        // @version         3.2
+        // @author          JooostS
+        // @description     Auto-skips all ads and removes adblock popups on YouTube.
+        // @description:de  Entfernt die lästige Popup-Nachricht zur Verwendung eines Adblockers auf YouTube.
+        // @description:ru  Удаление всплывающего окна об использовании блокировщика рекламы на YouTube.
+        // @description:uk  Видалення спливаючого вікна про використання блокувальника реклами на YouTube.
+        // @description:zh  YouTube 广告拦截器弹出窗口移除器：移除 YouTube 上关于使用广告拦截器的烦人弹出窗口消息。
+        // @description:ja  YouTube広告ブロッカーポップアップリムーバー：YouTubeで広告ブロッカーを使用する際の迷惑なポップアップメッセージを除去します。
+        // @description:nl  YouTube Adblock Popup-verwijderaar: Verwijdert het vervelende pop-upbericht over het gebruik van een adblocker op YouTube.
+        // @description:pt  Removedor de pop-up de bloqueador de anúncios do YouTube: Remove a mensagem irritante de pop-up sobre o uso de um bloqueador de anúncios no YouTube.
+        // @description:es  Removedor de pop-up del bloqueador de anuncios de YouTube: Elimina el molesto mensaje emergente sobre el uso de un bloqueador de anúncios en YouTube.
+        // @description:it  Rimozione del popup del blocco pubblicità di YouTube: Rimuove il fastidioso messaggio popup sull'uso di un blocco pubblicità su YouTube.
+        // @description:ar  إزالة النافذة المنبثقة لمانع الإعلانات على يوتيوب: يزيل الرسالة المنبثقة المزعجة حول استخدام مانع الإعلانات على يوتيوب.
+        // @description:fr  Supprimeur de popup de bloqueur de publicités YouTube : Supprime le message pop-up ennuyeux sur l'utilisation d'un bloqueur de publicités sur YouTube.
+        // @match           *://www.youtube.com/*
+        // @grant           GM_getValue
+        // @grant           GM_setValue
+        // @grant           GM_registerMenuCommand
+        // @license         MIT
+        // @downloadURL https://update.greasyfork.org/scripts/540098/Auto%20adblock%20skipper%20on%20Youtube.user.js
+        // @updateURL https://update.greasyfork.org/scripts/540098/Auto%20adblock%20skipper%20on%20Youtube.meta.js
+        // ==/UserScript==
 
-      colors.webpage.darkmode.enabled = true;
+        const config = GM_getValue('config', { allowedReloadPage: true });
+        let video = null;
+        let pausedByUser = false;
+        let allowPauseVideoTimeoutId = 0;
+        let observerAttached = false;
 
-      content.javascript.enabled = true;
-      content.pdfjs = true;
-      content.cookies.store = true;
-      content.geolocation = false;
-      content.headers.user_agent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36";
+        function log(msg) {
+          console.log(`[AdSkipper] $${msg}`);
+        }
 
-      scrolling.smooth = true;
+        // --- Skip button selectors (expanded for 2024/2025 YouTube UI) ---
+        function getSkipButton() {
+          return document.querySelector([
+            '.ytp-skip-ad-button',
+            '.ytp-ad-skip-button',
+            '.ytp-ad-skip-button-modern',
+            '[class*="skip-ad"]',
+            '[class*="SkipAd"]',
+            '.ytp-ad-skip-button-slot button',
+            'button.ytp-ad-skip-button-modern',
+          ].join(', '));
+        }
 
-      content.blocking.enabled = true;
-      content.blocking.method = "adblock";
-      content.blocking.adblock.lists = [
-        "https://github.com/uBlockOrigin/uAssets/raw/master/filters/legacy.txt"
-        "https://github.com/uBlockOrigin/uAssets/raw/master/filters/filters.txt"
-        "https://github.com/uBlockOrigin/uAssets/raw/master/filters/filters-2020.txt"
-        "https://github.com/uBlockOrigin/uAssets/raw/master/filters/filters-2021.txt"
-        "https://github.com/uBlockOrigin/uAssets/raw/master/filters/filters-2022.txt"
-        "https://github.com/uBlockOrigin/uAssets/raw/master/filters/filters-2023.txt"
-        "https://github.com/uBlockOrigin/uAssets/raw/master/filters/filters-2024.txt"
-        "https://github.com/uBlockOrigin/uAssets/raw/master/filters/badware.txt"
-        "https://github.com/uBlockOrigin/uAssets/raw/master/filters/privacy.txt"
-        "https://github.com/uBlockOrigin/uAssets/raw/master/filters/badlists.txt"
-        "https://github.com/uBlockOrigin/uAssets/raw/master/filters/annoyances.txt"
-        "https://github.com/uBlockOrigin/uAssets/raw/master/filters/annoyances-cookies.txt"
-        "https://github.com/uBlockOrigin/uAssets/raw/master/filters/annoyances-others.txt"
-        "https://github.com/uBlockOrigin/uAssets/raw/master/filters/badlists.txt"
-        "https://github.com/uBlockOrigin/uAssets/raw/master/filters/quick-fixes.txt"
-        "https://github.com/uBlockOrigin/uAssets/raw/master/filters/resource-abuse.txt"
-        "https://github.com/uBlockOrigin/uAssets/raw/master/filters/unbreak.txt"
-      ];
-    };
+        // --- Core ad skipper ---
+        function skipAd() {
+          const player = document.querySelector('#movie_player');
+          if (!player) return;
 
-    extraConfig = ''
-      def setup(c, flavour, samecolorrows = False):
-          palette = {}
+          video = player.querySelector('video.html5-main-video');
+          if (!video) return;
 
-          # flavours {{{
-          if flavour == "latte":
-              palette = {
-                  "rosewater": "#dc8a78",
-                  "flamingo": "#dd7878",
-                  "pink": "#ea76cb",
-                  "mauve": "#8839ef",
-                  "red": "#d20f39",
-                  "maroon": "#e64553",
-                  "peach": "#fe640b",
-                  "yellow": "#df8e1d",
-                  "green": "#40a02b",
-                  "teal": "#179299",
-                  "sky": "#04a5e5",
-                  "sapphire": "#209fb5",
-                  "blue": "#1e66f5",
-                  "lavender": "#7287fd",
-                  "text": "#4c4f69",
-                  "subtext1": "#5c5f77",
-                  "subtext0": "#6c6f85",
-                  "overlay2": "#7c7f93",
-                  "overlay1": "#8c8fa1",
-                  "overlay0": "#9ca0b0",
-                  "surface2": "#acb0be",
-                  "surface1": "#bcc0cc",
-                  "surface0": "#ccd0da",
-                  "base": "#eff1f5",
-                  "mantle": "#e6e9ef",
-                  "crust": "#dce0e8",
+          const isAdShowing =
+            player.classList.contains('ad-showing') ||
+            player.classList.contains('ad-interrupting');
+
+          if (isAdShowing) {
+            const skipButton = getSkipButton();
+            if (skipButton && skipButton.offsetParent !== null) {
+              skipButton.click();
+              log('Ad skipped via button.');
+            } else {
+              // Fast-forward through unskippable ad
+              video.playbackRate = 16;
+              if (isFinite(video.duration) && video.duration > 0) {
+                video.currentTime = video.duration - 0.1;
               }
-          elif flavour == "frappe":
-              palette = {
-                  "rosewater": "#f2d5cf",
-                  "flamingo": "#eebebe",
-                  "pink": "#f4b8e4",
-                  "mauve": "#ca9ee6",
-                  "red": "#e78284",
-                  "maroon": "#ea999c",
-                  "peach": "#ef9f76",
-                  "yellow": "#e5c890",
-                  "green": "#a6d189",
-                  "teal": "#81c8be",
-                  "sky": "#99d1db",
-                  "sapphire": "#85c1dc",
-                  "blue": "#8caaee",
-                  "lavender": "#babbf1",
-                  "text": "#c6d0f5",
-                  "subtext1": "#b5bfe2",
-                  "subtext0": "#a5adce",
-                  "overlay2": "#949cbb",
-                  "overlay1": "#838ba7",
-                  "overlay0": "#737994",
-                  "surface2": "#626880",
-                  "surface1": "#51576d",
-                  "surface0": "#414559",
-                  "base": "#303446",
-                  "mantle": "#292c3c",
-                  "crust": "#232634",
-              }
-          elif flavour == "macchiato":
-              palette = {
-                  "rosewater": "#f4dbd6",
-                  "flamingo": "#f0c6c6",
-                  "pink": "#f5bde6",
-                  "mauve": "#c6a0f6",
-                  "red": "#ed8796",
-                  "maroon": "#ee99a0",
-                  "peach": "#f5a97f",
-                  "yellow": "#eed49f",
-                  "green": "#a6da95",
-                  "teal": "#8bd5ca",
-                  "sky": "#91d7e3",
-                  "sapphire": "#7dc4e4",
-                  "blue": "#8aadf4",
-                  "lavender": "#b7bdf8",
-                  "text": "#cad3f5",
-                  "subtext1": "#b8c0e0",
-                  "subtext0": "#a5adcb",
-                  "overlay2": "#939ab7",
-                  "overlay1": "#8087a2",
-                  "overlay0": "#6e738d",
-                  "surface2": "#5b6078",
-                  "surface1": "#494d64",
-                  "surface0": "#363a4f",
-                  "base": "#24273a",
-                  "mantle": "#1e2030",
-                  "crust": "#181926",
-              }
-          else:
-              palette = {
-                  "rosewater": "#f5e0dc",
-                  "flamingo": "#f2cdcd",
-                  "pink": "#f5c2e7",
-                  "mauve": "#cba6f7",
-                  "red": "#f38ba8",
-                  "maroon": "#eba0ac",
-                  "peach": "#fab387",
-                  "yellow": "#f9e2af",
-                  "green": "#a6e3a1",
-                  "teal": "#94e2d5",
-                  "sky": "#89dceb",
-                  "sapphire": "#74c7ec",
-                  "blue": "#89b4fa",
-                  "lavender": "#b4befe",
-                  "text": "#cdd6f4",
-                  "subtext1": "#bac2de",
-                  "subtext0": "#a6adc8",
-                  "overlay2": "#9399b2",
-                  "overlay1": "#7f849c",
-                  "overlay0": "#6c7086",
-                  "surface2": "#585b70",
-                  "surface1": "#45475a",
-                  "surface0": "#313244",
-                  "base": "#1e1e2e",
-                  "mantle": "#181825",
-                  "crust": "#11111b",
-              }
-          # }}}
+              log('Ad accelerated.');
+            }
+          } else {
+            // Reset playback rate after ad
+            if (video.playbackRate !== 1) {
+              video.playbackRate = 1;
+            }
+          }
+        }
 
-          # completion {{{
-          ## Background color of the completion widget category headers.
-          c.colors.completion.category.bg = palette["base"]
-          ## Bottom border color of the completion widget category headers.
-          c.colors.completion.category.border.bottom = palette["mantle"]
-          ## Top border color of the completion widget category headers.
-          c.colors.completion.category.border.top = palette["overlay2"]
-          ## Foreground color of completion widget category headers.
-          c.colors.completion.category.fg = palette["green"]
-          ## Background color of the completion widget for even and odd rows.
-          if samecolorrows:
-              c.colors.completion.even.bg = palette["mantle"]
-              c.colors.completion.odd.bg = c.colors.completion.even.bg
-          else:
-              c.colors.completion.even.bg = palette["mantle"]
-              c.colors.completion.odd.bg = palette["crust"]
-          ## Text color of the completion widget.
-          c.colors.completion.fg = palette["subtext0"]
+        // --- Adblock / enforcement popup removal ---
+        // YouTube now serves these in several different ways; cover all known variants.
+        function removeAdblockPopups() {
+          const popupSelectors = [
+            // Classic enforcement dialog
+            'tp-yt-paper-dialog:has(#feedback.ytd-enforcement-message-view-model)',
+            '.yt-playability-error-supported-renderers:has(.ytd-enforcement-message-view-model)',
+            // 2024 modal overlay variants
+            'ytd-enforcement-message-view-model',
+            '#enforcement-dialog',
+            '#error-screen:has(.ytd-enforcement-message-view-model)',
+            // "Ad blocker detected" interstitial
+            '.yt-mealbar-promo-renderer',
+            // Dialog that pauses the video asking to allow ads / subscribe
+            'ytd-modal-with-title-and-button-renderer:has([class*="enforcement"])',
+            // Newer: full-page paywall overlay
+            '#paywallOverlay',
+          ];
 
-          ## Background color of the selected completion item.
-          c.colors.completion.item.selected.bg = palette["surface2"]
-          ## Bottom border color of the selected completion item.
-          c.colors.completion.item.selected.border.bottom = palette["surface2"]
-          ## Top border color of the completion widget category headers.
-          c.colors.completion.item.selected.border.top = palette["surface2"]
-          ## Foreground color of the selected completion item.
-          c.colors.completion.item.selected.fg = palette["text"]
-          ## Foreground color of the selected completion item.
-          c.colors.completion.item.selected.match.fg = palette["rosewater"]
-          ## Foreground color of the matched text in the completion.
-          c.colors.completion.match.fg = palette["text"]
+          let found = false;
+          popupSelectors.forEach(sel => {
+            document.querySelectorAll(sel).forEach(el => {
+              el.remove();
+              found = true;
+              log(`Adblock popup removed: $${sel}`);
+            });
+          });
 
-          ## Color of the scrollbar in completion view
-          c.colors.completion.scrollbar.bg = palette["crust"]
-          ## Color of the scrollbar handle in completion view.
-          c.colors.completion.scrollbar.fg = palette["surface2"]
-          # }}}
+          if (found && config.allowedReloadPage) {
+            log('Reloading page after popup removal.');
+            location.reload();
+          }
 
-          # downloads {{{
-          c.colors.downloads.bar.bg = palette["base"]
-          c.colors.downloads.error.bg = palette["base"]
-          c.colors.downloads.start.bg = palette["base"]
-          c.colors.downloads.stop.bg = palette["base"]
+          // Unblock video if it was frozen by YouTube's enforcement
+          unmuteAndUnfreezeVideo();
+        }
 
-          c.colors.downloads.error.fg = palette["red"]
-          c.colors.downloads.start.fg = palette["blue"]
-          c.colors.downloads.stop.fg = palette["green"]
-          c.colors.downloads.system.fg = "none"
-          c.colors.downloads.system.bg = "none"
-          # }}}
+        // YouTube sometimes mutes + pauses the video as part of enforcement.
+        function unmuteAndUnfreezeVideo() {
+          const player = document.querySelector('#movie_player');
+          if (!player) return;
 
-          # hints {{{
-          ## Background color for hints. Note that you can use a `rgba(...)` value
-          ## for transparency.
-          c.colors.hints.bg = palette["peach"]
+          video = player.querySelector('video.html5-main-video');
+          if (!video) return;
 
-          ## Font color for hints.
-          c.colors.hints.fg = palette["mantle"]
+          if (video.muted) {
+            video.muted = false;
+            log('Video unmuted.');
+          }
 
-          ## Hints
-          c.hints.border = "1px solid " + palette["mantle"]
+          if (video.paused && !pausedByUser && !document.hidden) {
+            video.play().catch(() => {});
+            log('Video force-played after enforcement freeze.');
+          }
+        }
 
-          ## Font color for the matched part of hints.
-          c.colors.hints.match.fg = palette["subtext1"]
-          # }}}
+        // --- Dismiss "Skip Ads" / survey overlays that block interaction ---
+        function dismissOverlays() {
+          const overlaySelectors = [
+            '.ytp-ad-overlay-close-button',
+            '.ytp-ad-overlay-close-container button',
+            '.ytp-suggested-action-badge-expanded',
+          ];
+          overlaySelectors.forEach(sel => {
+            const el = document.querySelector(sel);
+            if (el) {
+              el.click();
+              log(`Overlay dismissed: $${sel}`);
+            }
+          });
+        }
 
-          # keyhints {{{
-          ## Background color of the keyhint widget.
-          c.colors.keyhint.bg = palette["mantle"]
+        // --- Pause tracking ---
+        function resumeVideoIfPausedUnexpectedly() {
+          if (pausedByUser || document.hidden || !video) return;
+          const remaining = video.duration - video.currentTime;
+          if (remaining < 0.1) return;
+          video.play().catch(() => {});
+          log('Resumed video after unexpected pause.');
+        }
 
-          ## Text color for the keyhint widget.
-          c.colors.keyhint.fg = palette["text"]
+        function enableVideoPause() {
+          pausedByUser = true;
+          clearTimeout(allowPauseVideoTimeoutId);
+          allowPauseVideoTimeoutId = setTimeout(() => { pausedByUser = false; }, 600);
+        }
 
-          ## Highlight color for keys to complete the current keychain.
-          c.colors.keyhint.suffix.fg = palette["subtext1"]
-          # }}}
+        // --- MutationObserver on player + document body ---
+        function observePlayer() {
+          const player = document.querySelector('#movie_player');
+          if (!player || !window.MutationObserver) return;
+          if (observerAttached) return;
 
-          # messages {{{
-          ## Background color of an error message.
-          c.colors.messages.error.bg = palette["overlay0"]
-          ## Background color of an info message.
-          c.colors.messages.info.bg = palette["overlay0"]
-          ## Background color of a warning message.
-          c.colors.messages.warning.bg = palette["overlay0"]
+          const playerObserver = new MutationObserver(() => {
+            skipAd();
+            removeAdblockPopups();
+            dismissOverlays();
+          });
+          playerObserver.observe(player, { childList: true, subtree: true, attributes: true });
 
-          ## Border color of an error message.
-          c.colors.messages.error.border = palette["mantle"]
-          ## Border color of an info message.
-          c.colors.messages.info.border = palette["mantle"]
-          ## Border color of a warning message.
-          c.colors.messages.warning.border = palette["mantle"]
+          // Also observe body for enforcement overlays injected outside the player
+          const bodyObserver = new MutationObserver(() => {
+            removeAdblockPopups();
+          });
+          bodyObserver.observe(document.body, { childList: true, subtree: true });
 
-          ## Foreground color of an error message.
-          c.colors.messages.error.fg = palette["red"]
-          ## Foreground color an info message.
-          c.colors.messages.info.fg = palette["text"]
-          ## Foreground color a warning message.
-          c.colors.messages.warning.fg = palette["peach"]
-          # }}}
+          observerAttached = true;
+          log('MutationObservers attached.');
+        }
 
-          # prompts {{{
-          ## Background color for prompts.
-          c.colors.prompts.bg = palette["mantle"]
+        // --- CSS: hide ad elements ---
+        function applyCustomStyles() {
+          const style = document.createElement('style');
+          style.textContent = `
+            /* In-player ad banners and slots */
+            #player-ads,
+            #masthead-ad,
+            ytd-ad-slot-renderer,
+            ytd-rich-item-renderer:has(.ytd-ad-slot-renderer),
+            ytd-reel-video-renderer:has(.ytd-ad-slot-renderer),
+            .ytp-suggested-action,
+            .ytp-ad-image-overlay,
+            .ytp-ad-overlay-slot,
+            .ytp-ad-module,
+            .ytd-promoted-video-renderer,
+            ytd-display-ad-renderer,
+            /* 2024/2025 additions */
+            ytd-action-companion-ad-renderer,
+            ytd-video-masthead-ad-v3-renderer,
+            ytd-in-feed-ad-layout-renderer,
+            ytd-banner-promo-renderer,
+            ytd-statement-banner-renderer,
+            ytd-shopping-video-annotation-renderer,
+            ytd-primetime-promo-renderer,
+            .ytd-merch-shelf-renderer,
+            /* Endscreen / cards */
+            .ytp-endscreen-content,
+            .ytp-ce-element,
+            .ytp-pause-overlay {
+              display: none !important;
+            }
+          `;
+          document.head.appendChild(style);
+          log('Custom styles applied.');
+        }
 
-          # ## Border used around UI elements in prompts.
-          c.colors.prompts.border = "1px solid " + palette["overlay0"]
+        // --- Greasemonkey menu ---
+        function initializeMenuCommands() {
+          GM_registerMenuCommand(
+            `Reload page if ad can't be skipped: $${config.allowedReloadPage ? 'Yes' : 'No'}`,
+            () => {
+              config.allowedReloadPage = !config.allowedReloadPage;
+              GM_setValue('config', config);
+              initializeMenuCommands();
+            }
+          );
+        }
 
-          ## Foreground color for prompts.
-          c.colors.prompts.fg = palette["text"]
+        // --- Event listeners ---
+        function setupEventListeners() {
+          // Track user-initiated pauses via keyboard
+          window.addEventListener('keydown', e => {
+            if (['KeyK', 'MediaPlayPause', 'Space'].includes(e.code)) enableVideoPause();
+          });
+          window.addEventListener('keyup', e => {
+            if (e.code === 'Space') enableVideoPause();
+          });
 
-          ## Background color for the selected item in filename prompts.
-          c.colors.prompts.selected.bg = palette["surface2"]
+          // Track user-initiated pauses via click on player
+          document.addEventListener('click', e => {
+            const player = document.querySelector('#movie_player');
+            if (player && player.contains(e.target)) enableVideoPause();
+          });
 
-          ## Background color for the selected item in filename prompts.
-          c.colors.prompts.selected.fg = palette["rosewater"]
-          # }}}
+          // Re-attach observer on SPA navigation
+          document.addEventListener('yt-navigate-finish', () => {
+            observerAttached = false;
+            video = null;
+            observePlayer();
+            skipAd();
+            removeAdblockPopups();
+          });
 
-          # statusbar {{{
-          ## Background color of the statusbar.
-          c.colors.statusbar.normal.bg = palette["base"]
-          ## Background color of the statusbar in insert mode.
-          c.colors.statusbar.insert.bg = palette["crust"]
-          ## Background color of the statusbar in command mode.
-          c.colors.statusbar.command.bg = palette["base"]
-          ## Background color of the statusbar in caret mode.
-          c.colors.statusbar.caret.bg = palette["base"]
-          ## Background color of the statusbar in caret mode with a selection.
-          c.colors.statusbar.caret.selection.bg = palette["base"]
+          // Also handle YouTube's newer navigation event
+          document.addEventListener('yt-page-data-updated', () => {
+            observerAttached = false;
+            observePlayer();
+          });
+        }
 
-          ## Background color of the progress bar.
-          c.colors.statusbar.progress.bg = palette["base"]
-          ## Background color of the statusbar in passthrough mode.
-          c.colors.statusbar.passthrough.bg = palette["base"]
+        // --- Init ---
+        function init() {
+          applyCustomStyles();
+          observePlayer();
+          setupEventListeners();
+          initializeMenuCommands();
 
-          ## Foreground color of the statusbar.
-          c.colors.statusbar.normal.fg = palette["text"]
-          ## Foreground color of the statusbar in insert mode.
-          c.colors.statusbar.insert.fg = palette["rosewater"]
-          ## Foreground color of the statusbar in command mode.
-          c.colors.statusbar.command.fg = palette["text"]
-          ## Foreground color of the statusbar in passthrough mode.
-          c.colors.statusbar.passthrough.fg = palette["peach"]
-          ## Foreground color of the statusbar in caret mode.
-          c.colors.statusbar.caret.fg = palette["peach"]
-          ## Foreground color of the statusbar in caret mode with a selection.
-          c.colors.statusbar.caret.selection.fg = palette["peach"]
+          // Periodic safety net (catches anything the observer misses)
+          setInterval(() => {
+            skipAd();
+            removeAdblockPopups();
+            dismissOverlays();
+          }, 1000);
 
-          ## Foreground color of the URL in the statusbar on error.
-          c.colors.statusbar.url.error.fg = palette["red"]
+          // Slower check for frozen/muted video
+          setInterval(() => {
+            resumeVideoIfPausedUnexpectedly();
+          }, 2000);
 
-          ## Default foreground color of the URL in the statusbar.
-          c.colors.statusbar.url.fg = palette["text"]
+          log('Script initialized (v3.2).');
+        }
 
-          ## Foreground color of the URL in the statusbar for hovered links.
-          c.colors.statusbar.url.hover.fg = palette["sky"]
+        init();
+      '')
+    ];
 
-          ## Foreground color of the URL in the statusbar on successful load
-          c.colors.statusbar.url.success.http.fg = palette["teal"]
-
-          ## Foreground color of the URL in the statusbar on successful load
-          c.colors.statusbar.url.success.https.fg = palette["green"]
-
-          ## Foreground color of the URL in the statusbar when there's a warning.
-          c.colors.statusbar.url.warn.fg = palette["yellow"]
-
-          ## PRIVATE MODE COLORS
-          ## Background color of the statusbar in private browsing mode.
-          c.colors.statusbar.private.bg = palette["mantle"]
-          ## Foreground color of the statusbar in private browsing mode.
-          c.colors.statusbar.private.fg = palette["subtext1"]
-          ## Background color of the statusbar in private browsing + command mode.
-          c.colors.statusbar.command.private.bg = palette["base"]
-          ## Foreground color of the statusbar in private browsing + command mode.
-          c.colors.statusbar.command.private.fg = palette["subtext1"]
-
-          # }}}
-
-          # tabs {{{
-          ## Background color of the tab bar.
-          c.colors.tabs.bar.bg = palette["crust"]
-          ## Background color of unselected even tabs.
-          c.colors.tabs.even.bg = palette["surface2"]
-          ## Background color of unselected odd tabs.
-          c.colors.tabs.odd.bg = palette["surface1"]
-
-          ## Foreground color of unselected even tabs.
-          c.colors.tabs.even.fg = palette["overlay2"]
-          ## Foreground color of unselected odd tabs.
-          c.colors.tabs.odd.fg = palette["overlay2"]
-
-          ## Color for the tab indicator on errors.
-          c.colors.tabs.indicator.error = palette["red"]
-          ## Color gradient interpolation system for the tab indicator.
-          ## Valid values:
-          ##	 - rgb: Interpolate in the RGB color system.
-          ##	 - hsv: Interpolate in the HSV color system.
-          ##	 - hsl: Interpolate in the HSL color system.
-          ##	 - none: Don't show a gradient.
-          c.colors.tabs.indicator.system = "none"
-
-          # ## Background color of selected even tabs.
-          c.colors.tabs.selected.even.bg = palette["base"]
-          # ## Background color of selected odd tabs.
-          c.colors.tabs.selected.odd.bg = palette["base"]
-
-          # ## Foreground color of selected even tabs.
-          c.colors.tabs.selected.even.fg = palette["text"]
-          # ## Foreground color of selected odd tabs.
-          c.colors.tabs.selected.odd.fg = palette["text"]
-          # }}}
-
-          # context menus {{{
-          c.colors.contextmenu.menu.bg = palette["base"]
-          c.colors.contextmenu.menu.fg = palette["text"]
-
-          c.colors.contextmenu.disabled.bg = palette["mantle"]
-          c.colors.contextmenu.disabled.fg = palette["overlay0"]
-
-          c.colors.contextmenu.selected.bg = palette["overlay0"]
-          c.colors.contextmenu.selected.fg = palette["rosewater"]
-          # }}}
-
-      setup(c, 'frappe', True)
-    '';
   };
 
 }
