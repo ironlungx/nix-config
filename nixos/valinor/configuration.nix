@@ -39,7 +39,12 @@
   # Enable networking
   networking.networkmanager.enable = true;
 
-  networking.firewall.checkReversePath = false;
+  services.tailscale.enable = true;
+  networking.nftables.enable = true;
+
+  systemd.services.tailscaled.serviceConfig.Environment = [
+    "TS_DEBUG_FIREWALL_MODE=nftables"
+  ];
 
   # networking.wireless.iwd.settings = {
   #   IPv6 = {
@@ -57,10 +62,23 @@
   };
 
   services.flatpak.enable = true;
-  xdg.portal.enable = true;
-  xdg.portal.extraPortals = with pkgs; [
-    xdg-desktop-portal-hyprland
-  ];
+  xdg.portal = {
+    enable = true;
+    extraPortals = with pkgs; [
+      xdg-desktop-portal-gtk
+      xdg-desktop-portal-gnome
+    ];
+    config.common.default = [ "gtk" ];
+    config.niri = {
+      default = [
+        "gtk"
+        "gnome"
+      ];
+      "org.freedesktop.impl.portal.FileChooser" = [ "gtk" ];
+      "org.freedesktop.impl.portal.ScreenCast" = [ "gnome" ];
+      "org.freedesktop.impl.portal.Screenshot" = [ "gnome" ];
+    };
+  };
 
   services.xserver.videoDrivers = [ "nvidia" ];
   hardware.nvidia = {
@@ -290,6 +308,7 @@
   };
 
   hardware.opentabletdriver.enable = true;
+  programs.thunar.enable = true;
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
@@ -311,6 +330,11 @@
 
     wireguard-tools
     winboat
+
+    # support both 32- and 64-bit applications
+    wineWow64Packages.stable
+    winetricks
+    wineWow64Packages.waylandFull
   ];
 
   # services.ollama = {
@@ -352,9 +376,23 @@
   # Or disable the firewall altogether.
   # networking.firewall.enable = false;
 
-  networking.firewall.trustedInterfaces = [ "virbr0" ];
-  networking.firewall.allowedTCPPorts = [ 59100 ];
-  networking.firewall.allowedUDPPorts = [ 59100 ];
+  networking.firewall = {
+    enable = true;
+    checkReversePath = "loose";
+  };
+
+  networking.firewall.trustedInterfaces = [
+    "virbr0"
+    "tailscale0"
+  ];
+  networking.firewall.allowedTCPPorts = [
+    443
+    59100
+  ];
+  networking.firewall.allowedUDPPorts = [
+    59100
+    config.services.tailscale.port
+  ];
   networking.firewall.allowedTCPPortRanges = [
     {
       from = 1714;
