@@ -9,6 +9,9 @@
     niri.url = "github:sodiboo/niri-flake";
     audiorelay-flake.url = "github:JamesReynolds/audiorelay-flake";
 
+    helium-flake.url = "github:oxcl/nix-flake-helium-browser";
+    helium-flake.inputs.nixpkgs.follows = "nixpkgs";
+
     awww.url = "git+https://codeberg.org/LGFae/awww";
     concord = {
       url = "github:chojs23/concord";
