@@ -4,9 +4,6 @@
   config,
   ...
 }:
-let
-  terminal = pkgs.ghostty;
-in
 {
   imports = [
     inputs.niri.homeModules.niri
@@ -14,6 +11,9 @@ in
   ];
 
   home.packages = with pkgs; [
+    playerctl
+    cliphist
+    wl-clipboard
     grim
     slurp
     swayosd
@@ -30,9 +30,14 @@ in
     enable = true;
     settings = {
       input = {
+        warp-mouse-to-focus = {
+          enable = true;
+          mode = "center-xy";
+        };
+
         keyboard = {
           repeat-delay = 200;
-          repeat-rate = 50;
+          repeat-rate = 40;
         };
 
         mouse = {
@@ -137,6 +142,11 @@ in
             "${pkgs.xwayland-satellite}/bin/xwayland-satellite"
           ];
         }
+        {
+          command = [
+            "foot --server"
+          ];
+        }
       ];
 
       layout = {
@@ -146,14 +156,14 @@ in
         };
 
         preset-column-widths = [
-          { proportion = 0.25; }
+          { proportion = 0.33333; }
           { proportion = 0.5; }
-          { proportion = 0.75; }
+          { proportion = 0.66667; }
         ];
 
-        default-column-width.proportion = 1.0;
+        default-column-width.proportion = 0.5;
 
-        gaps = 16;
+        gaps = 10;
 
         center-focused-column = "never";
       };
@@ -181,9 +191,9 @@ in
         "Mod+Shift+8".action.move-column-to-workspace = 8;
         "Mod+Shift+9".action.move-column-to-workspace = 9;
 
-        "Mod+Return".action.spawn = [ "${pkgs.ghostty}/bin/ghostty" ];
+        "Mod+Return".action.spawn = [ "footclient" ];
         "Mod+Control+Return".action.spawn = [
-          "${inputs.zen-browser.packages.${pkgs.system}.default}/bin/zen-beta"
+          "helium"
         ];
         "Mod+P".action.spawn = [
           "rofi"
@@ -227,18 +237,34 @@ in
 
         "Mod+M".action.screenshot = { };
 
-        "XF86AudioRaiseVolume".action.spawn-sh = [
-          "${pkgs.swayosd}/bin/swayosd-client --output-volume=+5"
-        ];
-        "XF86AudioLowerVolume".action.spawn-sh = [
-          "${pkgs.swayosd}/bin/swayosd-client --output-volume=-5"
-        ];
+        "XF86AudioRaiseVolume" = {
+          allow-when-locked = true;
+          action.spawn-sh = [ "${pkgs.swayosd}/bin/swayosd-client --output-volume=+5" ];
+        };
+        "XF86AudioLowerVolume" = {
+          allow-when-locked = true;
+          action.spawn-sh = [
+            "${pkgs.swayosd}/bin/swayosd-client --output-volume=-5"
+          ];
+        };
 
-        "XF86AudioNext".action.spawn-sh = [ "playerctl next" ];
-        "XF86AudioPrev".action.spawn-sh = [ "playerctl previous" ];
+        "XF86AudioNext" = {
+          allow-when-locked = true;
+          action.spawn-sh = [ "playerctl next" ];
+        };
+        "XF86AudioPrev" = {
+          allow-when-locked = true;
+          action.spawn-sh = [ "playerctl previous" ];
+        };
 
-        "XF86AudioPause".action.spawn-sh = [ "playerctl play-pause" ];
-        "XF86AudioPlay".action.spawn-sh = [ "playerctl play-pause" ];
+        "XF86AudioPause" = {
+          allow-when-locked = true;
+          action.spawn-sh = [ "playerctl play-pause" ];
+        };
+        "XF86AudioPlay" = {
+          allow-when-locked = true;
+          action.spawn-sh = [ "playerctl play-pause" ];
+        };
 
       };
 

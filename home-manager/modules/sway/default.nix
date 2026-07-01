@@ -34,7 +34,7 @@
 
     extraConfig = ''
       set $menu "rofi -show drun"
-      set $browser "zen-beta"
+      set $browser "helium"
       # set $screenshot "screenshot"
       set $screenshot "grim -g \"`slurp`\" - | wl-copy"
       set $wayscriber "pkill -SIGUSR1 wayscriber"

@@ -10,9 +10,9 @@ let
       "position" = "bottom";
       "modules-left" = [
         "custom/nix"
-        # "niri/workspaces"
+        "niri/workspaces"
         # "hyprland/workspaces"
-        "sway/workspaces"
+        # "sway/workspaces"
         "sway/mode"
         "custom/sep"
         "cpu"
@@ -25,7 +25,6 @@ let
       "modules-right" = [
         "mpris"
         "custom/sep"
-        "custom/weather"
         "network"
         "bluetooth"
         "custom/sep"

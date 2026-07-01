@@ -1,8 +1,8 @@
 {
   imports = [
     ./stylix.nix
-    ./hyprland
-    # ./niri
+    # ./hyprland
+    ./niri
     ./sway
     ./cli
     ./apps
