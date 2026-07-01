@@ -15,6 +15,7 @@ in
     inputs.spicetify-nix.homeManagerModules.default
     inputs.nixcord.homeModules.nixcord
     inputs.stylix.homeModules.stylix
+    inputs.helium-flake.homeModules.default
 
     ./modules
   ];
@@ -38,6 +39,8 @@ in
   };
 
   home.packages = with pkgs; [
+    thunar
+    distrobox
     xclip
     devenv
     tldr
@@ -46,10 +49,11 @@ in
     carla
     sooperlooper
     dragonfly-reverb
+    surge-xt
     qsynth
     qsynth
     pavucontrol
-    inputs.concord.packages.${pkgs.system}.default
+    # inputs.concord.packages.${pkgs.system}.default
     wl-kbptr
   ];
 
@@ -58,7 +62,6 @@ in
   programs = {
     home-manager.enable = true;
     cava.enable = true;
-    zen-browser.enable = true;
   };
 
   programs.git = {
@@ -86,6 +89,25 @@ in
     format = "{icon}  {temp} {unit}";
   };
 
+  programs.helium = {
+    enable = true;
+
+    # Optional: override the package
+    # package = pkgs.helium;
+
+    # 🚩 Flags - Command-line arguments always passed to Helium
+    # flags = [
+    #   "--enable-features=TouchpadOverscrollHistoryNavigation"
+    #   "--start-maximized"
+    # ];
+    #
+    # # Optional: user policies (best-effort, use NixOS module for critical policies)
+    # policies = {
+    #   "BrowserSignin" = 0;
+    # };
+  };
+
+  xdg.mimeApps.defaultApplications."inode/directory" = "thunar.desktop";
   # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
   home.stateVersion = "25.05";
 }
