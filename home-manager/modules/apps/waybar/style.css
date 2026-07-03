@@ -53,7 +53,7 @@
 }
 
 /* Common styling for elements with margin, padding and border-radius */
-#mode, #custom-weather, #custom-nix, #workspaces, #window, #bluetooth, #pulseaudio, #cpu, #memory, #disk, #mpris, #tray, #clock, #network {
+#mode, #custom-weather, #custom-nix, #workspaces, #window, #language, #bluetooth, #battery, #pulseaudio, #cpu, #memory, #disk, #mpris, #tray, #clock, #network {
   margin: 7px;
   padding: 5px;
   padding-left: 8px;
@@ -136,7 +136,7 @@
   color: @teal;
 }
 
-#memory {
+#memory, #battery {
   color: @flamingo;
 }
 
@@ -172,7 +172,7 @@
   color: @green;
 }
 
-#bluetooth {
+#bluetooth, #language {
   color: @blue;
 }
 

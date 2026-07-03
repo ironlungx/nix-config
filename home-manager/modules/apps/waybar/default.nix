@@ -26,7 +26,9 @@ let
         "mpris"
         "custom/sep"
         "network"
-        "bluetooth"
+        # "bluetooth"
+        "niri/language"
+        "battery"
         "custom/sep"
         "custom/dunst"
         "custom/focus"
@@ -85,6 +87,45 @@ let
           active = "";
           default = "";
         };
+      };
+
+      "niri/language" = {
+        format = "{long}";
+      };
+
+      "battery" = {
+        "bat" = "BAT0";
+        "interval" = 8;
+        "format" = "{icon} {capacity}%";
+        "format-icons" = {
+          "default" = [
+            "󰂎"
+            "󰁺"
+            "󰁻"
+            "󰁼"
+            "󰁽"
+            "󰁾"
+            "󰁿"
+            "󰂀"
+            "󰂁"
+            "󰂂"
+            "󰁹"
+          ];
+          "charging" = [
+            "󰢟"
+            "󰢜"
+            "󰂆"
+            "󰂇"
+            "󰂈"
+            "󰢝"
+            "󰂉"
+            "󰢞"
+            "󰂊"
+            "󰂋"
+            "󰂅"
+          ];
+        };
+        tooltip-format = "{timeTo}, {power}W";
       };
 
       cpu = {
