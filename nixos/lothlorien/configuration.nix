@@ -233,6 +233,8 @@
     unzip
     android-tools
     usbutils
+    tinymist
+    websocat
   ];
 
   # Enable the OpenSSH daemon.
