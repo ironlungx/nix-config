@@ -75,6 +75,14 @@
           ];
         };
 
+        lothlorien = nixpkgs.lib.nixosSystem {
+          specialArgs = { inherit inputs outputs; };
+          modules = [
+            ./nixos/lothlorien/configuration.nix
+            stylix.nixosModules.stylix
+          ];
+        };
+
         gondor = nixpkgs.lib.nixosSystem {
           system = "x86_64-linux";
           specialArgs = { inherit inputs outputs; };
@@ -99,6 +107,12 @@
           pkgs = nixpkgs.legacyPackages.x86_64-linux;
           extraSpecialArgs = { inherit inputs outputs; };
           modules = [ ./home-manager/valinor.nix ];
+        };
+
+        "ironlung@lothlorien" = home-manager.lib.homeManagerConfiguration {
+          pkgs = nixpkgs.legacyPackages.x86_64-linux;
+          extraSpecialArgs = { inherit inputs outputs; };
+          modules = [ ./home-manager/lothlorien.nix ];
         };
 
         "ironlung@gondor" = home-manager.lib.homeManagerConfiguration {
