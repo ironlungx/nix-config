@@ -36,8 +36,17 @@
         };
 
         keyboard = {
+          xkb = {
+            layout = "gb,us";
+            options = "grp:win_space_toggle,ctrl:nocaps";
+          };
           repeat-delay = 200;
-          repeat-rate = 40;
+          repeat-rate = 23;
+        };
+
+        touchpad = {
+          enable = true;
+          scroll-factor = 0.6;
         };
 
         mouse = {
@@ -241,10 +250,31 @@
           allow-when-locked = true;
           action.spawn-sh = [ "${pkgs.swayosd}/bin/swayosd-client --output-volume=+5" ];
         };
+
         "XF86AudioLowerVolume" = {
           allow-when-locked = true;
           action.spawn-sh = [
             "${pkgs.swayosd}/bin/swayosd-client --output-volume=-5"
+          ];
+        };
+
+        "XF86AudioMute" = {
+          allow-when-locked = true;
+          action.spawn-sh = [
+            "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"
+          ];
+        };
+
+        "XF86MonBrightnessDown" = {
+          allow-when-locked = true;
+          action.spawn-sh = [
+            "${pkgs.swayosd}/bin/swayosd-client --brightness lower"
+          ];
+        };
+        "XF86MonBrightnessUp" = {
+          allow-when-locked = true;
+          action.spawn-sh = [
+            "${pkgs.swayosd}/bin/swayosd-client --brightness raise"
           ];
         };
 
@@ -270,18 +300,6 @@
 
       animations = {
         enable = true;
-        window-open = {
-          easing = {
-            curve = "ease-out-expo";
-            duration-ms = 800;
-          };
-        };
-        window-close = {
-          easing = {
-            curve = "ease-out-quad";
-            duration-ms = 800;
-          };
-        };
       };
     };
   };
