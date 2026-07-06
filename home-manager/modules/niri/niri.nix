@@ -40,7 +40,7 @@
             layout = "gb,us";
             options = "grp:win_space_toggle,ctrl:nocaps";
           };
-          repeat-delay = 200;
+          repeat-delay = 250;
           repeat-rate = 23;
         };
 
