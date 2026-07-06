@@ -1,4 +1,9 @@
-{ config, pkgs, ... }:
+{
+  lib,
+  config,
+  pkgs,
+  ...
+}:
 
 {
   imports = [ ./hardware-configuration.nix ];
@@ -213,7 +218,7 @@
       xdg-desktop-portal-gnome
     ];
     config.common.default = [ "gtk" ];
-    config.niri = {
+    config.niri = lib.mkForce {
       default = [
         "gtk"
       ];
@@ -272,6 +277,7 @@
   };
   programs.fish.enable = true;
   programs.dconf.enable = true;
+  programs.niri.enable = true;
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
