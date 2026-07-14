@@ -61,6 +61,16 @@
     enable32Bit = true;
   };
 
+  services = {
+    desktopManager.plasma6.enable = true;
+
+    # Default display manager for Plasma
+    displayManager.plasma-login-manager.enable = true;
+
+    # Optionally enable xserver
+    xserver.enable = true;
+  };
+
   services.flatpak.enable = true;
   xdg.portal = {
     enable = true;
@@ -72,7 +82,6 @@
     config.niri = {
       default = [
         "gtk"
-        "gnome"
       ];
       "org.freedesktop.impl.portal.FileChooser" = [ "gtk" ];
       "org.freedesktop.impl.portal.ScreenCast" = [ "gnome" ];
@@ -330,6 +339,17 @@
 
     wireguard-tools
     winboat
+
+    carla
+    dragonfly-reverb
+    surge-xt
+    qdelay
+    vital
+    guitarix-vst
+    guitarix
+
+    yabridge
+    yabridgectl
 
     # support both 32- and 64-bit applications
     wineWow64Packages.stable
