@@ -204,12 +204,11 @@
         "Mod+Control+Return".action.spawn = [
           "helium"
         ];
-        "Mod+P".action.spawn = [
-          "rofi"
-          "-show"
-          "drun"
-        ];
-        "Mod+Control+Escape".action.spawn = [ "pkill niri" ];
+        "Mod+P".action.spawn-sh =
+          "tofi-drun --font ${pkgs.iosevka}/share/fonts/truetype/Iosevka-Regular.ttf | bash";
+        "Mod+Shift+P".action.spawn-sh =
+          "tofi-run --font ${pkgs.iosevka}/share/fonts/truetype/Iosevka-Regular.ttf | bash";
+        "Mod+Control+Escape".action.spawn-sh = [ "pkill niri" ];
         "Mod+Escape".action.spawn-sh = [ "hyprlock --grace 4" ];
 
         "Mod+Shift+Q".action.close-window = { };
