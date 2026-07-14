@@ -68,6 +68,8 @@
     ];
   };
 
+  virtualisation.docker.enable = true;
+
   services.tlp.enable = true;
 
   services.kanata = {
@@ -83,20 +85,24 @@
 
         config = ''
           (defsrc
+                                      ins
                  q w e r t y u i o p
             caps a s d f h j k l ;
                  lalt            ralt
           )
 
           (defvar
-            tap-time 200
-            hold-time 150
+            tap-time 185
+            hold-time 170
           )
 
           (defalias
             caps esc
             lalt (layer-while-held nav)
             ralt bspc
+
+            toggle-plain (layer-switch plain)
+            toggle-hmr (layer-switch base)
 
             a (tap-hold $tap-time $hold-time a lmet)
             s (tap-hold $tap-time $hold-time s lalt)
@@ -125,13 +131,23 @@
           )
 
           (deflayer base
+                                               @toggle-plain
                    q  w  e  r  t  y  u  i  o  p
             @caps @a @s @d @f  h @j @k @l @;
 
                      @lalt      @ralt
           )
 
+          (deflayer plain
+                                               @toggle-hmr
+                   q w e r t y u i o p
+             esc   a s d f h j k l ;
+                 lalt            ralt
+
+          )
+
           (deflayer nav
+                                              ins
               @q @w @e @r @t @y @u @i @o @p
             _ @a @s @d @f   @nav-h @nav-j @nav-k @nav-l _
                    _            _
@@ -169,7 +185,7 @@
         FastConnectable = true;
       };
       Policy = {
-        AutoEnable = true;
+        AutoEnable = false;
       };
     };
   };
@@ -193,6 +209,7 @@
     isNormalUser = true;
     description = "ironlung";
     extraGroups = [
+      "docker"
       "networkmanager"
       "wheel"
       "input"
@@ -240,6 +257,11 @@
     usbutils
     tinymist
     websocat
+
+    carla
+    surge-xt
+    vital
+    dragonfly-reverb
   ];
 
   # Enable the OpenSSH daemon.
