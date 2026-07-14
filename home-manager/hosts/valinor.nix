@@ -18,12 +18,14 @@ in
   myhm = {
     isLaptop = false;
     keyboardLayout = "us";
-    launcher = "tofi";
+    launcher = "rofi";
+    terminal = "footclient";
 
     foot.enable = true;
     waybar.enable = true;
     dunst.enable = true;
     hyprlock.enable = true;
+    nixcord.enable = true;
   };
 
   nixpkgs = {
@@ -44,14 +46,13 @@ in
       thunar
       distrobox
       xclip
-      devenv
       tldr
       obsidian
       anki
       sooperlooper
       prismlauncher
-      mangohud
       qpwgraph
+      pwvucontrol
     ];
     stateVersion = "25.05";
   };

@@ -18,9 +18,9 @@
         "kitty"
         "wezterm"
         "alacritty"
-        "foot"
+        "footclient"
       ];
-      default = "foot";
+      default = "footclient";
       description = "Application launcher to use";
     };
 

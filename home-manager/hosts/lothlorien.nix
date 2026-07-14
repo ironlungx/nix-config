@@ -20,7 +20,7 @@ in
     isLaptop = true;
     keyboardLayout = "gb,us";
     launcher = "tofi";
-    terminal = "foot";
+    terminal = "footclient";
 
     foot.enable = true;
     waybar.enable = true;

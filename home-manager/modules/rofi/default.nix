@@ -19,7 +19,7 @@ in
 
   config.programs.rofi = lib.mkIf (config.myhm.launcher == "rofi") {
     enable = true;
-    terminal = "kitty";
+    terminal = config.myhm.terminal;
     theme = rofiTheme;
 
     plugins = with pkgs; [

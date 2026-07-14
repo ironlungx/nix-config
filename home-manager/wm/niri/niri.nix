@@ -1,4 +1,5 @@
 {
+  lib,
   pkgs,
   inputs,
   config,
@@ -10,7 +11,7 @@
     inputs.niri.homeModules.stylix
   ];
 
-  home.packages = with pkgs; [
+  config.home.packages = with pkgs; [
     playerctl
     cliphist
     wl-clipboard
@@ -26,7 +27,7 @@
     wayscriber
   ];
 
-  programs.niri = {
+  config.programs.niri = {
     enable = true;
     settings = {
       input = {
@@ -37,7 +38,7 @@
 
         keyboard = {
           xkb = {
-            layout = "gb,us";
+            layout = config.myhm.keyboardLayout;
             options = "grp:win_space_toggle,ctrl:nocaps";
           };
           repeat-delay = 250;
@@ -151,11 +152,11 @@
             "${pkgs.xwayland-satellite}/bin/xwayland-satellite"
           ];
         }
-        {
+        (lib.mkIf (config.myhm.terminal == "foot") {
           command = [
             "foot --server"
           ];
-        }
+        })
       ];
 
       layout = {
@@ -200,14 +201,20 @@
         "Mod+Shift+8".action.move-column-to-workspace = 8;
         "Mod+Shift+9".action.move-column-to-workspace = 9;
 
-        "Mod+Return".action.spawn = [ "footclient" ];
+        "Mod+Return".action.spawn = [ config.myhm.terminal ];
         "Mod+Control+Return".action.spawn = [
           "helium"
         ];
         "Mod+P".action.spawn-sh =
-          "tofi-drun --font ${pkgs.iosevka}/share/fonts/truetype/Iosevka-Regular.ttf | bash";
+          if config.myhm.launcher == "tofi" then
+            "tofi-drun --font ${pkgs.iosevka}/share/fonts/truetype/Iosevka-Regular.ttf | bash"
+          else
+            "rofi -show drun";
         "Mod+Shift+P".action.spawn-sh =
-          "tofi-run --font ${pkgs.iosevka}/share/fonts/truetype/Iosevka-Regular.ttf | bash";
+          if config.myhm.launcher == "tofi" then
+            "tofi-run --font ${pkgs.iosevka}/share/fonts/truetype/Iosevka-Regular.ttf | bash"
+          else
+            "rofi -show drun";
         "Mod+Control+Escape".action.spawn-sh = [ "pkill niri" ];
         "Mod+Escape".action.spawn-sh = [ "hyprlock --grace 4" ];
 

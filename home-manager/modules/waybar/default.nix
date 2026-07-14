@@ -48,8 +48,15 @@ let
         "network"
       ]
 
-      ++ lib.optional (wmModule == "niri") "niri/language"
-      ++ (if isLaptop then [ "battery" ] else [ "bluetooth" ])
+      ++ (
+        if isLaptop then
+          [
+            "battery"
+            "niri/language"
+          ]
+        else
+          [ "bluetooth" ]
+      )
       ++ [
         "custom/sep"
         "custom/dunst"
