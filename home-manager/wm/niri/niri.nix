@@ -41,8 +41,8 @@
             layout = config.myhm.keyboardLayout;
             options = "grp:win_space_toggle,ctrl:nocaps";
           };
-          repeat-delay = 250;
-          repeat-rate = 23;
+          repeat-delay = if config.myhm.isLaptop then 250 else 200;
+          repeat-rate = if config.myhm.isLaptop then 23 else 40;
         };
 
         touchpad = {
