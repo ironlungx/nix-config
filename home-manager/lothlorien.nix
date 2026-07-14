@@ -43,6 +43,8 @@ in
     anki
     kanata
     pwvucontrol
+    qmidiarp
+    qpwgraph
   ];
 
   fonts.fontconfig.enable = true;
