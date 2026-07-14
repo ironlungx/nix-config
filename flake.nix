@@ -106,19 +106,19 @@
         "ironlung@valinor" = home-manager.lib.homeManagerConfiguration {
           pkgs = nixpkgs.legacyPackages.x86_64-linux;
           extraSpecialArgs = { inherit inputs outputs; };
-          modules = [ ./home-manager/valinor.nix ];
+          modules = [ ./home-manager/hosts/valinor.nix ];
         };
 
         "ironlung@lothlorien" = home-manager.lib.homeManagerConfiguration {
           pkgs = nixpkgs.legacyPackages.x86_64-linux;
           extraSpecialArgs = { inherit inputs outputs; };
-          modules = [ ./home-manager/lothlorien.nix ];
+          modules = [ ./home-manager/hosts/lothlorien.nix ];
         };
 
         "ironlung@gondor" = home-manager.lib.homeManagerConfiguration {
           pkgs = nixpkgs.legacyPackages.x86_64-linux;
           extraSpecialArgs = { inherit inputs outputs; };
-          modules = [ ./home-manager/gondor.nix ];
+          modules = [ ./home-manager/hosts/gondor.nix ];
         };
       };
     };
