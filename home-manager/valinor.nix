@@ -46,14 +46,7 @@ in
     tldr
     obsidian
     anki
-    carla
     sooperlooper
-    dragonfly-reverb
-    surge-xt
-    qsynth
-    qsynth
-    pavucontrol
-    # inputs.concord.packages.${pkgs.system}.default
     wl-kbptr
   ];
 
