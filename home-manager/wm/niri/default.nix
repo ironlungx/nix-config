@@ -107,12 +107,12 @@
         {
           command = [ "${pkgs.dunst}/bin/dunst" ];
         }
-        {
+        (lib.mkIf (config.myhm.isLaptop == false) {
           command = [
             "${pkgs.wayscriber}/bin/wayscriber"
             "--daemon"
           ];
-        }
+        })
         {
           command = [ "swayosd-server" ];
         }

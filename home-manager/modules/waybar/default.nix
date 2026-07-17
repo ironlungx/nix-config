@@ -8,6 +8,9 @@ let
   cfg = config.myhm.waybar;
   isLaptop = config.myhm.isLaptop;
 
+  fastPoll = (if isLaptop then 2 else 5);
+  slowPoll = (if isLaptop then 5 else 10);
+
   # detect active WM from what the host imported, rather than a separate flag
   wmModule =
     if config.programs.niri.enable or false then
@@ -60,7 +63,16 @@ let
       ++ [
         "custom/sep"
         "custom/dunst"
-        "custom/focus"
+      ]
+      ++ (
+        if (config.services.focus-mode.enable) then
+          [
+            "custom/focus"
+          ]
+        else
+          [ ]
+      )
+      ++ [
         "tray"
       ];
 
@@ -124,7 +136,7 @@ let
 
       "battery" = {
         "bat" = "BAT0";
-        "interval" = 8;
+        "interval" = 60;
         "format" = "{icon} {capacity}%";
         "format-icons" = {
           "default" = [
@@ -158,17 +170,17 @@ let
       };
 
       cpu = {
-        interval = 1;
+        interval = slowPoll;
         format = "  {usage}%";
         max-length = 10;
       };
       disk = {
-        interval = 30;
+        interval = if isLaptop then 60 else 30;
         format = "  {specific_free:0.1f}G";
         unit = "GB";
       };
       memory = {
-        interval = 2;
+        interval = slowPoll;
         format = "  {used:0.1f}G";
       };
       network = {
@@ -180,7 +192,7 @@ let
         tooltip-format-ethernet = "{ifname} via {gwaddr}";
         tooltip-format-disconnected = "Disconnected";
         max-length = 50;
-        interval = 5;
+        interval = 2 * slowPoll;
       };
 
       "custom/weather" = {
@@ -227,7 +239,7 @@ let
       "custom/nix".format = "<span size='large'> </span>";
 
       "custom/dunst" = {
-        interval = 1;
+        interval = slowPoll;
         exec = pkgs.writeShellScript "dunst_status" ''
           COUNT=$(dunstctl count waiting)
           ENABLED="<span size='large' color='${config.lib.stylix.colors.withHashtag.base0F}'>  </span>"
