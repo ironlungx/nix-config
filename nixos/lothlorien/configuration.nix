@@ -85,10 +85,13 @@
 
         config = ''
           (defsrc
-                                      ins
-                 q w e r t y u i o p
-            caps a s d f h j k l ;
-                 lalt            ralt
+               esc                      ins del
+             grv 1 2 3 4 5 6 7 8 9 0 - =   bspc
+                tab q w e r t y u i o p [ ]
+                caps a s d f g h j k l ; ' nuhs ret
+                lsft \ z x c v b n m , . / rsft
+                lctl lmeta lalt spc ralt rctl    pgup up pgdn
+                                                 lft down rght
           )
 
           (defvar
@@ -103,21 +106,21 @@
 
             toggle-plain (layer-switch plain)
             toggle-hmr (layer-switch base)
+            toggle-blank (layer-switch blank)
 
             a (tap-hold $tap-time $hold-time a lmet)
             s (tap-hold $tap-time $hold-time s lalt)
             d (tap-hold $tap-time $hold-time d lsft)
             f (tap-hold $tap-time $hold-time f lctl)
-
-            j (tap-hold $tap-time $hold-time j rctl)
-            k (tap-hold $tap-time $hold-time k rsft)
-            l (tap-hold $tap-time $hold-time l ralt)
-            ; (tap-hold $tap-time $hold-time ; rmet)
-
+            j (tap-hold $tap-time $hold-time j lctl)
+            k (tap-hold $tap-time $hold-time k lsft)
+            l (tap-hold $tap-time $hold-time l lalt)
+            ; (tap-hold $tap-time $hold-time ; lmet)
             nav-h left
             nav-j down
             nav-k up
             nav-l right
+            nav-del del
             q 1
             w 2
             e 3
@@ -131,26 +134,43 @@
           )
 
           (deflayer base
-                                               @toggle-plain
-                   q  w  e  r  t  y  u  i  o  p
-            @caps @a @s @d @f  h @j @k @l @;
-
-                     @lalt      @ralt
+             _            @toggle-plain           @toggle-blank  
+             _   _ _ _ _ _ _ _ _ _ _ _ _   _
+                _   _  _  _  _  _  _  _  _  _  _  _  _
+                @caps @a @s @d @f _ _ @j @k @l @; _ _ _
+                _ _ _ _ _ _ _ _ _ _ _ _ _
+                _ _ @lalt _ @ralt _    _ _ _
+                                                 _ _ _
           )
 
           (deflayer plain
-                                               @toggle-hmr
-                   q w e r t y u i o p
-             esc   a s d f h j k l ;
-                 lalt            ralt
+               _                        _  @toggle-hmr
+             _ _ _ _ _ _ _ _ _ _ _ _ _   _
+                _ _ _ _ _ _ _ _ _ _ _ _ _
+                _ _ _ _ _ _ _ _ _ _ _ _ _ _
+                _ _ _ _ _ _ _ _ _ _ _ _ _
+                _ _ _ _ _ _    _ _ _
+                                                 _ _ _
+          )
 
+          (deflayer blank
+               XX                       XX  @toggle-hmr
+             XX XX XX XX XX XX XX XX XX XX XX XX XX   XX
+                XX XX XX XX XX XX XX XX XX XX XX XX XX
+                XX XX XX XX XX XX XX XX XX XX XX XX XX XX
+                XX XX XX XX XX XX XX XX XX XX XX XX XX
+                XX XX XX XX XX XX    XX XX XX
+                                                 XX XX XX
           )
 
           (deflayer nav
-                                              ins
-              @q @w @e @r @t @y @u @i @o @p
-            _ @a @s @d @f   @nav-h @nav-j @nav-k @nav-l _
-                   _            _
+               _                        ins _
+             _ @q @w @e @r @t @y @u @i @o @p _ _   _
+                _   1 2 3 4 5 6 7 8 9 0  _  _
+                _ @a @s @d @f _ @nav-h @nav-j @nav-k @nav-l _ _ _ _
+                _ _ _ _ _ _ _ _ _ _ _ _ _
+                _ _ _ _ @nav-del _    _ _ _
+                                                 _ _ _
           )
         '';
       };

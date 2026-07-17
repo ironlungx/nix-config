@@ -35,6 +35,9 @@ in
     config = {
       allowUnfree = true;
       allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [ "audio-relay" ];
+      permittedInsecurePackages = [
+        "electron-40.10.5"
+      ];
     };
   };
 
@@ -48,7 +51,6 @@ in
       tldr
       obsidian
       anki
-      kanata
       pwvucontrol
       qpwgraph
     ];
