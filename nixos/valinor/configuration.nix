@@ -118,8 +118,9 @@
 
     # Tragic times indeed...
     # package = config.boot.kernelPackages.nvidiaPackages.stable;
-    package = config.boot.kernelPackages.nvidiaPackages.legacy_580;
+    # package = config.boot.kernelPackages.nvidiaPackages.legacy_580;
   };
+  hardware.nvidia-container-toolkit.enable = true;
 
   # Set your time zone.
   time.timeZone = "Europe/London";
@@ -282,6 +283,7 @@
 
   virtualisation.spiceUSBRedirection.enable = true;
   virtualisation.docker.enable = true;
+  virtualisation.docker.daemon.settings.features.cdi = true;
   virtualisation.docker.enableOnBoot = false;
 
   programs.nh = {
@@ -350,6 +352,8 @@
 
     yabridge
     yabridgectl
+    mangohud
+    bottles
 
     # support both 32- and 64-bit applications
     wineWow64Packages.stable
@@ -359,7 +363,7 @@
 
   # services.ollama = {
   #   enable = true;
-  #   acceleration = "cuda";
+  #   package = pkgs.ollama-cuda;
   # };
 
   nix.settings.experimental-features = [
