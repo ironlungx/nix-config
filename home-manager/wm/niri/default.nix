@@ -246,6 +246,8 @@
 
         "Mod+Shift+H".action.set-column-width = "-10%";
         "Mod+Shift+L".action.set-column-width = "+10%";
+        "Mod+Shift+K".action.set-column-width = "+10%";
+        "Mod+Shift+J".action.set-column-width = "-10%";
 
         "Mod+Comma".action.consume-or-expel-window-left = { };
         "Mod+Period".action.consume-or-expel-window-right = { };
