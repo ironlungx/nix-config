@@ -277,6 +277,7 @@
     usbutils
     tinymist
     websocat
+    powertop
 
     carla
     surge-xt

@@ -53,6 +53,8 @@ in
       anki
       pwvucontrol
       qpwgraph
+      sioyek
+      mpv
     ];
     stateVersion = "25.05";
   };
