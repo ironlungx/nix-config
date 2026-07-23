@@ -68,7 +68,10 @@
     ];
   };
 
-  virtualisation.docker.enable = true;
+  virtualisation.docker = {
+    enable = true;
+    enableOnBoot = false;
+  };
 
   services.tlp.enable = true;
 
@@ -88,7 +91,7 @@
                esc                      ins del
              grv 1 2 3 4 5 6 7 8 9 0 - =   bspc
                 tab q w e r t y u i o p [ ]
-                caps a s d f g h j k l ; ' nuhs ret
+                caps a s d f g h j k l ; ' f24 ret
                 lsft \ z x c v b n m , . / rsft
                 lctl lmeta lalt spc ralt rctl    pgup up pgdn
                                                  lft down rght
@@ -278,6 +281,8 @@
     tinymist
     websocat
     powertop
+    man-pages
+    man-pages-posix
 
     carla
     surge-xt
