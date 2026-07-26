@@ -21,7 +21,15 @@
         "footclient"
       ];
       default = "footclient";
-      description = "Application launcher to use";
+      description = "Terminal to use";
+    };
+    browser = lib.mkOption {
+      type = lib.types.enum [
+        "helium"
+        "firefox"
+      ];
+      default = "firefox";
+      description = "Browser to use";
     };
 
     launcher = lib.mkOption {

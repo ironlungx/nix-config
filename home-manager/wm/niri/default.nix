@@ -206,7 +206,7 @@
 
         "Mod+Return".action.spawn = [ config.myhm.terminal ];
         "Mod+Control+Return".action.spawn = [
-          "helium"
+          "${config.myhm.browser}"
         ];
         "Mod+P".action.spawn-sh =
           if config.myhm.launcher == "tofi" then

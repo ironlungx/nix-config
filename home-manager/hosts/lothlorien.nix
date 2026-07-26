@@ -21,6 +21,7 @@ in
     keyboardLayout = "gb,us";
     launcher = "tofi";
     terminal = "footclient";
+    browser = "firefox";
 
     foot.enable = true;
     waybar.enable = true;
@@ -28,6 +29,7 @@ in
     dunst.enable = true;
     hyprlock.enable = true;
     nixcord.enable = true;
+    firefox.enable = true;
   };
 
   nixpkgs = {
@@ -56,7 +58,7 @@ in
       sioyek
       mpv
     ];
-    stateVersion = "25.05";
+    stateVersion = "26.11";
   };
 
   fonts.fontconfig.enable = true;

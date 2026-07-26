@@ -11,7 +11,12 @@ in
 {
   options.myhm.firefox.enable = lib.mkEnableOption "firefox";
 
+  config.nixpkgs.overlays = lib.mkIf cfg.enable [
+    inputs.firefox-addons.overlays.default
+  ];
+
   config.programs.firefox = lib.mkIf cfg.enable {
+    enable = true;
     profiles.ironlung = {
       search.engines = {
         "Nix Packages" = {
@@ -107,6 +112,14 @@ in
         "browser.bookmarks.restore_default_bookmarks" = false;
         "browser.bookmarks.addedImportButton" = true;
 
+        "browser.newtabpage.activity-stream.feeds.section.topstories" = false;
+        "browser.newtabpage.activity-stream.feeds.topsites" = false;
+        "browser.newtabpage.activity-stream.newtabWallpapers.user.enabled.migrated" = false;
+        "browser.newtabpage.activity-stream.showSearch" = false;
+        "browser.newtabpage.activity-stream.showSponsored" = false;
+        "browser.newtabpage.activity-stream.showSponsoredCheckboxes" = false;
+        "browser.newtabpage.activity-stream.showSponsoredTopSites" = false;
+
         # Disable some telemetry
         "app.shield.optoutstudies.enabled" = false;
         "browser.discovery.enabled" = false;
@@ -194,11 +207,11 @@ in
         /* some css */
       '';
 
-      extensions.packages = with inputs.firefox-addons.packages.${pkgs.system}; [
+      extensions.packages = with pkgs.firefoxAddons; [
         ublock-origin
         sponsorblock
         darkreader
-        vimium
+        vimium-ff
         youtube-shorts-block
         stylus
       ];
