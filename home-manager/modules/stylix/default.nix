@@ -13,6 +13,7 @@ in
     inputs.stylix.homeModules.stylix
   ];
   options.myhm.stylix.enable = lib.mkEnableOption "stylix";
+  config.home.pointerCursor.enable = lib.mkIf cfg.enable true;
   config.stylix = lib.mkIf cfg.enable {
     enable = true;
     image = pkgs.fetchurl {
@@ -60,7 +61,7 @@ in
       firefox.profileNames = [ "ironlung" ];
       hyprlock = {
         enable = true;
-        useWallpaper = true;
+        image.enable = true;
       };
     };
   };
