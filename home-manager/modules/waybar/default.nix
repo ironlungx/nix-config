@@ -170,7 +170,7 @@ let
       };
 
       cpu = {
-        interval = slowPoll;
+        interval = fastPoll;
         format = "  {usage}%";
         max-length = 10;
       };
