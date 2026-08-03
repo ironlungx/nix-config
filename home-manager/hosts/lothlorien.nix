@@ -20,7 +20,7 @@ in
     isLaptop = true;
     keyboardLayout = "gb,us";
     launcher = "tofi";
-    terminal = "footclient";
+    terminal = "alacritty";
     browser = "firefox";
 
     foot.enable = true;

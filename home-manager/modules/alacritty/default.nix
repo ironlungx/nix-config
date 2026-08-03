@@ -1,11 +1,6 @@
 { lib, config, ... }:
-let
-  cfg = config.myhm.alacritty;
-in
 {
-  options.myhm.alacritty.enable = lib.mkEnableOption "alacritty";
-
-  config.programs.alacritty = lib.mkIf cfg.enable {
+  config.programs.alacritty = lib.mkIf (config.myhm.terminal == "alacritty") {
     enable = true;
     settings = {
       env.TERM = "xterm-256color";

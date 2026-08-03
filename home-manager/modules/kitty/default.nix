@@ -3,13 +3,8 @@
   config,
   ...
 }:
-let
-  cfg = config.myhm.kitty;
-in
 {
-  options.myhm.kitty.enable = lib.mkEnableOption "kitty";
-
-  config.programs.kitty = lib.mkIf cfg.enable {
+  config.programs.kitty = lib.mkIf (config.myhm.terminal == "kitty") {
     enable = true;
     # font = {
     #   name = config.stylix.fonts.monospace.name;
