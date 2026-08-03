@@ -150,6 +150,10 @@ in
 
         "sidebar.verticalTabs" = true;
 
+        "media.ffmpeg.vaapi.enabled" = true;
+        "media.hardware-video-decoding.force-enabled" = true;
+        "gfx.webrender.all" = true;
+
         # Disable fx accounts
         "identity.fxaccounts.enabled" = false;
         # Disable "save password" prompt
