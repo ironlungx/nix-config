@@ -48,6 +48,7 @@ in
     homeDirectory = "/home/ironlung";
     sessionPath = [ "$HOME/.local/bin" ];
     packages = with pkgs; [
+      steam
       thunar
       distrobox
       tldr
