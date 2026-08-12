@@ -23,11 +23,15 @@
   # Use latest kernel.
   boot.kernelPackages = pkgs.linuxPackages_latest;
 
+  boot.kernel.sysctl = {
+    "vm.dirty_writeback_centisecs" = 1500;
+  };
+
   networking.hostName = "lothlorien"; # Define your hostname.
 
   # Enable networking
   networking.networkmanager.enable = true;
-
+  services.resolved.enable = true;
   # Set your time zone.
   time.timeZone = "Europe/London";
 
@@ -74,6 +78,18 @@
   };
 
   services.tlp.enable = true;
+  services.avahi = {
+    enable = true;
+    nssmdns = true; # printing
+    openFirewall = true; # ensuring that firewall ports are open as needed
+    publish = {
+      enable = true;
+      addresses = true;
+      workstation = true;
+      userServices = true;
+      domain = true;
+    };
+  };
 
   services.kanata = {
     enable = true;
@@ -106,6 +122,7 @@
             caps esc
             lalt (layer-while-held nav)
             ralt bspc
+            b (one-shot 500 (layer-while-held bb))
 
             toggle-plain (layer-switch plain)
             toggle-hmr (layer-switch base)
@@ -134,6 +151,13 @@
             i 8
             o 9
             p 0
+
+            bb_c (unicode U+2102)
+            bb_r (unicode U+211D)
+            bb_q (unicode U+211A)
+            bb_z (unicode U+2124)
+            bb_n (unicode U+2115)
+
           )
 
           (deflayer base
@@ -171,10 +195,21 @@
              _ @q @w @e @r @t @y @u @i @o @p _ _   _
                 _   1 2 3 4 5 6 7 8 9 0  _  _
                 _ @a @s @d @f _ @nav-h @nav-j @nav-k @nav-l _ _ _ _
-                _ _ _ _ _ _ _ _ _ _ _ _ _
+                _ _ _ _ _ _ @b _ _ _ _ _ _
                 _ _ _ _ @nav-del _    _ _ _
                                                  _ _ _
           )
+
+          (deflayer bb
+               esc                      ins del
+             grv 1 2 3 4 5 6 7 8 9 0 - =   bspc
+                tab @bb_q w e @bb_r t y u i o p [ ]
+                caps a s d f g h j k l ; ' f24 ret
+                lsft \ @bb_z x @bb_c v b @bb_n m , . / rsft
+                lctl lmeta lalt spc ralt rctl    pgup up pgdn
+                                                 lft down rght
+          )
+
         '';
       };
     };
@@ -268,33 +303,48 @@
     };
   };
 
-  environment.systemPackages = with pkgs; [
-    vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
-    neovim
-    wget
-    git
-    gcc
-    python3
-    unzip
-    android-tools
-    usbutils
-    tinymist
-    websocat
-    powertop
-    man-pages
-    man-pages-posix
+  environment.systemPackages =
+    with pkgs;
+    [
+      vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
+      neovim
+      wget
+      git
+      gcc
+      python3
+      unzip
+      android-tools
+      usbutils
+      tinymist
+      websocat
+      powertop
+      man-pages
+      man-pages-posix
 
-    carla
-    surge-xt
-    vital
-    dragonfly-reverb
-  ];
+      carla
+      surge-xt
+      vital
+      dragonfly-reverb
+      qdelay
+      reaper
+      uxplay
+    ]
+    ++ (with pkgs.gst_all_1; [
+      gst-libav
+      gst-plugins-bad
+      gst-plugins-base
+      gst-plugins-good
+      gst-plugins-ugly
+      gstreamer
+    ]);
 
   # Enable the OpenSSH daemon.
   services.openssh.enable = true;
   services.udisks2.enable = true;
   services.tailscale.enable = true;
   networking.nftables.enable = true;
+  networking.interfaces.tailscale0.useDHCP = false;
+  networking.firewall.checkReversePath = "loose";
 
   systemd.services.tailscaled.serviceConfig.Environment = [
     "TS_DEBUG_FIREWALL_MODE=nftables"
