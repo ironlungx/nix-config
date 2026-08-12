@@ -28,6 +28,7 @@
   ];
 
   config.programs.niri = {
+    package = pkgs.niri;
     enable = true;
     settings = {
       input = {

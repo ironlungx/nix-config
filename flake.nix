@@ -6,7 +6,10 @@
     nixcord.url = "github:kaylorben/nixcord";
     spicetify-nix.url = "github:Gerg-L/spicetify-nix";
     stylix.url = "github:danth/stylix";
-    niri.url = "github:sodiboo/niri-flake";
+    niri = {
+      url = "github:sodiboo/niri-flake";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     audiorelay-flake.url = "github:JamesReynolds/audiorelay-flake";
 
     helium-flake.url = "github:oxcl/nix-flake-helium-browser";
