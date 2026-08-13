@@ -293,7 +293,7 @@
       xdg-desktop-portal-gnome
     ];
     config.common.default = [ "gtk" ];
-    config.niri = lib.mkForce {
+    config.niri = lib.mkDefault {
       default = [
         "gtk"
       ];
@@ -376,6 +376,7 @@
   programs.fish.enable = true;
   programs.dconf.enable = true;
   programs.niri.enable = true;
+  programs.gnupg.agent.enable = true;
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions

@@ -1,4 +1,5 @@
 {
+  config,
   inputs,
   lib,
   pkgs,
@@ -58,6 +59,8 @@ in
       qpwgraph
       sioyek
       mpv
+      pass
+      gnupg
     ];
     stateVersion = "26.11";
   };
@@ -67,7 +70,7 @@ in
   programs = {
     home-manager.enable = true;
     cava.enable = true;
-    helium.enable = true;
+    helium.enable = config.myhm.browser == "helium";
     git = {
       enable = true;
       settings.user = {
