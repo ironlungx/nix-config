@@ -209,6 +209,10 @@
         "Mod+Control+Return".action.spawn = [
           "${config.myhm.browser}"
         ];
+
+        "Mod+B".action.spawn-sh =
+          "bluetooth-menu --font ${pkgs.iosevka}/share/fonts/truetype/Iosevka-Regular.ttf";
+
         "Mod+P".action.spawn-sh =
           if config.myhm.launcher == "tofi" then
             "tofi-drun --font ${pkgs.iosevka}/share/fonts/truetype/Iosevka-Regular.ttf | bash"
