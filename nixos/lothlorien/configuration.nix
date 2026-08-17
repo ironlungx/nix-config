@@ -252,6 +252,10 @@
   hardware.graphics = {
     enable = true;
     enable32Bit = true;
+    extraPackages = with pkgs; [
+      intel-media-driver
+      vpl-gpu-rt
+    ];
   };
 
   services.blueman.enable = true;
@@ -261,6 +265,7 @@
   security.sudo.extraConfig = ''
     Defaults pwfeedback
     Defaults insults
+    Defaults timestamp_type=global
   '';
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
