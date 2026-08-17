@@ -136,8 +136,8 @@ let
 
       "battery" = {
         "bat" = "BAT0";
-        "interval" = 60;
-        "format" = "{icon} {capacity}%";
+        "interval" = slowPoll;
+        "format" = "{icon} {capacity}%  {power}W";
         "format-icons" = {
           "default" = [
             "󰂎"
