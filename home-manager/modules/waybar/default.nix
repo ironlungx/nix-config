@@ -8,8 +8,8 @@ let
   cfg = config.myhm.waybar;
   isLaptop = config.myhm.isLaptop;
 
-  fastPoll = (if isLaptop then 2 else 5);
-  slowPoll = (if isLaptop then 5 else 10);
+  fastPoll = (if isLaptop then 4 else 2);
+  slowPoll = (if isLaptop then 6 else 4);
 
   # detect active WM from what the host imported, rather than a separate flag
   wmModule =
