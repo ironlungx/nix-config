@@ -1,4 +1,5 @@
 {
+  config,
   inputs,
   lib,
   pkgs,
@@ -20,6 +21,7 @@ in
     keyboardLayout = "us";
     launcher = "rofi";
     terminal = "footclient";
+    browser = "helium";
 
     foot.enable = true;
     waybar.enable = true;
@@ -69,7 +71,7 @@ in
         email = "hwlooverhello@gmail.com";
       };
     };
-    helium.enable = true;
+    helium.enable = config.myhm.browser == "helium";
   };
 
   systemd.user.startServices = "sd-switch";
