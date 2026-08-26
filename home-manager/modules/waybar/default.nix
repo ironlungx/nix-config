@@ -40,7 +40,15 @@ let
         "cpu"
         "memory"
         "disk"
-      ];
+      ]
+      ++ (
+        if isLaptop then
+          [
+            "battery"
+          ]
+        else
+          [ ]
+      );
       "modules-center" = [
         "clock"
       ];
@@ -54,7 +62,7 @@ let
       ++ (
         if isLaptop then
           [
-            "battery"
+            # "battery"
             "niri/language"
           ]
         else
