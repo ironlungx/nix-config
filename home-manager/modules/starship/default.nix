@@ -10,7 +10,7 @@ in
       scan_timeout = 10;
       add_newline = false;
       format = "$directory $nix_shell $character";
-      right_format = "$git_branch$cmd_duration";
+      right_format = "$hostname$git_branch$cmd_duration";
       character = {
         success_symbol = "[ ](bold green)";
         error_symbol = "[ ](bold red)";
@@ -24,10 +24,8 @@ in
         format = "[$user]($style)";
       };
       hostname = {
-        disabled = true;
-        ssh_only = false;
-        style = "bold bg:none fg:text";
-        format = "@[$hostname]($style) ";
+        ssh_only = true;
+        format = "[$hostname](bold blue) ";
       };
       directory = {
         read_only = " ";
