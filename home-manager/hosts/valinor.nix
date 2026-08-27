@@ -1,7 +1,6 @@
 {
   config,
   inputs,
-  lib,
   pkgs,
   ...
 }:
@@ -31,12 +30,8 @@ in
   };
 
   nixpkgs = {
-    overlays = [
-      inputs.firefox-addons.overlays.default
-    ];
     config = {
       allowUnfree = true;
-      allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [ "audio-relay" ];
     };
   };
 
