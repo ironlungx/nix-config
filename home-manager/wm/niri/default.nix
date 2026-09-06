@@ -121,9 +121,6 @@
           command = [ "waybar" ];
         }
         {
-          command = [ "${pkgs.hyprpaper}/bin/hyprpaper" ];
-        }
-        {
           command = [
             "${pkgs.wl-clipboard}/bin/wl-paste "
             "--type"
