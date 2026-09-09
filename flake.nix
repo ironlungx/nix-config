@@ -2,6 +2,7 @@
   description = "IronLung's nix config";
 
   inputs = {
+    musnix.url = "github:musnix/musnix";
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     nixcord.url = "github:kaylorben/nixcord";
     spicetify-nix.url = "github:Gerg-L/spicetify-nix";
