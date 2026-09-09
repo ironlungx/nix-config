@@ -1,12 +1,15 @@
 {
   lib,
-  config,
+  inputs,
   pkgs,
   ...
 }:
 
 {
-  imports = [ ./hardware-configuration.nix ];
+  imports = [
+    ./hardware-configuration.nix
+    inputs.musnix.nixosModules.musnix
+  ];
 
   # Bootloader.
   # boot.loader.systemd-boot.enable = true;
@@ -26,6 +29,7 @@
   boot.kernel.sysctl = {
     "vm.dirty_writeback_centisecs" = 1500;
   };
+  musnix.enable = true;
 
   networking.hostName = "lothlorien"; # Define your hostname.
 
@@ -333,7 +337,9 @@
       dragonfly-reverb
       qdelay
       reaper
-      uxplay
+      wineWow64Packages.stable
+      yabridge
+      yabridgectl
     ]
     ++ (with pkgs.gst_all_1; [
       gst-libav
