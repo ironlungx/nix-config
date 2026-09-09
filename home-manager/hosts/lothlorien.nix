@@ -24,6 +24,7 @@ in
     terminal = "alacritty";
     browser = "firefox";
 
+    sunsetr.enable = true;
     bluetooth-menu.enable = true;
     foot.enable = true;
     waybar.enable = true;

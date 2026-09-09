@@ -9,7 +9,7 @@ let
 in
 {
   options.myhm.sunsetr.enable = lib.mkEnableOption "sunsetr";
-  home.packages = lib.mkIf cfg.enable [
+  config.home.packages = lib.mkIf cfg.enable [
     pkgs.sunsetr
   ];
 
