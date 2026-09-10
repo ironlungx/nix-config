@@ -8,6 +8,10 @@ let
   mediaScript = pkgs.writeShellScript "hyprlock-media" ''
     exec ${pkgs.playerctl}/bin/playerctl metadata --format '    {{ artist }} — {{ title }}'
   '';
+
+  batteryScript = pkgs.writeShellScript "battery" ''
+    exec echo "  $(cat /sys/class/power_supply/BAT0/capacity)%"
+  '';
   cfg = config.myhm.hyprlock;
 in
 {
@@ -69,6 +73,16 @@ in
           "font_size " = "22";
           "font_family " = "JetBrains Mono";
           "position " = "0, 300";
+          "halign " = "center";
+          "valign " = "center";
+        }
+
+        {
+          "monitor " = "";
+          "text " = "cmd[update:5000] ${batteryScript}";
+          "font_size " = "22";
+          "font_family " = "JetBrains Mono";
+          "position " = "0, 350";
           "halign " = "center";
           "valign " = "center";
         }
