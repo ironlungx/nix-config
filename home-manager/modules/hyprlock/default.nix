@@ -77,7 +77,7 @@ in
           "valign " = "center";
         }
 
-        {
+        (lib.mkIf config.myhm.isLaptop {
           "monitor " = "";
           "text " = "cmd[update:5000] ${batteryScript}";
           "font_size " = "22";
@@ -85,7 +85,7 @@ in
           "position " = "0, 350";
           "halign " = "center";
           "valign " = "center";
-        }
+        })
 
         {
           "monitor" = "";
