@@ -284,10 +284,19 @@
       "uinput"
       "adbusers"
       "dialout"
+      "audio"
+      "video"
     ];
     packages = with pkgs; [ ];
     shell = pkgs.fish;
   };
+
+  # idx man brightness doesn't seem to work without root without this
+  services.udev.extraRules = ''
+    ACTION=="add", SUBSYSTEM=="backlight", KERNEL=="intel_backlight", \
+      MODE="0664", RUN+="${pkgs.coreutils}/bin/chmod g+w /sys/class/backlight/%k/brightness"
+  '';
+
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
 
