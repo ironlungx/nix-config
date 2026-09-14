@@ -9,9 +9,18 @@ let
     exec ${pkgs.playerctl}/bin/playerctl metadata --format '    {{ artist }} — {{ title }}'
   '';
 
-  batteryScript = pkgs.writeShellScript "battery" ''
-    exec echo "  $(cat /sys/class/power_supply/BAT0/capacity)%"
+  # batteryScript = pkgs.writeShellScript "battery" ''
+  #   exec echo "  $(cat /sys/class/power_supply/BAT0/capacity)%"
+  # '';
+  batteryScript = pkgs.writers.writePython3 "battery" { flakeIgnore = [ "E501" ]; } ''
+    charge_percent: int = int(open("/sys/class/power_supply/BAT0/capacity").read())
+    idx: int = min(int(open("/sys/class/power_supply/BAT0/capacity").read()) // 25, 3)
+    is_charging: bool = open("/sys/class/power_supply/BAT0/status").read().strip("\n") == "Charging"
+    icons = [" ", " ", " ", " ", ]
+
+    print(f"{"󱐋 " if is_charging else ""}{icons[idx]} {charge_percent}%")
   '';
+
   cfg = config.myhm.hyprlock;
 in
 {
