@@ -1,10 +1,10 @@
-{ lib, ... }:
+{ lib, pkgs, ... }:
 {
   options.myhm = {
     isLaptop = lib.mkOption {
       type = lib.types.bool;
       default = false;
-      description = "Whether this host is a laptop";
+      description = "Is this host is a laptop";
     };
 
     keyboardLayout = lib.mkOption {
@@ -23,6 +23,14 @@
       default = "footclient";
       description = "Terminal to use";
     };
+
+    wallpaper = lib.mkOption {
+      default = pkgs.fetchurl {
+        url = "https://raw.githubusercontent.com/ironlungx/wallpapers/refs/heads/main/clouds-3.png";
+        sha256 = "06jvwq4gfq542bn6m1k13yaxkdkkd27niiqm4b53d8nwnqj85qvq";
+      };
+    };
+
     browser = lib.mkOption {
       type = lib.types.enum [
         "helium"
