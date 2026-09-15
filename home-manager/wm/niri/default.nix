@@ -233,8 +233,8 @@
         "Mod+C".action.center-column = { };
 
         "Mod+H".action.focus-column-left = { };
-        "Mod+J".action.focus-window-or-monitor-down = { };
-        "Mod+K".action.focus-window-or-monitor-up = { };
+        "Mod+J".action.focus-window-or-workspace-down = { };
+        "Mod+K".action.focus-window-or-workspace-up = { };
         "Mod+L".action.focus-column-right = { };
 
         "Mod+S".action.spawn-sh = [ "pkill -SIGUSR1 wayscriber" ];
