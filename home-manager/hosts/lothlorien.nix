@@ -29,7 +29,7 @@ in
 
     };
 
-    sunsetr.enable = true;
+    wlsunset.enable = true;
     bluetooth-menu.enable = true;
     foot.enable = true;
     waybar.enable = true;

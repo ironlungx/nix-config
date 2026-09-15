@@ -117,8 +117,8 @@
         {
           command = [ "swayosd-server" ];
         }
-        (lib.mkIf config.myhm.sunsetr.enable {
-          command = [ "sunsetr" ];
+        (lib.mkIf config.myhm.wlsunset.enable {
+          command = [ "wlsunset" ];
         })
         {
           command = [ "waybar" ];
