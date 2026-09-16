@@ -35,6 +35,7 @@
       type = lib.types.enum [
         "helium"
         "firefox"
+        "qutebrowser"
       ];
       default = "firefox";
       description = "Browser to use";

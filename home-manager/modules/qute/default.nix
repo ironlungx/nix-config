@@ -15,7 +15,7 @@ in
     lib.mkIf cfg.enable [
       python3Packages.adblock
     ];
-  config.programs.qutebrowser = lib.mkIf cfg.enable {
+  config.programs.qutebrowser = lib.mkIf (cfg.enable || config.myhm.browser == "qutebrowser") {
     enable = true;
     searchEngines = {
       w = "https://en.wikipedia.org/wiki/Special:Search?search={}&amp;go=Go&amp;ns0=1";
@@ -25,7 +25,7 @@ in
       yt = "https://www.youtube.com/results?search_query={}";
       p = "https://www.perplexity.ai/?q={}";
     };
-    settings.content.headers.user_agent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36";
+    settings.content.headers.user_agent = "Mozilla/5.0 ({os_info}; rv:135.0) Gecko/20100101 Firefox/135";
 
     extraConfig = builtins.readFile ./config.py;
 
