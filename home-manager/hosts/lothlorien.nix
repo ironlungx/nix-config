@@ -22,7 +22,7 @@ in
     keyboardLayout = "gb,us";
     launcher = "tofi";
     terminal = "alacritty";
-    browser = "qutebrowser";
+    browser = "firefox";
     wallpaper = pkgs.fetchurl {
       url = "https://raw.githubusercontent.com/ironlungx/wallpapers/refs/heads/main/in%20rainbows_themed_catppuccin-frappe.jpg";
       sha256 = "0hkrb2973ms6qy099i5d8kb9fbxqpl5vh1clf2735jwjzmlvn6sf";
