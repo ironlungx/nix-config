@@ -297,6 +297,10 @@
       MODE="0664", RUN+="${pkgs.coreutils}/bin/chmod g+w /sys/class/backlight/%k/brightness"
   '';
 
+  services.udev.packages = with pkgs; [
+    numworks-udev-rules
+  ];
+
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
 
