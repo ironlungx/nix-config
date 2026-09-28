@@ -19,7 +19,7 @@ in
     image = config.myhm.wallpaper;
     fonts = {
       sizes = {
-        terminal = 10.25;
+        terminal = 11;
       };
       monospace = {
         package = pkgs.iosevka;
