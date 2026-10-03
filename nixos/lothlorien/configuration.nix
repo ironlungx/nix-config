@@ -295,6 +295,7 @@
   services.udev.extraRules = ''
     ACTION=="add", SUBSYSTEM=="backlight", KERNEL=="intel_backlight", \
       MODE="0664", RUN+="${pkgs.coreutils}/bin/chmod g+w /sys/class/backlight/%k/brightness"
+    ACTION=="add", SUBSYSTEM=="pci", KERNEL=="0000:00:1f.4", ATTR{power/control}="on"
   '';
 
   services.udev.packages = with pkgs; [

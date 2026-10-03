@@ -37,7 +37,6 @@ in
     rofi.enable = true;
     dunst.enable = true;
     hyprlock.enable = true;
-    nixcord.enable = true;
     firefox.enable = true;
   };
 
