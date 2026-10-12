@@ -29,6 +29,20 @@
   boot.kernel.sysctl = {
     "vm.dirty_writeback_centisecs" = 1500;
   };
+
+  fileSystems."/mnt/storage" = {
+    device = "//u681484.your-storagebox.de/backup";
+    fsType = "cifs";
+    options = [
+      "credentials=/etc/smb-secrets"
+      "uid=1000"
+      "gid=1000"
+      "seal"
+      "nofail"
+      "x-systemd.automount"
+    ];
+  };
+
   musnix.enable = true;
 
   networking.hostName = "lothlorien"; # Define your hostname.
