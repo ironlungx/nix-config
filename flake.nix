@@ -4,6 +4,12 @@
   inputs = {
     musnix.url = "github:musnix/musnix";
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+
+    nixos-hardware = {
+      url = "github:NixOS/nixos-hardware";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     nixcord.url = "github:kaylorben/nixcord";
     spicetify-nix.url = "github:Gerg-L/spicetify-nix";
     stylix.url = "github:danth/stylix";
@@ -64,6 +70,7 @@
       home-manager,
       nixos-wsl,
       stylix,
+      nixos-hardware,
       ...
     }@inputs:
     let
@@ -84,6 +91,7 @@
           modules = [
             ./nixos/lothlorien/configuration.nix
             stylix.nixosModules.stylix
+            nixos-hardware.nixosModules.lenovo-thinkpad-x1-6th-gen
           ];
         };
 
