@@ -21,6 +21,11 @@
     "sd_mod"
   ];
   boot.initrd.kernelModules = [ ];
+
+  boot.blacklistedKernelModules = [ "i2c_i801" ];
+
+  boot.kernelParams = [ "psmouse.synaptics_intertouch=1" ];
+
   boot.kernelModules = [
     "kvm-intel"
     "uinput"

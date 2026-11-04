@@ -42,7 +42,7 @@
             layout = config.myhm.keyboardLayout;
             options = "grp:win_space_toggle,ctrl:nocaps";
           };
-          repeat-delay = if config.myhm.isLaptop then 250 else 200;
+          repeat-delay = if config.myhm.isLaptop then 262 else 200;
           repeat-rate = if config.myhm.isLaptop then 23 else 40;
         };
 
