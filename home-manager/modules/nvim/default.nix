@@ -40,6 +40,7 @@ in
       tinymist
 
       ty
+      ruff
     ];
   };
 }
