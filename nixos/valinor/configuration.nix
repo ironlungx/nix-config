@@ -31,6 +31,19 @@
     "TS_DEBUG_FIREWALL_MODE=nftables"
   ];
 
+  fileSystems."/mnt/storage" = {
+    device = "//u681484.your-storagebox.de/backup";
+    fsType = "cifs";
+    options = [
+      "credentials=/etc/smb-secrets"
+      "uid=1000"
+      "gid=1000"
+      "seal"
+      "nofail"
+      "x-systemd.automount"
+    ];
+  };
+
   hardware.graphics = {
     enable = true;
     enable32Bit = true;
@@ -199,6 +212,8 @@
   virtualisation.docker.daemon.settings.features.cdi = true;
   virtualisation.docker.enableOnBoot = false;
 
+  virtualisation.waydroid.enable = true;
+
   programs.nh = {
     enable = true;
     clean.enable = true;
@@ -215,7 +230,10 @@
 
   nixpkgs.config.allowUnfree = true;
 
-  hardware.opentabletdriver.enable = true;
+  hardware.opentabletdriver = {
+    enable = true;
+    daemon.enable = true;
+  };
   programs.thunar.enable = true;
 
   environment.systemPackages = with pkgs; [
@@ -266,10 +284,12 @@
 
   services.openssh.enable = true;
 
-  services.udev.packages = [
-    pkgs.platformio-core
-    pkgs.openocd
-    pkgs.esptool
+  services.udev.packages = with pkgs; [
+    platformio-core
+    openocd
+    esptool
+
+    pkgs.numworks-udev-rules
   ];
 
   networking.firewall = {
